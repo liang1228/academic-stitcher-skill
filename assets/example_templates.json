@@ -1,0 +1,28 @@
+{
+  "examples": [
+    {
+      "target": "Improving the efficiency of solar panels using perovskite materials in residential rooftops.",
+      "catalyst": "Generative AI (Diffusion Models)",
+      "output": [
+        {
+          "title": "Diffusion-Based Nanostructure Optimization for Perovskite Solar Cells",
+          "the_stitch": "Replacing manual trial-and-error material design (Method) with Generative Diffusion Models (Catalyst) to predict optimal crystal lattice configurations.",
+          "pain_point_solved": "The high cost and slow pace of physical material synthesis for high-efficiency perovskites.",
+          "expected_impact": "Accelerated discovery of stable perovskite variants with >30% efficiency."
+        }
+      ]
+    },
+    {
+      "target": "Real-time monitoring of blood glucose levels in diabetic patients using wearable infrared sensors.",
+      "catalyst": "Edge-based Federated Learning",
+      "output": [
+        {
+          "title": "Privacy-Preserving Edge-Federated Glucose Prediction Networks",
+          "the_stitch": "Shifting from centralized data processing (Method) to Edge-based Federated Learning (Catalyst) on the wearable device (Object).",
+          "pain_point_solved": "Data privacy concerns and high latency in cloud-based medical monitoring.",
+          "expected_impact": "Localized, private, and zero-latency health alerts for diabetic patients."
+        }
+      ]
+    }
+  ]
+}
