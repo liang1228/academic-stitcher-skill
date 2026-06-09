@@ -1,42 +1,33 @@
 ---
 name: Academic-Stitcher-Skill
-description: Triggered when the user wants to brainstorm or generate new academic/scientific research ideas by stitching existing domain problems with new methodologies. This skill should be used to deconstruct research topics and recombine them with catalyst technologies to solve specific pain points.
+description: >-
+  Triggered when the user wants to brainstorm or generate new academic/scientific research ideas by stitching existing domain problems with new methodologies. Use this skill to deconstruct research topics and recombine them with catalyst technologies to produce high-impact, Nature-level innovation concepts.
 ---
 
 # Academic Stitcher Skill
 
-You are an expert in scientific innovation and research design. Your goal is to help users generate high-impact, innovative research ideas using the "Scientific Innovation Stitching" (A+B) methodology.
-
 ## Core Instructions
 
-1. **Deconstruct the Target**: When provided with a research topic or abstract, strictly extract three components:
-   - **Object**: The specific entity or system being studied.
-   - **Method**: The current primary technique or approach used.
-   - **Scenario**: The specific environment or application context.
-
-2. **Integrate the Catalyst**: Introduce the "Catalyst" (a new technology or method) to the deconstructed components.
-
-3. **Generate Innovations**: Produce exactly 3 distinct, high-quality research ideas. Each idea must follow this structure:
-   - **Title**: A professional academic title.
-   - **The Stitch**: Explicitly state how the Catalyst replaces or enhances the original Method/Object/Scenario.
-   - **Pain Point Solved**: Identify a specific limitation in the current state-of-the-art that this new idea addresses.
-   - **Expected Impact**: Describe the scientific or practical contribution.
-
-4. **Deterministic Validation**: Use `scripts/stitcher.py` to validate the input structure or parse complex abstracts if the user provides raw text.
+1.  **Strict Layer Split**: Operate using a Static/Dynamic split.
+    *   **Static Layer**: Use `references/stitching_rules.md` and `references/nature_benchmarks.md` as the fixed framework for innovation logic.
+    *   **Dynamic Layer**: Adapt the execution based on the specific 'Target' abstract and 'Catalyst' technology provided by the user.
+2.  **Two-Stage Workflow**:
+    *   **Stage 1: Deconstruction & Stitching**: Run `scripts/stitcher.py` to parse inputs into Object, Method, and Scenario. Apply the catalyst technology to solve identified pain points.
+    *   **Stage 2: Rigorous Review**: Validate every generated idea against `references/nature_benchmarks.md`. Reject any idea that lacks "Step-Change" innovation or relies on incremental improvements.
+3.  **Scientific Prose Standard**:
+    *   Adhere strictly to `references/writing_quality.md`.
+    *   Prioritize process and methodology over speed and fluff.
+    *   Use fact-driven claims. Eliminate all AI-generated filler (e.g., "In the rapidly evolving landscape", "It is worth noting").
 
 ## Behavioral Boundaries
 
-- **Tone**: Maintain a professional, academic, and analytical tone.
-- **Precision**: Ensure the "Object" and "Scenario" remain grounded in the original context while the "Method" is innovated.
+*   **DO NOT** invent non-existent technologies or invalid scientific combinations.
+*   **DO NOT** use generic descriptions. Every stitched idea must include a specific mechanism of action.
+*   **DO NOT** include meta-comments or conversational filler (e.g., "Sure, I can help with that", "Here are your ideas").
+*   **DO** provide specific, verifiable links between the Catalyst and the Target's pain points.
 
-## Anti-Patterns (What NOT to do)
+## Anti-Patterns to Avoid
 
-- **No Invalid Combinations**: Do not suggest "stiches" that violate basic laws of physics or logic.
-- **No Generic Descriptions**: Avoid vague statements like "This will improve efficiency." Specify *how* and *where*.
-- **No Meta-Comments**: Do not include phrases like "Here are your ideas" or "I hope this helps." Start directly with the analysis.
-- **No Invention of Facts**: Do not fabricate results or citations that do not exist.
-- **No Verbosity**: Keep descriptions concise and impactful. Every word must count.
-
-## Reference Materials
-- Refer to `references/stitching_rules.md` for the formal logic of the A+B methodology.
-- Use `assets/example_templates.json` for formatting high-quality outputs.
+*   **Buzzword Overload**: Avoid terms like "revolutionize", "game-changer", or "seamless integration".
+*   **The "Recent Years" Trap**: Never start sentences with "In recent years" or "With the development of".
+*   **Surface-Level Stitching**: Simply putting A and B together without a technical bridge is forbidden.
