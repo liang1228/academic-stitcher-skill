@@ -2,32 +2,23 @@
 name: Academic-Stitcher-Skill
 description: >-
   Triggered when the user wants to brainstorm or generate new academic/scientific research ideas by stitching existing domain problems with new methodologies. Use this skill to deconstruct research topics and recombine them with catalyst technologies to produce high-impact, Nature-level innovation concepts.
+triggers:
+  - "When the user provides a research target/abstract and a catalyst technology"
+  - "When the user asks to stitch or combine two different research domains or methods"
+  - "When the user requests brainstorming of top-tier academic research ideas (Nature-level)"
 ---
 
 # Academic Stitcher Skill
 
 ## Core Instructions
 
-1.  **Strict Layer Split**: Operate using a Static/Dynamic split.
-    *   **Static Layer**: Use `references/stitching_rules.md` and `references/nature_benchmarks.md` as the fixed framework for innovation logic.
-    *   **Dynamic Layer**: Adapt the execution based on the specific 'Target' abstract and 'Catalyst' technology provided by the user.
-2.  **Two-Stage Workflow**:
-    *   **Stage 1: Deconstruction & Stitching**: Run `scripts/stitcher.py` to parse inputs into Object, Method, and Scenario. Apply the catalyst technology to solve identified pain points.
-    *   **Stage 2: Rigorous Review**: Validate every generated idea against `references/nature_benchmarks.md`. Reject any idea that lacks "Step-Change" innovation or relies on incremental improvements.
-3.  **Scientific Prose Standard**:
-    *   Adhere strictly to `references/writing_quality.md`.
-    *   Prioritize process and methodology over speed and fluff.
-    *   Use fact-driven claims. Eliminate all AI-generated filler (e.g., "In the rapidly evolving landscape", "It is worth noting").
-
-## Behavioral Boundaries
-
-*   **DO NOT** invent non-existent technologies or invalid scientific combinations.
-*   **DO NOT** use generic descriptions. Every stitched idea must include a specific mechanism of action.
-*   **DO NOT** include meta-comments or conversational filler (e.g., "Sure, I can help with that", "Here are your ideas").
-*   **DO** provide specific, verifiable links between the Catalyst and the Target's pain points.
-
-## Anti-Patterns to Avoid
-
-*   **Buzzword Overload**: Avoid terms like "revolutionize", "game-changer", or "seamless integration".
-*   **The "Recent Years" Trap**: Never start sentences with "In recent years" or "With the development of".
-*   **Surface-Level Stitching**: Simply putting A and B together without a technical bridge is forbidden.
+1.  **Isolate Execution Layers**:
+    *   Initialize the static constraints from `references/constraints.md` and `references/nature_benchmarks.md` at start.
+    *   Execute the dynamic stitching logic based on user-provided Target and Catalyst parameters.
+2.  **Execute Two-Stage Workflow**:
+    *   **Stage 1 (Deconstruction & Stitching)**: Run `scripts/academic_stitcher.py` to parse inputs into Object, Method, and Scenario. Apply the catalyst technology to resolve identified pain points.
+    *   **Stage 2 (Rigorous Review)**: Pass results through the criteria defined in `references/nature_benchmarks.md`. Reject any idea that fails to demonstrate step-change innovation.
+3.  **Refine Writing Quality**:
+    *   Adhere strictly to style rules in `references/writing_quality.md`.
+    *   Eliminate subjective hype, AI-generated filler, and banned phrases.
+    *   Format output using concise, fact-driven prose.
