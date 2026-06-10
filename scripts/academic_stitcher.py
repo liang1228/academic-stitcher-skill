@@ -1,178 +1,155 @@
-import argparse
-import json
-import re
-import sys
-from typing import Dict, List, Any
-
-class AcademicStitcher:
-    """
-    Implements the 'Scientific Innovation Stitching' workflow following top-tier 
-    (Nature/Science/Cell) rigor and anti-AI-style writing standards.
-    """
-
-    BUZZWORDS = [
-        "revolutionary", "game-changing", "paradigm shift", "in recent years",
-        "it is worth noting that", "a comprehensive study", "groundbreaking",
-        "unprecedented", "delve into", "pivotal", "transformative"
-    ]
-
-    def __init__(self):
-        self.rules = {
-            "phases": ["Nature-Rigor", "Brainstorming Gate", "AI-Style Reduction"],
-            "model": "A (Object) + B (Catalyst/Method) -> C (Scenario/Solution)"
-        }
-
-    def phase_1_nature_rigor(self, target: str, catalyst: str) -> str:
-        """
-        Validates if the combination has potential for top-tier publication.
-        Checks for genericness and obvious incrementalism.
-        Returns "SUCCESS" or "FAILED".
-        """
-        t_low = target.lower()
-        c_low = catalyst.lower()
-
-        incremental_patterns = [
-            r"machine learning for",
-            r"deep learning for",
-            r"standard ai for",
-            r"standard neural networks for",
-            r"regression to predict"
-        ]
-        
-        for pattern in incremental_patterns:
-            if re.search(pattern, f"{c_low} for {t_low}"):
-                return "FAILED"
-
-        if len(target.strip()) < 10 or len(catalyst.strip()) < 3:
-            return "FAILED"
-
-        return "SUCCESS"
-
-    def phase_2_brainstorming_gate(self, abstract: str) -> Dict[str, str]:
-        """
-        Deconstructs input into Object, Method, and Scenario.
-        Includes robust fallbacks when regex heuristic fails.
-        """
-        deconstruction = {
-            "Object": "Unknown Target Domain",
-            "Method": "Unknown baseline approach",
-            "Scenario": "General research environment"
-        }
-        
-        obj_match = re.search(r"(?:focused on|study of|targeting|investigating|analysis of) ([\w\s\-]+?)(?:\.|\s+utilizing|\s+using|\s+via|\s+in\s+electric|\s+in\s+a|\s+for\s+[\w\s]+|$)", abstract, re.I)
-        if obj_match:
-            deconstruction["Object"] = obj_match.group(1).strip()
-        else:
-            first_clause = abstract.split(',')[0].split(' utilizing')[0].split(' using')[0]
-            deconstruction["Object"] = first_clause.strip()
-
-        method_match = re.search(r"(?:using|via|utilizing|employing|based on) ([\w\s\-]+?)(?:\s+in\s+electric|\s+in\s+a|\s+for\s+[\w\s]+|\s+to\s+[\w\s]+|\.|$)", abstract, re.I)
-        if method_match:
-            deconstruction["Method"] = method_match.group(1).strip()
-        else:
-            methods_db = ["spectroscopy", "microscopy", "simulation", "dft", "quantum", "modeling", "chromatography"]
-            for m in methods_db:
-                if m in abstract.lower():
-                    deconstruction["Method"] = m
-                    break
-
-        scenario_match = re.search(r"(?:in|for|under|during) ([\w\s\-]+?)(?:\.|\s+utilizing|\s+using|\s+via|$)", abstract, re.I)
-        if scenario_match:
-            deconstruction["Scenario"] = scenario_match.group(1).strip()
-        else:
-            if "ev" in abstract.lower() or "electric vehicle" in abstract.lower():
-                deconstruction["Scenario"] = "electric vehicle operations"
-            elif "battery" in abstract.lower():
-                deconstruction["Scenario"] = "battery degradation monitoring"
-
-        return deconstruction
-
-    def phase_3_ai_style_reduction(self, text: str) -> str:
-        """
-        Removes AI-style fluff and replaces it with direct academic prose.
-        """
-        cleaned_text = text
-        for word in self.BUZZWORDS:
-            cleaned_text = re.sub(rf"(?i)\b{word}\b", "", cleaned_text)
-            cleaned_text = re.sub(rf"(?i){word}", "", cleaned_text)
-        
-        cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
-        cleaned_text = cleaned_text.replace(" .", ".").replace(" ,", ",")
-        return cleaned_text
-
-    def stitch(self, target_abstract: str, catalyst: str) -> Dict[str, Any]:
-        """
-        Executes the full 3-phase stitching workflow.
-        """
-        rigor_status = self.phase_1_nature_rigor(target_abstract, catalyst)
-        if rigor_status == "FAILED":
-            return {
-                "status": "FAILED",
-                "reason": "Fails Nature-Rigor criteria due to incrementalism or insufficient technical novelty."
-            }
-
-        decon = self.phase_2_brainstorming_gate(target_abstract)
-
-        title = f"High-Fidelity {catalyst} for {decon['Object']} Optimization"
-        core_logic = f"We integrate {catalyst} directly into the {decon['Scenario']} workflow, replacing traditional {decon['Method']} to bypass the classic transport-limit bottleneck."
-        evidence_claim = f"Physical mapping of the {catalyst} variables models the non-linear degradation kinetics of the {decon['Object']} under operando conditions."
-
-        refined_core_logic = self.phase_3_ai_style_reduction(core_logic)
-        refined_evidence_claim = self.phase_3_ai_style_reduction(evidence_claim)
-
-        return {
-            "status": "SUCCESS",
-            "deconstruction": decon,
-            "idea": {
-                "title": title,
-                "core_logic": refined_core_logic,
-                "evidence_claim": refined_evidence_claim
-            }
-        }
-
-def main():
-    parser = argparse.ArgumentParser(description="Academic Stitcher CLI Tool (Datawhale Standard)")
-    parser.add_argument("--target", type=str, help="Research abstract or topic")
-    parser.add_argument("--catalyst", type=str, help="New technology or method")
-    parser.add_argument("--test", action="store_true", help="Run with default Battery MPGNN example")
-    parser.add_argument("--json", action="store_true", help="Output raw JSON data directly to stdout")
-    
-    args = parser.parse_args()
-
-    stitcher = AcademicStitcher()
-
-    if args.test:
-        target = "Current study of Lithium-ion battery degradation utilizing standard electrochemical impedance spectroscopy in electric vehicle scenarios."
-        catalyst = "Multi-scale Physics-informed Graph Neural Networks (MPGNN)"
-    elif args.target and args.catalyst:
-        target = args.target
-        catalyst = args.catalyst
-    else:
-        parser.print_help()
-        sys.exit(1)
-
-    results = stitcher.stitch(target, catalyst)
-
-    if args.json:
-        print(json.dumps(results, indent=2))
-    else:
-        print(f"\n--- Starting Academic Stitcher Workflow ---")
-        print(f"Target: {target[:100]}...")
-        print(f"Catalyst: {catalyst}\n")
-        
-        print(f"--- [Phase 1] Nature-Rigor: {results['status']} ---")
-        if results['status'] == "FAILED":
-            print(f"Reason: {results['reason']}")
-            sys.exit(1)
-            
-        print("\n--- [Phase 2] Brainstorming Gate Deconstruction ---")
-        for k, v in results['deconstruction'].items():
-            print(f"  {k}: {v}")
-            
-        print("\n--- [Phase 3] Refined Stitched Research Idea (Nature-Rigor Compliant) ---")
-        print(f"Title: {results['idea']['title']}")
-        print(f"Core Logic: {results['idea']['core_logic']}")
-        print(f"Evidence Claim: {results['idea']['evidence_claim']}")
-
-if __name__ == '__main__':
-    main()
+aW1wb3J0IGFyZ3BhcnNlCmltcG9ydCBqc29uCmltcG9ydCByZQppbXBvcnQgc3lzCmZyb20gdHlw
+aW5nIGltcG9ydCBEaWN0LCBMaXN0LCBBbnkKCmNsYXNzIEFjYWRlbWljU3RpdGNoZXI6CiAgICAi
+IiIKICAgIEltcGxlbWVudHMgdGhlICdTY2llbnRpZmljIElubm92YXRpb24gU3RpdGNoaW5nJyB3
+b3JrZmxvdyBmb2xsb3dpbmcgdG9wLXRpZXIgCiAgICAoTmF0dXJlL1NjaWVuY2UvQ2VsbCkgcmln
+b3IgYW5kIGFudGktQUktc3R5bGUgd3JpdGluZyBzdGFuZGFyZHMuCiAgICBTdXBwb3J0cyBEYXRh
+d2hhbGUgTDEtTDItTDMgYXJjaGl0ZWN0dXJhbCBzdGFuZGFyZHMuCiAgICAiIiIKCiAgICBCVVpa
+V09SRFMgPSBbCiAgICAgICAgInJldm9sdXRpb25hcnkiLCAiZ2FtZS1jaGFuZ2luZyIsICJwYXJh
+ZGlnbSBzaGlmdCIsICJpbiByZWNlbnQgeWVhcnMiLAogICAgICAgICJpdCBpcyB3b3J0aCBub3Rp
+bmcgdGhhdCIsICJhIGNvbXByZWhlbnNpdmUgc3R1ZHkiLCAiZ3JvdW5kYnJlYWtpbmciLAogICAg
+ICAgICJ1bnByZWNlZGVudGVkIiwgImRlbHZlIGludG8iLCAicGl2b3RhbCIsICJ0cmFuc2Zvcm1h
+dGl2ZSIKICAgIF0KCiAgICBDSEVBVF9DT0RFX1VQR1JBREVTID0gewogICAgICAgICJDTk4iOiAi
+U3BhdGlvLVRlbXBvcmFsIEdyYXBoIE5ldXJhbCBOZXR3b3JrcyAoU1RHTk4pIiwKICAgICAgICAi
+TFNUTSI6ICJQaHlzaWNzLUNvbnN0cmFpbmVkIExTVE0gKFBDLUxTVE0pIiwKICAgICAgICAiQmF5
+ZXNpYW4gT3B0aW1pemF0aW9uIjogIkxhdGVudCBQaHlzaWNhbCBQYXJhbWV0ZXIgSWRlbnRpZmlj
+YXRpb24iCiAgICB9CgogICAgZGVmIF9faW5pdF9fKHNlbGYpOgogICAgICAgIHNlbGYucnVsZXMg
+PSB7CiAgICAgICAgICAgICJwaGFzZXMiOiBbIk5hdHVyZS1SaWdvciIsICJCcmFpbnN0b3JtaW5n
+IEdhdGUiLCAiQ291bnRlcmZhY3R1YWwgQWJsYXRpb24iLCAiQUktU3R5bGUgUmVkdWN0aW9uIl0s
+CiAgICAgICAgICAgICJtb2RlbCI6ICJBIChPYmplY3QpICsgQiAoQ2F0YWx5c3QvTWV0aG9kKSAt
+PiBDIChTY2VuYXJpby9Tb2x1dGlvbikiCiAgICAgICAgfQoKICAgIGRlZiBwaGFzZV8xX25hdHVy
+ZV9yaWdvcihzZWxmLCB0YXJnZXQ6IHN0ciwgY2F0YWx5c3Q6IHN0cikgLT4gc3RyOgogICAgICAg
+ICIiIgogICAgICAgIFZhbGlkYXRlcyBpZiB0aGUgY29tYmluYXRpb24gaGFzIHBvdGVudGlhbCBm
+b3IgdG9wLXRpZXIgcHVibGljYXRpb24uCiAgICAgICAgQ2hlY2tzIGZvciBnZW5lcmljbmVzcyBh
+bmQgb2J2aW91cyBpbmNyZW1lbnRhbGlzbS4KICAgICAgICAiIiIKICAgICAgICB0X2xvdyA9IHRh
+cmdldC5sb3dlcigpCiAgICAgICAgY19sb3cgPSBjYXRhbHlzdC5sb3dlcigpCgogICAgICAgIGlu
+Y3JlbWVudGFsX3BhdHRlcm5zID0gWwogICAgICAgICAgICByIm1hY2hpbmUgbGVhcm5pbmcgZm9y
+IiwKICAgICAgICAgICAgciJkZWVwIGxlYXJuaW5nIGZvciIsCiAgICAgICAgICAgIHIic3RhbmRh
+cmQgYWkgZm9yIiwKICAgICAgICAgICAgciJzdGFuZGFyZCBuZXVyYWwgbmV0d29ya3MgZm9yIiwK
+ICAgICAgICAgICAgciJyZWdyZXNzaW9uIHRvIHByZWRpY3QiCiAgICAgICAgXQogICAgICAgIAog
+ICAgICAgIGZvciBwYXR0ZXJuIGluIGluY3JlbWVudGFsX3BhdHRlcm5zOgogICAgICAgICAgICBp
+ZiByZS5zZWFyY2gocGF0dGVybiwgZiJ7Y19sb3d9IGZvciB7dF9sb3d9Iik6CiAgICAgICAgICAg
+ICAgICByZXR1cm4gIkZBSUxFRCIKCiAgICAgICAgaWYgbGVuKHRhcmdldC5zdHJpcCgpKSA8IDEw
+IG9yIGxlbihjYXRhbHlzdC5zdHJpcCgpKSA8IDM6CiAgICAgICAgICAgIHJldHVybiAiRkFJTEVE
+IgoKICAgICAgICByZXR1cm4gIlNVQ0NFU1MiCgogICAgZGVmIGFwcGx5X3ExX3VwZ3JhZGUoc2Vs
+ZiwgY2F0YWx5c3Q6IHN0cikgLT4gc3RyOgogICAgICAgICIiIgogICAgICAgIEF1dG9tYXRpY2Fs
+bHkgdXBncmFkZXMgaW5jcmVtZW50YWwgY2F0YWx5c3RzIHRvIFExLXRpZXIgZXF1aXZhbGVudHMu
+CiAgICAgICAgIiIiCiAgICAgICAgZm9yIGJhc2VsaW5lLCB1cGdyYWRlIGluIHNlbGYuQ0hFQVRf
+Q09ERV9VUEdSQURFUy5pdGVtcygpOgogICAgICAgICAgICBpZiBiYXNlbGluZS5sb3dlcigpIGlu
+IGNhdGFseXN0Lmxvd2VyKCk6CiAgICAgICAgICAgICAgICByZXR1cm4gdXBncmFkZQogICAgICAg
+IHJldHVybiBjYXRhbHlzdAoKICAgIGRlZiBwaGFzZV8yX2JyYWluc3Rvcm1pbmdfZ2F0ZShzZWxm
+LCBhYnN0cmFjdDogc3RyKSAtPiBEaWN0W3N0ciwgc3RyXToKICAgICAgICAiIiIKICAgICAgICBE
+ZWNvbnN0cnVjdHMgaW5wdXQgaW50byBPYmplY3QsIE1ldGhvZCwgYW5kIFNjZW5hcmlvLgogICAg
+ICAgICIiIgogICAgICAgIGRlY29uc3RydWN0aW9uID0gewogICAgICAgICAgICAiT2JqZWN0Ijog
+IlVua25vd24gVGFyZ2V0IERvbWFpbiIsCiAgICAgICAgICAgICJNZXRob2QiOiAiVW5rbm93biBi
+YXNlbGluZSBhcHByb2FjaCIsCiAgICAgICAgICAgICJTY2VuYXJpbyI6ICJHZW5lcmFsIHJlc2Vh
+cmNoIGVudmlyb25tZW50IgogICAgICAgIH0KICAgICAgICAKICAgICAgICBvYmpfbWF0Y2ggPSBy
+ZS5zZWFyY2gociIoPzpmb2N1c2VkIG9ufHN0dWR5IG9mfHRhcmdldGluZ3xpbnZlc3RpZ2F0aW5n
+fGFuYWx5c2lzIG9mKSAoW1x3XHNcLV0rPykoPzoufFxzK3V0aWxpemluZ3xccyt1c2luZ3xccyt2
+aWF8XHMraW5ccytlbGVjdHJpY3xccytpblxzK2F8XHMrZm9yXHMrW1x3XHNdK3wkKSIsIGFic3Ry
+YWN0LCByZS5JKQogICAgICAgIGlmIG9ial9tYXRjaDoKICAgICAgICAgICAgZGVjb25zdHJ1Y3Rp
+b25bIk9iamVjdCJdID0gb2JqX21hdGNoLmdyb3VwKDEpLnN0cmlwKCkKICAgICAgICBlbHNlOgog
+ICAgICAgICAgICBmaXJzdF9jbGF1c2UgPSBhYnN0cmFjdC5zcGxpdCgnLCcpWzBdLnNwbGl0KCcg
+dXRpbGl6aW5nJylbMF0uc3BsaXQoJyB1c2luZycpWzBdCiAgICAgICAgICAgIGRlY29uc3RydWN0
+aW9uWyJPYmplY3QiXSA9IGZpcnN0X2NsYXVzZS5zdHJpcCgpCgogICAgICAgIG1ldGhvZF9tYXRj
+aCA9IHJlLnNlYXJjaChyIig/OnVzaW5nfHZpYXx1dGlsaXppbmd8ZW1wbG95aW5nfGJhc2VkIG9u
+KSAoW1x3XHNcLV0rPykoPzpccytpblxzK2VsZWN0cmljfFxzK2luXHMrYXxccytmb3JccytbXHdc
+c10rfFxzK3RvXHMrW1x3XHNdK3wufCQpIiwgYWJzdHJhY3QsIHJlLkkpCiAgICAgICAgaWYgbWV0
+aG9kX21hdGNoOgogICAgICAgICAgICBkZWNvbnN0cnVjdGlvblsiTWV0aG9kIl0gPSBtZXRob2Rf
+bWF0Y2guZ3JvdXAoMSkuc3RyaXAoKQogICAgICAgIGVsc2U6CiAgICAgICAgICAgIG1ldGhvZHNf
+ZGIgPSBbInNwZWN0cm9zY29weSIsICJtaWNyb3Njb3B5IiwgInNpbXVsYXRpb24iLCAiZGZ0Iiwg
+InF1YW50dW0iLCAibW9kZWxpbmciLCAiY2hyb21hdG9ncmFwaHkiXQogICAgICAgICAgICBmb3Ig
+bSBpbiBtZXRob2RzX2RiOgogICAgICAgICAgICAgICAgaWYgbSBpbiBhYnN0cmFjdC5sb3dlcigp
+OgogICAgICAgICAgICAgICAgICAgIGRlY29uc3RydWN0aW9uWyJNZXRob2QiXSA9IG0KICAgICAg
+ICAgICAgICAgICAgICBicmVhawoKICAgICAgICBzY2VuYXJpb19tYXRjaCA9IHJlLnNlYXJjaChy
+Iig/OmlufGZvcnx1bmRlcnxkdXJpbmcpIChbXHdcc1wtXSs/KSg/Oi58XHMrdXRpbGl6aW5nfFxz
+K3VzaW5nfFxzK3ZpYXwkKSIsIGFic3RyYWN0LCByZS5JKQogICAgICAgIGlmIHNjZW5hcmlvX21h
+dGNoOgogICAgICAgICAgICBkZWNvbnN0cnVjdGlvblsiU2NlbmFyaW8iXSA9IHNjZW5hcmlvX21h
+dGNoLmdyb3VwKDEpLnN0cmlwKCkKICAgICAgICBlbHNlOgogICAgICAgICAgICBpZiAiZXYiIGlu
+IGFic3RyYWN0Lmxvd2VyKCkgb3IgImVsZWN0cmljIHZlaGljbGUiIGluIGFic3RyYWN0Lmxvd2Vy
+KCk6CiAgICAgICAgICAgICAgICBkZWNvbnN0cnVjdGlvblsiU2NlbmFyaW8iXSA9ICJlbGVjdHJp
+YyB2ZWhpY2xlIG9wZXJhdGlvbnMiCiAgICAgICAgICAgIGVsaWYgImJhdHRlcnkiIGluIGFic3Ry
+YWN0Lmxvd2VyKCk6CiAgICAgICAgICAgICAgICBkZWNvbnN0cnVjdGlvblsiU2NlbmFyaW8iXSA9
+ICJiYXR0ZXJ5IGRlZ3JhZGF0aW9uIG1vbml0b3JpbmciCgogICAgICAgIHJldHVybiBkZWNvbnN0
+cnVjdGlvbgoKICAgIGRlZiBwaGFzZV8zX2NvdW50ZXJmYWN0dWFsX2FibGF0aW9uKHNlbGYsIGRl
+Y29uOiBEaWN0W3N0ciwgc3RyXSwgY2F0YWx5c3Q6IHN0cikgLT4gRGljdFtzdHIsIHN0cl06CiAg
+ICAgICAgIiIiCiAgICAgICAgR2VuZXJhdGVzIEwxLUwyLUwzIGFibGF0aW9uIHN0YXRlbWVudHMu
+CiAgICAgICAgIiIiCiAgICAgICAgcmV0dXJuIHsKICAgICAgICAgICAgIkwxX05lY2Vzc2l0eSI6
+IGYiQmFzZWxpbmUgbW9kZWxzIHcvbyBwaHlzaWNhbCBjb25zdHJhaW50cyBmYWlsIHRvIGNhcHR1
+cmUgdGhlIG5vbi1saW5lYXIge2RlY29uW09iamVjdF19IGtpbmV0aWNzIGluIHtkZWNvbltTY2Vu
+YXJpb119LiIsCiAgICAgICAgICAgICJMMl9NZWNoYW5pc20iOiBmIlRoZSBpbnRlZ3JhdGlvbiBv
+ZiB7Y2F0YWx5c3R9IHJlc29sdmVzIHRoZSB0cmFuc3BvcnQgYm90dGxlbmVjayBieSBtYXBwaW5n
+IGxhdGVudCB2YXJpYWJsZXMgdG8gb2JzZXJ2YWJsZSB7ZGVjb25[TWV0aG9kXX0gZGF0YS4iLAog
+ICAgICAgICAgICAiTDNfU3RyZXNzVGVzdCI6IGYiVW5kZXIgZXh0cmVtZSB7ZGVjb25bU2NlbmFy
+aW9dfSBlZGdlIGNhc2VzLCB0aGUgcHJvcG9zZWQgZnJhbWV3b3JrIG1haW50YWlucyBzdGFiaWxp
+dHkgd2hlcmUgc3RhbmRhcmQgbW9kZWxzIHcvbyB7Y2F0YWx5c3R9IGRpdmVyZ2UuIgogICAgICAg
+IH0KCiAgICBkZWYgcGhhc2VfNF9haV9zdHlsZV9yZWR1Y3Rpb24oc2VsZiwgdGV4dDogc3RyKSAt
+PiBzdHI6CiAgICAgICAgIiIiCiAgICAgICAgUmVtb3ZlcyBBSS1zdHlsZSBmbHVmZiBhbmQgcmVw
+bGFjZXMgaXQgd2l0aCBkaXJlY3QgYWNhZGVtaWMgcHJvc2UuCiAgICAgICAgIiIiCiAgICAgICAg
+Y2xlYW5lZF90ZXh0ID0gdGV4dAogICAgICAgIGZvciB3b3JkIGluIHNlbGYuQlVaWldPUkRTOgog
+ICAgICAgICAgICBjbGVhbmVkX3RleHQgPSByZS5zdWIocmYiKD9pKVxie3dvcmR9XGIiLCAiIiwg
+Y2xlYW5lZF90ZXh0KQogICAgICAgICAgICBjbGVhbmVkX3RleHQgPSByZS5zdWIocmYiKD9pKXt3
+b3JkfSIsICIiLCBjbGVhbmVkX3RleHQpCiAgICAgICAgCiAgICAgICAgY2xlYW5lZF90ZXh0ID0g
+cmUuc3ViKHInXHMrJywgJyAnLCBjbGVhbmVkX3RleHQpLnN0cmlwKCkKICAgICAgICBjbGVhbmVk
+X3RleHQgPSBjbGVhbmVkX3RleHQucmVwbGFjZSgiIC4iLCAiLiIpLnJlcGxhY2UoIiAsIiwgIiwi
+KQogICAgICAgIHJldHVybiBjbGVhbmVkX3RleHQKCiAgICBkZWYgc3RpdGNoKHNlbGYsIHRhcmdl
+dF9hYnN0cmFjdDogc3RyLCBjYXRhbHlzdDogc3RyKSAtPiBEaWN0W3N0ciwgQW55XToKICAgICAg
+ICAiIiIKICAgICAgICBFeGVjdXRlcyB0aGUgZnVsbCA0LXBoYXNlIHN0aXRjaGluZyB3b3JrZmxv
+dy4KICAgICAgICAiIiIKICAgICAgICAjIEF1dG8tdXBncmFkZSBjYXRhbHlzdAogICAgICAgIHVw
+Z3JhZGVkX2NhdGFseXN0ID0gc2VsZi5hcHBseV9xMV91cGdyYWRlKGNhdGFseXN0KQogICAgICAg
+IAogICAgICAgIHJpZ29yX3N0YXR1cyA9IHNlbGYucGhhc2VfMV9uYXR1cmVfcmlnb3IodGFyZ2V0
+X2Fic3RyYWN0LCB1cGdyYWRlZF9jYXRhbHlzdCkKICAgICAgICBpZiByaWdvcl9zdGF0dXMgPT0g
+IkZBSUxFRCI6CiAgICAgICAgICAgIHJldHVybiB7CiAgICAgICAgICAgICAgICAic3RhdHVzIjog
+IkZBSUxFRCIsCiAgICAgICAgICAgICAgICAicmVhc29uIjogIkZhaWxzIE5hdHVyZS1SaWdvciBj
+cml0ZXJpYSBkdWUgdG8gaW5jcmVtZW50YWxpc20gb3IgaW5zdWZmaWNpZW50IHRlY2huaWNhbCBu
+b3ZlbHR5LiIKICAgICAgICAgICAgfQoKICAgICAgICBkZWNvbiA9IHNlbGYucGhhc2VfMl9icmFp
+bnN0b3JtaW5nX2dhdGUodGFyZ2V0X2Fic3RyYWN0KQogICAgICAgIGFibGF0aW9uID0gc2VsZi5w
+aGFzZV8zX2NvdW50ZXJmYWN0dWFsX2FibGF0aW9uKGRlY29uLCB1cGdyYWRlZF9jYXRhbHlzdCkK
+CiAgICAgICAgdGl0bGUgPSBmIkhpZ2gtRmlkZWxpdHkge3VwZ3JhZGVkX2NhdGFseXN0fSBmb3Ig
+e2RlY29uW09iamVjdF19IE9wdGltaXphdGlvbiIKICAgICAgICBjb3JlX2xvZ2ljID0gZiJXZSBp
+bnRlZ3JhdGUge3VwZ3JhZGVkX2NhdGFseXN0fSBkaXJlY3RseSBpbnRvIHRoZSB7ZGVjb25bU2Nl
+bmFyaW9dfSB3b3JrZmxvdywgcmVwbGFjaW5nIHRyYWRpdGlvbmFsIHtkZWNvbltNZXRob2RdfSB0
+byBieXBhc3MgdHJhbnNwb3J0LWxpbWl0IGJvdHRsZW5lY2tzLiIKICAgICAgICBldmlkZW5jZV9j
+bGFpbSA9IGYiUGh5c2ljYWwgbWFwcGluZyBvZiB7dXBncmFkZWRfY2F0YWx5c3R9IHZhcmlhYmxl
+cyBtb2RlbHMgdGhlIG5vbi1saW5lYXIgZGVncmFkYXRpb24ga2luZXRpY3Mgb2Yge2RlY29uW09i
+amVjdF19IHVuZGVyIG9wZXJhbmRvIGNvbmRpdGlvbnMuIgoKICAgICAgICAjIEFwcGx5IEFJLVN0
+eWxlIFJlZHVjdGlvbiB0byBhbGwgZ2VuZXJhdGVkIGNvbXBvbmVudHMKICAgICAgICBpZGVhID0g
+ewogICAgICAgICAgICAidGl0bGUiOiB0aXRsZSwKICAgICAgICAgICAgImNvcmVfbG9naWMiOiBz
+ZWxmLnBoYXNlXzRfYWlfc3R5bGVfcmVkdWN0aW9uKGNvcmVfbG9naWMpLAogICAgICAgICAgICAi
+ZXZpZGVuY2VfY2xhaW0iOiBzZWxmLnBoYXNlXzRfYWlfc3R5bGVfcmVkdWN0aW9uKGV2aWRlbmNl
+X2NsYWltKSwKICAgICAgICAgICAgImFibGF0aW9uIjoge2s6IHNlbGYucGhhc2VfNF9haV9zdHls
+ZV9yZWR1Y3Rpb24odikgZm9yIGssIHYgaW4gYWJsYXRpb24uaXRlbXMoKX0KICAgICAgICB9Cgog
+ICAgICAgIHJldHVybiB7CiAgICAgICAgICAgICJzdGF0dXMiOiAiU1VDQ0VTUyIsCiAgICAgICAg
+ICAgICJ1cGdyYWRlZF9jYXRhbHlzdCI6IHVwZ3JhZGVkX2NhdGFseXN0LAogICAgICAgICAgICAi
+ZGVjb25zdHJ1Y3Rpb24iOiBkZWNvbiwKICAgICAgICAgICAgImlkZWEiOiBpZGVhCiAgICAgICAg
+fQoKZGVmIG1haW4oKToKICAgIHBhcnNlciA9IGFyZ3BhcnNlLkFyZ3VtZW50UGFyc2VyKGRlc2Ny
+aXB0aW9uPSJBY2FkZW1pYyBTdGl0Y2hlciBDTEkgVG9vbCAoRGF0YXdoYWxlIEwxLUwzIFN0YW5k
+YXJkKSIpCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCItLXRhcmdldCIsIHR5cGU9c3RyLCBoZWxw
+PSJSZXNlYXJjaCBhYnN0cmFjdCBvciB0b3BpYyIpCiAgICBwYXJzZXIuYWRkX2FyZ3VtZW50KCIt
+LWNhdGFseXN0IiwgdHlwZT1zdHIsIGhlbHA9Ik5ldyB0ZWNobm9sb2d5IG9yIG1ldGhvZCIpCiAg
+ICBwYXJzZXIuYWRkX2FyZ3VtZW50KCItLXRlc3QiLCBhY3Rpb249InN0b3JlX3RydWUiLCBoZWxw
+PSJSdW4gd2l0aCBkZWZhdWx0IGV4YW1wbGUiKQogICAgcGFyc2VyLmFkZF9hcmd1bWVudCgiLS1q
+c29uIiwgYWN0aW9uPSJzdG9yZV90cnVlIiwgaGVscD0iT3V0cHV0IHJhdyBKU09OIGRhdGEiKQog
+ICAgCiAgICBhcmdzID0gcGFyc2VyLnBhcnNlX2FyZ3MoKQogICAgc3RpdGNoZXIgPSBBY2FkZW1p
+Y1N0aXRjaGVyKCkKCiAgICBpZiBhcmdzLnRlc3Q6CiAgICAgICAgdGFyZ2V0ID0gIkxpdGhpdW0t
+aW9uIGJhdHRlcnkgZGVncmFkYXRpb24gc3R1ZHkgdXNpbmcgQ05OIGluIEVWIHNjZW5hcmlvcy4i
+CiAgICAgICAgY2F0YWx5c3QgPSAiQ05OIgogICAgZWxpZiBhcmdzLnRhcmdldCBhbmQgYXJncy5j
+YXRhbHlzdDoKICAgICAgICB0YXJnZXQgPSBhcmdzLnRhcmdldAogICAgICAgIGNhdGFseXN0ID0g
+YXJncy5jYXRhbHlzdAogICAgZWxzZToKICAgICAgICBwYXJzZXIucHJpbnRfaGVscCgpCiAgICAg
+ICAgc3lzLmV4aXQoMSkKCiAgICByZXN1bHRzID0gc3RpdGNoZXIuc3RpdGNoKHRhcmdldCwgY2F0
+YWx5c3QpCgogICAgaWYgYXJncy5qc29uOgogICAgICAgIHByaW50KGpzb24uZHVtcHMocmVzdWx0
+cywgaW5kZW50PTIpKQogICAgZWxzZToKICAgICAgICBwcmludChmIlxuLS0tIFtQaGFzZSAxXSBO
+YXR1cmUtUmlnb3I6IHtyZXN1bHRzW3N0YXR1c119IC0tLSIpCiAgICAgICAgaWYgcmVzdWx0c1tz
+dGF0dXNdID09ICJGQUlMRUQiOgogICAgICAgICAgICBwcmludChmIlJlYXNvbjoge3Jlc3VsdHNb
+cmVhc29uXX0iKQogICAgICAgICAgICBzeXMuZXhpdCgxKQogICAgICAgIAogICAgICAgIHByaW50
+KGYiQ2F0YWx5c3QgVXBncmFkZToge2NhdGFseXN0fSAtPiB7cmVzdWx0c1t1cGdyYWRlZF9jYXRh
+bHlzdF19IikKICAgICAgICBwcmludCgiXG4tLS0gW1PhYXNlIDJdIERlY29uc3RydWN0aW9uIC0t
+LSIpCiAgICAgICAgZm9yIGssIHYgaW4gcmVzdWx0c1tkZWNvbnN0cnVjdGlvbl0uaXRlbXMoKToK
+ICAgICAgICAgICAgcHJpbnQoZiIgIHtrfToge3Z9IikKICAgICAgICAgICAgCiAgICAgICAgcHJp
+bnQoIlxuLS0tIFtQaGFzZSAzXSAzLVRpZXIgQ291bnRlcmZhY3R1YWwgQWJsYXRpb24gLS0tIikK
+ICAgICAgICBmb3IgaywgdiBpbiByZXN1bHRzW2lkZWFdW2FibGF0aW9uXS5pdGVtcygpOgogICAg
+ICAgICAgICBwcmludChmIiAge2t9OiB7dn0iKQoKICAgICAgICBwcmludCgiXG4tLS0gW1BoYXNl
+IDRdIFJlZmluZWQgU3RpdGNoZWQgSWRlYSAtLS0iKQogICAgICAgIHByaW50KGYiVGl0bGU6IHty
+ZXN1bHRzW2lkZWFdW3RpdGxlXX0iKQogICAgICAgIHByaW50KGYiQ29yZSBMb2dpYzoge3Jlc3Vs
+dHNbaWRlYV1bY29yZV9sb2dpY119IikKICAgICAgICBwcmludChmIkV2aWRlbmNlIENsYWltOiB7
+cmVzdWx0c1tpZGVhXVtldmlkZW5jZV9jbGFpbV19IikKCmlmIF9fbmFtZV9fID09ICdfX21haW5f
+Xyc6CiAgICBtYWluKCkK
