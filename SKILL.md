@@ -1,24 +1,116 @@
 ---
-name: Academic-Stitcher-Skill
-description: >-
-  Triggered when the user wants to brainstorm or generate new academic/scientific research ideas by stitching existing domain problems with new methodologies. Use this skill to deconstruct research topics and recombine them with catalyst technologies to produce high-impact, Nature-level innovation concepts.
-triggers:
-  - "When the user provides a research target/abstract and a catalyst technology"
-  - "When the user asks to stitch or combine two different research domains or methods"
-  - "When the user requests brainstorming of top-tier academic research ideas (Nature-level)"
+name: academic-stitcher-skill
+description: |
+  将一系列相关的论文、基线模型、模块、实验结果或粗糙的毕业论文想法，转化为逻辑自洽、能够经得起审阅的“学术论文故事”。
+  适用场景：当用户要求“缝论文”、“做学术裁缝”、结合 A+B 论文、寻找论文创新点模块、构建 SCI/毕业论文大纲、解释工作量与创新性、撰写相关工作（Related Work）/方法（Method）章节，或将现有实验结果包装为合规的学术叙事时使用。
+  严禁用于：伪造实验数据、伪造引用、学术造假或洗稿抄袭。
 ---
 
-# Academic Stitcher Skill
+# Paper Tailor Story (学术裁缝与论文故事编撰)
 
-## Core Instructions
+> “学术裁缝的核心不是缝模块，而是编故事；不是简单的 A+B，而是为了解决 A 的缺陷引入了 B，并用严谨的实验证明 A+B 的有效性。”
 
-1.  **Isolate Execution Layers**:
-    *   Initialize the static constraints from `references/constraints.md` and `references/nature_benchmarks.md` at start.
-    *   Execute the dynamic stitching logic based on user-provided Target and Catalyst parameters.
-2.  **Execute Two-Stage Workflow**:
-    *   **Stage 1 (Deconstruction & Stitching)**: Run `scripts/academic_stitcher.py` to parse inputs into Object, Method, and Scenario. Apply the catalyst technology to resolve identified pain points.
-    *   **Stage 2 (Rigorous Review)**: Pass results through the criteria defined in `references/nature_benchmarks.md`. Reject any idea that fails to demonstrate step-change innovation.
-3.  **Refine Writing Quality**:
-    *   Adhere strictly to style rules in `references/writing_quality.md`.
-    *   Eliminate subjective hype, AI-generated filler, and banned phrases.
-    *   Format output using concise, fact-driven prose.
+本 Skill 提炼自 B 站 UP 主「水论文的程序猿-水导」的数十期关于“学术裁缝”、“缝论文”与“编故事”的核心指导视频。
+核心理念在于：合规的学术裁缝绝不是学术不端。通过合规的模块拼接、合理的逻辑推导与完整的实验论证，能够将微小的创新点（A+B+C+D）转化为符合顶会、顶刊或学位论文标准的高质量学术产出。
+
+## 来源与证据边界 (Source Boundary)
+
+本 skill 的来源证据采用分层口径：公开上传页显示 547 个视频；公开搜索和 view API 可验证 528 条；其中目标相关分类为 33 条 core、88 条 support、104 条 background、303 条 out。详见 `references/video-index.md` 与 `references/strict-video-audit.md`。
+
+后续使用用户临时提供的 Bilibili `SESSDATA` 对 `work/transcripts_raw/` 中的 75 份核心/支撑逐字稿对应 BVID 重新抓取 AI 字幕：70 条拿到可下载字幕，5 条不可用。但自动字幕并不等于可用证据，审计发现其中存在标题与字幕内容不匹配、字幕过短、以及摘要把灰色做法写成直接建议的问题。最终已重建 `transcripts_distilled/`：75 份全覆盖，其中 26 份用于方法蒸馏，49 份只记录证据边界。使用逐字稿材料前必须先查看 `references/transcript-distillation-audit.md`、`references/ai-transcript-coverage.csv` 和 `references/transcript-derived-playbook.md`。
+
+如果来源摘要含有“防查重、规避抄袭、伪装创新、造假、隐藏复用”等表述，必须改写为合规边界或拒绝项，不能作为执行建议。
+
+## 核心思维流派 (Operating Model)
+
+处理任何论文构思时，必须将其拆分为以下四个维度的层次：
+
+1. **目标 (Goal)**：明确产出类型（学位大论文、课程小论文、SCI 四区、顶会顶刊、Rebuttal 回复还是组会汇报）。目标决定了工作量上限与故事包装的深度。
+2. **基座 (Inheritance)**：这篇工作站在哪个基线模型（Baseline）、任务场景或经典论文家族之上。
+3. **变量 (Delta)**：在基座之上，你引入了什么改变（新的模块、损失函数、数据预处理方法、评价指标等）。
+4. **故事 (Story)**：将基座与变量连接起来的逻辑链条（问题-机制-证据）。解释为什么这个改变是“必需的”且“有效的”，而不是强行拼凑。
+
+## 执行工作流 (Workflow)
+
+当协助用户进行“学术裁缝”时，严格按照以下步骤执行：
+
+### 第一步：盘点与确立目标 (Triage & Target)
+- 询问并确认用户的领域、具体任务、目标发表级别以及字数/页数要求。
+- 盘点用户手头已有的资源：跑通的 Baseline、代码、数据集、跑挂了的实验结果、已经画好的图表。
+- **裁缝铁律**：选择最小且最诚实的目标。如果没有顶会的命和数据，就先缝出一个能稳妥毕业/发表的四区或学位论文框架。
+
+### 第二步：建立文献锚点矩阵 (Build The Paper Matrix)
+学术裁缝不能凭空想象，必须基于领域内文献。协助用户构建一个包含 8-20 篇相关论文的矩阵：
+- **原则**：只找同领域、同任务场景下与你直接相关的论文。
+- **提取重点**：对于“找模块”的需求，重点提取其他论文中模块的输入、输出、解决的痛点及计算代价。
+- **相关工作写法**：相关工作（Related Work）不是简单罗列 1000 篇论文，而是将领域内 100 篇相关论文分层次介绍，突出它们没做好的地方，从而引出你的工作。
+
+### 第三步：推导继承链与缝合逻辑 (Inheritance & Stitching)
+用一句话明确这篇论文的继承链：
+> `本工作继承了 [某论文/模型] 的 [基准任务]，但因为发现其在 [特定场景/缺陷] 表现不佳，因此引入了 [变量模块] 来解决。`
+
+**A+B 工作量的合规化：**
+- 简单的 A+B 是不够的。如果你的工作是 E = A + B + C + D。
+- 必须证明 E (优化后性能 99%) > A(98%)、B(97%)、C(95%)、D(96%)。
+- 对于硕士大论文，可以将多个模块打包成独立的工作量章节（例如：第3章介绍 A+b+c，第4章介绍在前者基础上的 d+e）。
+
+### 第四步：将“拼凑”转化为“机制解释” (Convert A+B into Mechanism)
+针对每一个要“缝”进来的模块，必须回答以下灵魂拷问：
+1. A 模型的什么缺陷（Failure mode）需要 B 模块来弥补？
+2. B 模块的数据分布和假设，与 A 模型的场景是否匹配？（**避免强行跨领域缝合导致的不适配**）
+3. 需要设计什么消融实验（Ablation study）、定量指标或误差分析来证明这个缝合是有效的？
+- **铁律**：如果一个模块仅仅是因为“流行”而缝合，且无法解释其机制，宁可丢弃。
+
+### 第五步：撰写论文故事主线 (Write The Story Spine)
+使用以下经典的“四段式故事结构”帮助用户打磨论文大纲：
+1. **领域痛点 (Field pressure)**：在当前的 XXX 任务中，现有的方法通常难以处理 `[具体瓶颈]`。
+2. **研究缺口 (Gap)**：之前的工作要么 `[缺陷1]`，要么 `[缺陷2]`，留下了一个 `[未解决的盲区]`。
+3. **破局思路 (Move)**：为此，我们提出了一种基于 `[新缝合模块/Delta]` 的方法，该方法能够通过 `[具体机制]` 解决上述问题。
+4. **证据支撑 (Evidence)**：在 `[特定数据集]` 上的实验表明，我们的方法达到了 `[具体的提升效果]`，尤其是在 `[某个极端/困难场景]` 下表现尤为出色。
+
+### 第六步：反向映射各个章节 (Map Sections Backward)
+基于故事主线，指导用户填充论文的具体章节（而不是看着代码瞎写）：
+- **标题 (Title)**：任务场景 + 核心机制 + 最终收益。
+- **摘要 (Abstract)**：痛点 -> 方法提出 -> 实验证据 -> 局限性。
+- **引言 (Introduction)**：详细阐述真实存在的问题，现有工作的不足，以及本工作的三点核心贡献（Contribution list）。
+- **方法 (Method)**：不要罗列代码！将整个流程描述为从输入到输出的数据流变换，并用数学公式或流程图定义每个缝合模块的职责。
+- **实验 (Experiments)**：主实验证明 SOTA，**消融实验证明每一个缝进去的模块都不是白给的**。
+
+### 第七步：学术底线与合规自检 (Evidence & Ethics Check)
+在交付任何方案前，进行严厉的底线审计：
+- **绝不捏造**：没有跑出来的结果不能写，负面结果可以转化为诚实的 `Limitation` 讨论。
+- **必须引用**：缝合过来的任何模块、公式和思想，必须明确提供引用来源（Attribution）。
+- **杜绝洗稿**：不鼓励简单的英译中、跨领域盲目套壳。必须要有自己重新组合后的机制解释。
+
+---
+
+## 默认输出格式 (Output Format)
+
+在处理用户的“学术裁缝”请求时，请默认输出以下格式的结构化规划：
+
+```markdown
+## 🪡 论文裁缝地图 (Paper Tailor Map)
+- **目标设定**: [明确发表级别与工作量要求]
+- **核心继承链**: [基于什么 Baseline]
+- **缝合的痛点 (Gap)**: [为什么要缝]
+- **候选拼图 (Delta)**: [拟引入的模块/机制]
+- **取舍建议**: [哪些模块建议保留，哪些因为难以解释建议丢弃]
+
+## 📖 核心故事主线 (Story Spine)
+1. **领域痛点**: ...
+2. **研究缺口**: ...
+3. **破局思路**: ...
+4. **实验证据**: ...
+
+## 📝 章节写作与实验对照表
+| 论文章节 | 核心叙事目标 (What to say) | 需要的实验证据 (Evidence needed) |
+| --- | --- | --- |
+| 引言/相关工作 | ... | 引用文献矩阵 |
+| 方法说明 | 解释模块 B 是如何融入 A 的 | 架构图 / 公式推导 |
+| 实验分析 | 证明缝合后的 A+B 优于单纯的 A | 消融实验结果 / 性能对比表 |
+
+## ⚠️ 合规与自检风险提示
+- **证据缺口**: [当前还缺什么实验数据来支撑这个故事]
+- **过度包装风险**: [哪些宣称可能过头了，需要往回找补]
+- **学术诚信确认**: [提醒必须引用的来源]
+```

@@ -1,37 +1,46 @@
-# Academic Stitcher Skill (学术缝合技能库)
+# Academic Stitcher Skill
 
-本仓库是一个严格遵循 [Datawhale《如何写出好的 Skill》指南](https://github.com/datawhalechina/hello-agents/blob/main/Extra-Chapter/Extra08-%E5%A6%82%E4%BD%95%E5%86%99%E5%87%BA%E5%A5%BD%E7%9A%84Skill.md) 构建的 AI Agent 技能模块。
+`academic-stitcher-skill` is a Codex skill for turning related papers, baseline models, modules, experiment results, and rough thesis ideas into a defensible academic paper story.
 
-## 简介
+The skill is distilled from public Bilibili videos by `水论文的程序猿-水导`, especially the `学术裁缝`, `缝论文`, and paper-story videos. It deliberately converts grey-area wording into compliant research practice: attribution, real deltas, reproducible experiments, bounded claims, and refusal of fabricated data or plagiarism.
 
-**Academic Stitcher Skill** 旨在帮助 AI Agent 执行“科学创新缝合（Scientific Innovation Stitching）”工作流。通过将目标研究课题（Target）解构为对象（Object）、方法（Method）和场景（Scenario），并引入新技术催化剂（Catalyst），生成具有创新性的学术研究思路。
+## Structure
 
-## 仓库结构
+- `SKILL.md`: skill entrypoint, trigger description, workflow, and safety boundaries.
+- `agents/openai.yaml`: UI metadata for Codex skill listings.
+- `references/video-index.md`: strict source index and core/support video table.
+- `references/strict-video-audit.md`: acquisition boundary for the 547 visible uploads and 528 verified public records.
+- `references/strict-video-catalog.csv`: all 528 verified public records with classification labels.
+- `references/ai-transcript-coverage.csv`: AI subtitle coverage and relevance audit for 75 selected core/support BVIDs.
+- `references/transcript-distillation-audit.md`: audit of regenerated transcript distillations.
+- `references/transcript-derived-playbook.md`: safe rules distilled from the 26 usable transcript records.
+- `references/playbook.md`: reusable templates for paper matrices, story spines, sections, and evidence checks.
+- `transcripts_distilled/`: 75 audited per-video distillation notes; 26 are used for method extraction and 49 are evidence-boundary records.
 
-本仓库采用 AI 优化的三级分层架构，确保 Agent 能以最低的 Token 成本获取最精准的指令：
+## Evidence Boundary
 
-- **`SKILL.md` (入口文件)**: 
-  - 包含 YAML frontmatter 元数据，定义技能激活触发条件。
-  - 包含核心指令（Imperative Mood），规定 Agent 的行为边界及反模式（Anti-patterns）。
-- **`scripts/stitcher.py` (执行脚本)**: 
-  - 确定性助手脚本。负责解析论文摘要、结构化 JSON 输出以及验证输入完整性，减少 AI 在格式处理上的不确定性。
-- **`references/stitching_rules.md` (参考资料)**: 
-  - 详细阐述“A+B 模型”逻辑。当 Agent 需要深入理解对象、方法、场景的解构原则时调用。
-- **`assets/example_templates.json` (产出模板)**: 
-  - 提供高质量的缝合思路示例，作为 Few-shot 模板引导 Agent 生成符合学术标准的创新构思。
+The public uploader page showed 547 uploads. Public search/view paths verified 528 records in this environment; 19 upload records remain unresolved because Bilibili upload pagination triggered risk controls.
 
-## 如何使用
+For the 75 transcript BVIDs:
 
-AI Agent 在加载此技能后，应遵循以下流程：
+- 70 had downloadable AI subtitles.
+- 5 were unavailable.
+- 26 were used for method distillation.
+- 49 were retained only as evidence-boundary records.
 
-1. **识别需求**: 当用户提出“帮我写论文开题报告”或“有哪些研究新思路”时，通过 `SKILL.md` 的描述自动触发。
-2. **解构与验证**: 调用 `scripts/stitcher.py` 对输入的课题进行结构化拆解。
-3. **知识参考**: 参考 `references/stitching_rules.md` 中的原则，确保“缝合”逻辑具备科学合理性。
-4. **生成产出**: 参考 `assets/example_templates.json` 的格式，输出 3 个针对具体痛点的创新研究点。
+Do not treat a downloadable subtitle as automatically relevant. Check `references/ai-transcript-coverage.csv` and the matching file under `transcripts_distilled/` before using any video as evidence.
 
-## 贡献与规范
+## Validation
 
-本仓库所有变更须严格遵守 Skill 设计原则：
-- **简洁性**: 不包含任何对 AI 无用的冗余文档（如人类阅读的安装指南）。
-- **确定性**: 脆弱操作（如复杂格式解析）必须通过脚本锁定。
-- **祈使句**: 指令部分统一使用祈使语气，消除歧义。
+Validated with:
+
+```powershell
+$env:PYTHONUTF8='1'
+D:\software\Anaconda3\envs\pytorch_env\python.exe C:\Users\zeooon3\.codex\skills\.system\skill-creator\scripts\quick_validate.py .
+```
+
+Expected result:
+
+```text
+Skill is valid!
+```

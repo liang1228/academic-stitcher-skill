@@ -1,0 +1,4 @@
+interface:
+  display_name: "学术缝合裁缝"
+  short_description: "把论文模块、实验结果与相关工作整合成合规可验证研究故事"
+  default_prompt: "Use $academic-stitcher-skill to turn my target papers and experiment results into a defensible paper story."
