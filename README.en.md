@@ -160,11 +160,3 @@ For English manuscript work, return polished English first. If the source materi
 - [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex): Codex suite orchestration, inline role passes, and reviewer independence.
 - Local project distillation: paper positioning, inheritance chains, module stitching, compliance translation of grey vocabulary, and graduate-research scenarios.
 
-## Maintenance Rules
-
-- Put common runtime rules in `static/core`.
-- Put route, paper-type, section, and language variants in `static/fragments`.
-- Put deeper templates and source-informed summaries in `references`.
-- Keep raw transcripts, per-video notes, fetch tables, upstream examples, tests, and scripts out of the main skill unless an evidence package is explicitly requested.
-- Keep `SKILL.md` lean and router-focused.
-- After major edits, run `quick_validate.py` and scan for local paths, credentials, and intermediate artifacts.
