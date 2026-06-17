@@ -1,9 +1,10 @@
 name: academic-stitcher-skill
-version: 2.0.0
+version: 2.1.0
 description: >
   Declarative router for the structured Academic Stitcher skill flow.
   SKILL.md uses this manifest to load only the core files and fragments
-  needed for the current paper-stitching, writing, polishing, or review task.
+  needed for the current paper-stitching, writing, polishing, review, or
+  Ctx2Skill-style self-evaluation task.
 
 always_load:
   - static/core/stance.md
@@ -17,13 +18,16 @@ axes:
       Decide the main work mode. Use stitch-plan for idea/module/story planning,
       section-draft for writing or rebuilding manuscript sections, nature-polish
       for polishing/restructuring existing prose, reviewer-audit for pre-submission
-      critique, and full-pipeline when the user asks for an end-to-end path.
+      critique, full-pipeline when the user asks for an end-to-end path, and
+      ctx2skill-audit when the user asks to evaluate, distill, regression-test,
+      or optimize this skill itself using Ctx2Skill/self-play logic.
     values:
       stitch-plan:     static/fragments/route/stitch-plan.md
       section-draft:   static/fragments/route/section-draft.md
       nature-polish:   static/fragments/route/nature-polish.md
       reviewer-audit:  static/fragments/route/reviewer-audit.md
       full-pipeline:   static/fragments/route/full-pipeline.md
+      ctx2skill-audit: static/fragments/route/ctx2skill-audit.md
     default: stitch-plan
     multi: false
 
@@ -74,3 +78,5 @@ references:
       path: references/writing-suite.md
     - condition: user asks what was distilled from the Bilibili transcripts/videos or needs source-informed heuristics
       path: references/transcript-derived-playbook.md
+    - condition: user asks to evaluate, maintain, distill, regression-test, or optimize this skill itself with Ctx2Skill-style loops
+      path: references/ctx2skill-evaluation.md
