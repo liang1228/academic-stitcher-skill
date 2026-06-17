@@ -6,6 +6,8 @@ Use only the gates relevant to the current request.
 
 - Every major claim maps to data, citation, figure, experiment, or explicit limitation.
 - Unsupported claims are marked as `needs evidence`, `inferred`, or downgraded.
+- Specific examples, mechanisms, applications, datasets, baselines, and future work must be either source-grounded or explicitly labeled as proposals.
+- Vague user notes should remain bounded; do not make them sound more precise than the source.
 
 ## Citation And Attribution Gate
 
