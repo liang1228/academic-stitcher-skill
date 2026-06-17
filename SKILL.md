@@ -1,7 +1,7 @@
 ---
 name: academic-stitcher-skill
 description: |
-  Structured academic paper-stitching and manuscript-writing skill. Use when the user asks to combine or extend papers, build an A+B research idea, design a defensible thesis/SCI/conference paper story, create an opening report or advisor-facing plan, draft or polish Nature-style manuscript sections, write Related Work/Method/Experiments/Discussion, simulate reviewer objections, or convert rough modules/results into a claim-evidence-boundary narrative. Trigger on English or Chinese requests such as paper stitching, academic tailor, research story, A+B idea, thesis proposal, manuscript draft, Nature-style writing, 论文故事, 缝论文, 学术裁缝, 小论文, 开题, 相关工作, 方法章节, SCI写作. Refuse fabricated data, fake citations, hidden copying, plagiarism, weakened baselines, undisclosed cherry-picking, or academic misconduct.
+  Structured academic paper-stitching and manuscript-writing skill. Use when the user asks to combine or extend papers, build an A+B research idea, design a defensible thesis/SCI/conference paper story, create an opening report or advisor-facing plan, draft or polish Nature-style manuscript sections, write Related Work/Method/Experiments/Discussion, simulate reviewer objections, convert rough modules/results into a claim-evidence-boundary narrative, or audit/improve this skill with Ctx2Skill-style challenger, judge, failure-diagnosis, and replay workflows. Trigger on English or Chinese requests such as paper stitching, academic tailor, research story, A+B idea, thesis proposal, manuscript draft, Nature-style writing, skill self-evaluation, Ctx2Skill audit, 论文故事, 缝论文, 学术裁缝, 小论文, 开题, 相关工作, 方法章节, SCI写作. Refuse fabricated data, fake citations, hidden copying, plagiarism, weakened baselines, undisclosed cherry-picking, or academic misconduct.
 ---
 
 # Academic Stitcher Skill
@@ -15,7 +15,7 @@ Follow this protocol for every request.
 1. Read `manifest.yaml`.
 2. Read every file listed under `always_load`.
 3. Detect the request axes from the manifest:
-   - `route`: stitch-plan, section-draft, nature-polish, reviewer-audit, or full-pipeline.
+   - `route`: stitch-plan, section-draft, nature-polish, reviewer-audit, full-pipeline, or ctx2skill-audit.
    - `paper_type`: research, methods, algorithmic, review, or proposal-thesis.
    - `section`: title, abstract, introduction, related-work, method, experiments, discussion, or conclusion.
    - `language`: zh-cn or en.
@@ -24,6 +24,8 @@ Follow this protocol for every request.
 6. Use `references/` only on demand, following `manifest.yaml` reference triggers.
 
 If the request supplies only a broad topic, route to scoping and paper-matrix work before drafting. If the user already has results, figures, or a draft, route directly to section architecture, polishing, or reviewer audit.
+
+Use `ctx2skill-audit` only when the user asks to evaluate, maintain, distill, regression-test, or optimize this skill itself. In that route, treat the skill repository as the artifact under test, generate context-grounded challenger tasks, diagnose failures, and propose bounded file updates instead of drafting manuscript prose.
 
 ## Source Hierarchy
 
@@ -35,6 +37,8 @@ Apply sources in this priority order:
 4. Deep references in `references/` when the selected task needs more templates or distilled heuristics.
 
 Do not invent missing evidence. If a claim, baseline, dataset, citation, statistic, or mechanism is absent, write a placeholder, downgrade the claim, or ask for the missing input.
+
+For skill-maintenance requests, do not invent benchmark results. Mark any unexecuted Ctx2Skill loop, judge pass, or API-dependent evaluation as not run, and separate deterministic repository inspection from model-generated evaluation.
 
 ## Operating Model
 
