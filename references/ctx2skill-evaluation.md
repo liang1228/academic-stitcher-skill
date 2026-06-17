@@ -11,6 +11,7 @@ Use this reference when maintaining `academic-stitcher-skill` with a Ctx2Skill-s
 - [Failure Taxonomy](#failure-taxonomy)
 - [Update Rules](#update-rules)
 - [Replay Gate](#replay-gate)
+- [Observed Replay Seed](#observed-replay-seed)
 
 ## Adapted Loop
 
@@ -89,3 +90,14 @@ Before declaring the update complete, check:
 - The change does not weaken evidence, attribution, or compliance boundaries.
 - The manifest lists every added file.
 - Validation and credential/path scans were run or explicitly marked as not run.
+
+## Observed Replay Seed
+
+The first successful local self-play smoke test generated a `strict-source-adherence` reasoner skill. The failure was not missing structure; it was over-elaboration: a draft turned the source phrase "potential applications for urban areas" into more specific examples that the source did not provide.
+
+Use this as a recurring replay seed:
+
+- Does the answer preserve explicit claims without adding examples?
+- Are vague source phrases kept vague or marked as proposals?
+- Does the claim-evidence map expose unsupported specificity?
+- Does the revision plan avoid inventing future experiments, settings, datasets, or mechanisms?
