@@ -15,14 +15,9 @@ Use this skill to turn paper ingredients into a defensible research story. The c
 Keep `SKILL.md` as the execution guide. Load bundled resources only when the task needs them:
 
 - Read `references/playbook.md` for deeper templates: diagnostic questions, paper matrix fields, story patterns, section templates, and red flags.
-- Read `references/transcript-derived-playbook.md` when the user asks where the distilled rules came from or needs source-backed heuristics.
-- Read `references/video-index.md` when the user asks about video coverage, core/support sources, BVIDs, or source scope.
-- Read `references/strict-video-audit.md` when the user challenges the 547/528/19 acquisition boundary or subtitle method.
-- Read `references/transcript-distillation-audit.md` and `references/ai-transcript-coverage.csv` before relying on any individual transcript-derived note.
-- Search `references/strict-video-catalog.csv` with `rg "<keyword>|<BVID>" references/strict-video-catalog.csv` instead of loading the whole CSV.
-- Search `transcripts_distilled/` with `rg "<BVID>|<theme>|Decision|Use for method" transcripts_distilled` and then open only the matching file.
+- Read `references/transcript-derived-playbook.md` when the user asks what was distilled from the video/transcript audit or needs source-informed heuristics.
 
-Do not load all transcript notes into context. Do not import raw transcript text into answers.
+The repository intentionally keeps only the distilled core. Per-video notes, raw transcripts, subtitle coverage tables, and acquisition audit tables are intermediate artifacts and are not part of the published skill.
 
 ## Operating Model
 
@@ -52,7 +47,7 @@ Reject or reframe requests that ask to fabricate, hide, or launder academic work
 - Do not hide copied modules, formulas, code, datasets, or writing. Require attribution.
 - Do not turn "rewrite to avoid detection" requests into operational advice. Reframe as legitimate synthesis with citation and original analysis.
 - Do not overclaim top-venue novelty when the evidence supports only a thesis, workshop, negative-result, or incremental paper.
-- Treat unavailable, too-short, or likely mismatched transcript notes as evidence-boundary records, not method sources.
+- Treat unavailable, too-short, or likely mismatched source material as excluded evidence, not method rules.
 
 ## Default Output
 

@@ -1,6 +1,8 @@
-# Transcript-Derived Playbook
+# Core Distilled Playbook
 
-This reference is regenerated from the audited 75-video transcript set. It keeps usable method rules and excludes unavailable, too-short, or likely mismatched subtitles from method distillation.
+This is the retained core distillation from the audited 75-video transcript set. It keeps only reusable method rules and excludes unavailable, too-short, or likely mismatched source material from method distillation.
+
+The repository intentionally omits intermediate artifacts such as raw transcripts, per-video distilled notes, subtitle coverage CSVs, and acquisition audit tables. Use this file as the compact source-informed rule summary.
 
 ## Coverage
 
@@ -36,9 +38,9 @@ This reference is regenerated from the audited 75-video transcript set. It keeps
 - Bind every claim to evidence: main result, ablation, robustness, complexity, qualitative cases, or explicit limitation.
 - Treat all shortcut or misconduct-adjacent wording as a refusal boundary and replace it with attribution, reproducibility, and bounded claims.
 
-## Do Not Import Into The Skill
+## Excluded Intermediate Artifacts
 
 - Do not import raw transcript text.
-- Do not import rules from rows marked `likely_mismatch`, `too_short`, or `unavailable` without manual review.
+- Do not import rules from rows that were marked `likely_mismatch`, `too_short`, or `unavailable` during audit without manual review.
 - Do not turn grey-area statements into operational advice.
 - Do not use title-only evidence as proof that a transcript contains that topic.
