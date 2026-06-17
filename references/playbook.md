@@ -7,6 +7,11 @@ Use this reference when a task needs deeper structure than the main `SKILL.md`.
 - [Diagnostic Questions](#diagnostic-questions)
 - [Paper Matrix Fields](#paper-matrix-fields)
 - [Story Patterns](#story-patterns)
+- [Document-Derived Graduate Workflow](#document-derived-graduate-workflow)
+- [Grey Vocabulary Map](#grey-vocabulary-map)
+- [Opening Report Scaffold](#opening-report-scaffold)
+- [SCI Paper Skeleton](#sci-paper-skeleton)
+- [Fair Evidence Rules](#fair-evidence-rules)
 - [Section Templates](#section-templates)
 - [Red Flags](#red-flags)
 - [Preferred Response Style](#preferred-response-style)
@@ -65,6 +70,102 @@ Use these columns for literature triage:
 - If the main metric is weak, look for honest subcases, robustness, cost, interpretability, or failure analysis.
 - Do not invent or massage data.
 - Reposition the work as diagnostic, negative-result, workshop, thesis, or follow-up plan if the evidence cannot support a full paper.
+
+## Document-Derived Graduate Workflow
+
+This section distills the added graduate survival, advisor Q&A, opening-report, small-paper, and SCI-template documents into reusable rules. Keep grey phrases as vocabulary, but convert risky tactics into transparent, attributable, evidence-bound work.
+
+### Target Backward Planning
+
+- Start from the user's exit target: graduation only, job, PhD application, scholarship, advisor requirement, or publication goal.
+- Translate the target into a minimum viable research product: thesis workload, small paper, SCI submission, opening report, or only a defensible research plan.
+- Use the gap between the desired CV and the current CV to choose tasks. Prefer tasks that produce durable evidence: reproduced baseline, paper matrix, experiment table, figure, draft section, or advisor-approved plan.
+- Do not default to "publish a paper" when it does not serve the user's graduation, PhD, job, or advisor constraint.
+
+### Advisor And Contribution Alignment
+
+- Do not tell the advisor "I want to write a paper" as an empty request. Bring a concrete work package: literature map, baseline reproduction, dataset audit, candidate module list, draft outline, or preliminary table.
+- Clarify contribution and authorship expectations early, especially before a first collaborative paper.
+- Treat advisor style and lab inheritance as constraints. If lab lineage, senior code, or dataset access exists, verify permission and attribution before building on it.
+- Convert conflict or uncertainty into a decision memo: current evidence, options, cost, risk, recommendation, and what decision is needed from the advisor.
+
+### Feasible Topic Selection
+
+- Prefer directions with public datasets, established metrics, comparable papers, and at least one reproducible baseline when the deadline is tight.
+- Use private or newly collected data only when access, labeling, ethics, cleaning, and evaluation resources are real.
+- Avoid "from-zero" topics with no survey, no benchmark, no comparable method, no metric, and no implementation path unless the user explicitly wants exploratory research and accepts the risk.
+- If no direct survey exists, inspect adjacent surveys. If even adjacent structure is absent, downgrade publication ambition and define the work as exploratory.
+
+### Baseline And Module Assembly
+
+- Treat the baseline as the inherited frame: task, dataset, preprocessing, architecture, objective, and evaluation protocol.
+- Treat a module as a separable component that can be removed, replaced, or measured in ablation.
+- Choose baselines by reproducibility and task fit, not only venue prestige. Recent strong papers are useful only if their code, data, or protocol can be reconstructed.
+- Keep a module only when it has three links: source/citation, compatibility with the baseline, and a mechanism that predicts a measurable improvement.
+- Turn A+B into a research claim by naming the baseline failure mode, why the module should address it, and what evidence will test the claim.
+
+## Grey Vocabulary Map
+
+Retain the user's source vocabulary so the skill can recognize the domain, but use the safe interpretation in the actual plan.
+
+| Grey phrase | Safe interpretation | Boundary |
+| --- | --- | --- |
+| 缝论文 / 学术裁缝 | Literature-driven module integration with attribution | No hidden copying, fake novelty, or uncredited reuse |
+| 水文 / 保毕业 | Graduation-focused, low-risk paper with bounded claims | Do not fabricate data, citations, or contribution |
+| 编故事 / 论文包装 | Problem-mechanism-evidence narrative | Do not invent a fake problem or hide contradictory evidence |
+| 科研 trick | Legitimate research craft: search strategy, fair tuning, ablation design, visualization, writing clarity | No selective weakening, undisclosed cherry-picking, or false randomness |
+| 造航母 | From-zero, high-risk topic without existing data, metrics, baselines, or literature | Downgrade ambition unless resources and time are real |
+| 胶水技能 | Engineering skill needed to integrate baseline and module | Integration must be reproducible and documented |
+| 挑 SOTA | Define a comparison set matching task, data, date, venue, and reproducibility | Do not pick only weak baselines while implying full SOTA coverage |
+| 只答不辩 | Defense posture: acknowledge feedback, record decisions, revise plan | Do not evade substantive methodological objections |
+
+## Opening Report Scaffold
+
+Use this when the user asks for a thesis proposal, opening report, advisor-facing plan, or defense PPT.
+
+| Part | What To Produce | Evidence Check |
+| --- | --- | --- |
+| Topic basis | Field background, task pressure, and why the problem matters now | 2-3 surveys or recent representative papers |
+| Research status | Domestic/foreign or field-level method families, not a paper-by-paper dump | Grouped paper matrix with strengths and limits |
+| Research significance | Scientific value plus practical value, stated modestly | No claim beyond available task/data evidence |
+| Research content | 2-4 concrete research questions or work packages | Each has input, method, output, and evaluation |
+| Research objective | What will be demonstrated by the end | Must be achievable within time and resources |
+| Key problems | Bottlenecks that the method must solve | Each maps to a module, experiment, or risk plan |
+| Method route | Pipeline, baseline, delta, training/inference, and figure plan | Shapes, data flow, and dependencies are clear |
+| Feasibility | Data, code, compute, preliminary result, and advisor/lab support | Missing resources are listed as risks |
+| Innovation | New combination, new adaptation, new evidence, or new application | Must be specific and attributable |
+| Schedule | Literature, reproduction, module design, experiments, writing, revision, defense | Time boxes include buffer for failed runs |
+| References | Real, relevant references | No fake citations or filler references |
+
+Write opening reports as feasible commitments, not fantasy promises. If the source material encourages exaggeration or "only answer, do not debate" behavior, reframe it as: listen to committee feedback, record decisions, and revise the plan.
+
+## SCI Paper Skeleton
+
+Use this section when the user wants a compact SCI-style paper plan.
+
+| Section | Narrative Job | Minimum Content |
+| --- | --- | --- |
+| Abstract | Compress field, gap, method, evidence, and contribution | One sentence each for problem, method, result, implication |
+| Introduction | Lead from field pressure to specific gap | Motivation, failure mode, why existing work is insufficient, contributions |
+| Related Work | Establish lineage and gap | Task lineage, baseline lineage, module lineage, unresolved gap |
+| Method / Approach | Explain how the delta enters the baseline | Overall pipeline, baseline recap, module mechanics, objective, complexity |
+| Experiments | Test every claim | Dataset, metrics, baselines, main result, ablation, robustness, case study |
+| Analysis | Explain why the result happened | Module contribution, failure cases, sensitivity, qualitative examples |
+| Conclusion | State what was shown and what remains limited | No new claims not supported earlier |
+
+Keep the section order conventional unless the target venue requires otherwise. Fix source typos and informal names before producing user-facing text.
+
+## Fair Evidence Rules
+
+Use these rules to convert grey source suggestions into compliant research practice.
+
+- **Baseline selection**: define the selection rule before comparing: same task, same dataset, recent enough, reproducible or directly reported, and representative of the target venue level.
+- **Reported vs reproduced numbers**: label which results are copied from original papers and which are reproduced locally. Do not mix them silently.
+- **Hyperparameters**: tune baselines and proposed methods fairly under comparable budgets. Do not intentionally weaken a baseline to create a gap.
+- **Ablation**: test each separable component alone and in combination when meaningful. If components only make sense jointly, state that and include a grouped ablation plus a rationale.
+- **Case study**: select qualitative examples by a stated rule. If examples are curated, call them curated and include at least one failure or borderline case.
+- **SOTA language**: use "compared with selected baselines" unless the comparison actually covers the strongest recent systems under the same protocol.
+- **Negative evidence**: failed runs, unstable gains, or non-significant deltas should become limitations, robustness checks, or a narrower claim.
 
 ## Section Templates
 
