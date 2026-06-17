@@ -36,6 +36,8 @@ Include only the files needed for the evaluation surface:
 
 Exclude raw transcripts, per-video notes, fetch outputs, local temp folders, credentials, and Git metadata.
 
+Use `scripts/build_ctx2skill_input.py` from the skill root to generate a one-record JSONL input for Ctx2Skill. The script reads the manifest, includes the router, core files, all declared fragments, and on-demand references, then writes a source-labeled context pack. Treat that JSONL as a local evaluation artifact, not as a file to publish inside the skill package.
+
 ## Challenger Tasks
 
 Use tasks like these as seeds, then adapt them to the current repository state.

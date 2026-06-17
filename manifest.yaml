@@ -1,5 +1,5 @@
 name: academic-stitcher-skill
-version: 2.1.2
+version: 2.1.3
 description: >
   Declarative router for the structured Academic Stitcher skill flow.
   SKILL.md uses this manifest to load only the core files and fragments

@@ -40,6 +40,8 @@ academic-stitcher-skill/
 ├── README.en.md
 ├── agents/
 │   └── openai.yaml
+├── scripts/
+│   └── build_ctx2skill_input.py
 ├── static/
 │   ├── core/
 │   │   ├── stance.md
@@ -90,6 +92,8 @@ academic-stitcher-skill/
 5. 只做最小必要文件更新，并通过 replay gate 检查是否改善 hard tasks、保留 easy tasks、没有引入上下文膨胀。
 
 如果没有实际运行 Ctx2Skill 框架、模型 API、judge 和 replay selection，必须标注为本地确定性审计，而不是完整 self-play run。
+
+仓库提供 `scripts/build_ctx2skill_input.py`，用于从当前 skill 文件生成 Ctx2Skill JSONL 输入。生成的 JSONL、self-play 输出和临时 reasoner/challenger skills 属于本地评估产物，不应提交进发布仓库。
 
 ## 适用场景
 

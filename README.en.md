@@ -40,6 +40,8 @@ academic-stitcher-skill/
 ├── README.en.md
 ├── agents/
 │   └── openai.yaml
+├── scripts/
+│   └── build_ctx2skill_input.py
 ├── static/
 │   ├── core/
 │   │   ├── stance.md
@@ -91,6 +93,8 @@ When the user asks to optimize or evaluate this skill with Ctx2Skill, route to `
 5. Make the smallest bounded file update and apply a replay gate to confirm the change helps hard tasks without bloating easy tasks.
 
 If the actual Ctx2Skill framework, model API, judge, and replay selection were not run, label the result as a deterministic local audit rather than a completed self-play run.
+
+The repository includes `scripts/build_ctx2skill_input.py` to generate a Ctx2Skill JSONL input from the current skill files. The generated JSONL, self-play outputs, and temporary reasoner/challenger skills are local evaluation artifacts and should not be committed to the published skill package.
 
 ## Typical Use Cases
 
