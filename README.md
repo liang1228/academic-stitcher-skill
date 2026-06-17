@@ -4,7 +4,7 @@
 
 `academic-stitcher-skill` 是一个面向 Codex 的结构化学术写作 Skill。它把“缝论文 / 论文故事 / A+B 组合 / 研究生开题 / SCI 写作 / Nature-style polishing / 预审稿”统一成一条可执行的 Skill flow：先识别目标与证据，再构建问题-机制-证据链，最后输出章节、实验、审稿风险和下一步工作包。
 
-该仓库参考了 [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) 的 router-style 结构，吸收了其 `manifest.yaml`、`static/core`、`static/fragments`、按需加载和质量门思路；同时保留本项目从 B 站“缝论文 / 论文故事”材料中蒸馏出的研究规划、论文包装、灰色话术合规转译与研究生场景经验。
+该仓库参考了 [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) 的 router-style 结构，吸收了其 `manifest.yaml`、`static/core`、`static/fragments`、按需加载和质量门思路；同时保留本项目从 “缝论文 / 论文故事”材料中蒸馏出的研究规划、论文包装、灰色话术合规转译与研究生场景经验。
 
 ## 目录
 
