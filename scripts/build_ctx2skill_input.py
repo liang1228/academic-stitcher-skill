@@ -32,7 +32,7 @@ def _unique_paths(paths: list[str]) -> list[str]:
     return out
 
 
-def collect_manifest_paths(manifest: dict) -> list[str]:
+def collect_manifest_paths(root: Path, manifest: dict, include_scripts: bool = True) -> list[str]:
     paths: list[str] = ["SKILL.md", "manifest.yaml"]
     paths.extend(manifest.get("always_load", []))
 
@@ -45,6 +45,11 @@ def collect_manifest_paths(manifest: dict) -> list[str]:
         path = entry.get("path")
         if path:
             paths.append(path)
+
+    if include_scripts:
+        scripts_dir = root / "scripts"
+        if scripts_dir.exists():
+            paths.extend(str(path.relative_to(root).as_posix()) for path in sorted(scripts_dir.glob("*.py")))
 
     return _unique_paths(paths)
 
@@ -73,7 +78,7 @@ def assert_clean_pack(files: list[tuple[str, str]]) -> None:
 def build_prompt(skill_name: str, files: list[tuple[str, str]]) -> str:
     chunks = [
         f"You are evaluating and improving the Codex skill named {skill_name}.",
-        "This context contains the skill router, manifest, core rules, fragments, and references.",
+        "This context contains the skill router, manifest, core rules, fragments, references, and maintenance scripts.",
         "Generate hard Ctx2Skill-style challenger tasks, solve or judge them against the current skill behavior, and propose the smallest evidence-preserving skill update.",
         "Do not invent benchmark results. If an API-dependent self-play loop was not actually run, label that as not run.",
         "",
@@ -95,6 +100,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", required=True, help="Output JSONL path.")
     parser.add_argument("--context-id", default="academic-stitcher-core", help="Ctx2Skill context_id metadata value.")
     parser.add_argument("--skip-clean-check", action="store_true", help="Skip local-artifact and local-path scan.")
+    parser.add_argument("--no-include-scripts", action="store_true", help="Exclude scripts/*.py from the context pack.")
     args = parser.parse_args(argv)
 
     root = Path(args.root).resolve()
@@ -104,7 +110,7 @@ def main(argv: list[str] | None = None) -> int:
 
     manifest = yaml.safe_load(_read_text(manifest_path)) or {}
     skill_name = str(manifest.get("name") or root.name)
-    rel_paths = collect_manifest_paths(manifest)
+    rel_paths = collect_manifest_paths(root, manifest, include_scripts=not args.no_include_scripts)
 
     files: list[tuple[str, str]] = []
     missing: list[str] = []

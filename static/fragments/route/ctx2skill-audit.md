@@ -8,9 +8,10 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 2. Generate 3-5 hard challenger tasks that require the context pack, not generic academic-writing ability.
 3. Give each task a binary rubric with 8-15 checks covering routing, evidence boundaries, compliance, output contract, and progressive disclosure.
 4. Solve or inspect the tasks using the current skill behavior.
-5. Classify each failure as one of: content gap, format/structure gap, constraint violation, reasoning error, task misunderstanding, or system-prompt non-compliance.
-6. Propose the smallest bounded update to `SKILL.md`, `manifest.yaml`, `static/`, or `references/`.
-7. Re-run repository validation and mark which checks were actually executed.
+5. Summarize the run output with `scripts/summarize_ctx2skill_run.py` when a Ctx2Skill JSONL result exists; do not infer success from process exit code alone.
+6. Classify each failure as one of: content gap, format/structure gap, constraint violation, reasoning error, task misunderstanding, or system-prompt non-compliance.
+7. Propose the smallest bounded update to `SKILL.md`, `manifest.yaml`, `static/`, `references/`, or deterministic maintenance scripts.
+8. Re-run repository validation and mark which checks were actually executed.
 
 ## Output
 

@@ -10,6 +10,7 @@ Use this reference when maintaining `academic-stitcher-skill` with a Ctx2Skill-s
 - [Rubric Dimensions](#rubric-dimensions)
 - [Failure Taxonomy](#failure-taxonomy)
 - [Update Rules](#update-rules)
+- [Run Summary](#run-summary)
 - [Replay Gate](#replay-gate)
 - [Observed Replay Seed](#observed-replay-seed)
 
@@ -33,10 +34,13 @@ Include only the files needed for the evaluation surface:
 - all `static/core/*.md`
 - selected route fragments, especially `stitch-plan`, `section-draft`, `reviewer-audit`, `full-pipeline`, and `ctx2skill-audit`
 - selected references only when the task requires distilled video heuristics, Codex-suite structure, or detailed writing templates
+- maintenance scripts when evaluating the Ctx2Skill loop itself
 
 Exclude raw transcripts, per-video notes, fetch outputs, local temp folders, credentials, and Git metadata.
 
-Use `scripts/build_ctx2skill_input.py` from the skill root to generate a one-record JSONL input for Ctx2Skill. The script reads the manifest, includes the router, core files, all declared fragments, and on-demand references, then writes a source-labeled context pack. Treat that JSONL as a local evaluation artifact, not as a file to publish inside the skill package.
+Use `scripts/build_ctx2skill_input.py` from the skill root to generate a one-record JSONL input for Ctx2Skill. The script reads the manifest, includes the router, core files, all declared fragments, on-demand references, and maintenance scripts, then writes a source-labeled context pack. Treat that JSONL as a local evaluation artifact, not as a file to publish inside the skill package.
+
+Use `scripts/summarize_ctx2skill_run.py` after a run to inspect task scores, failed rubrics, judge rationales, and proposed skills. The summary helps decide whether an edit is justified. Treat the generated summary as a local evaluation artifact unless the user explicitly asks for an evidence package.
 
 ## Challenger Tasks
 
@@ -80,8 +84,22 @@ Use one primary label per failed check:
 - Update `manifest.yaml` when adding a route, fragment, or reference trigger.
 - Add `static/fragments` for reusable task-specific behavior.
 - Add `references` for deeper playbooks, example task families, or evaluation rubrics.
+- Add or update `scripts` only for deterministic maintenance steps such as context-pack generation, run summarization, or package checks.
 - Avoid putting raw evidence packages, generated audit logs, or temporary Ctx2Skill outputs in the installable skill.
 - Prefer one targeted addition over broad rewrites of existing working fragments.
+
+## Run Summary
+
+Before editing the skill from Ctx2Skill output, inspect:
+
+- whether the output contains valid JSONL records;
+- total tasks, passed tasks, failed tasks, and failed API calls;
+- exact failed rubric indices and text;
+- judge rationale for each failed task;
+- proposed reasoner or challenger skill names and descriptions;
+- whether the output is a real self-play run or only a failed probe.
+
+Do not treat a zero process exit code as proof that self-play ran. If the output file is missing, empty, malformed, or contains only an error message, mark the run as not completed and use deterministic repository inspection instead.
 
 ## Replay Gate
 

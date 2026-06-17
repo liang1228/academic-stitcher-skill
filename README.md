@@ -41,7 +41,8 @@ academic-stitcher-skill/
 ├── agents/
 │   └── openai.yaml
 ├── scripts/
-│   └── build_ctx2skill_input.py
+│   ├── build_ctx2skill_input.py
+│   └── summarize_ctx2skill_run.py
 ├── static/
 │   ├── core/
 │   │   ├── stance.md
@@ -93,7 +94,7 @@ academic-stitcher-skill/
 
 如果没有实际运行 Ctx2Skill 框架、模型 API、judge 和 replay selection，必须标注为本地确定性审计，而不是完整 self-play run。
 
-仓库提供 `scripts/build_ctx2skill_input.py`，用于从当前 skill 文件生成 Ctx2Skill JSONL 输入。生成的 JSONL、self-play 输出和临时 reasoner/challenger skills 属于本地评估产物，不应提交进发布仓库。
+仓库提供两个维护脚本：`scripts/build_ctx2skill_input.py` 用于从当前 skill 文件生成 Ctx2Skill JSONL 输入，`scripts/summarize_ctx2skill_run.py` 用于把 self-play JSONL 结果汇总成失败 rubric、proposed skill 和 replay 线索。生成的 JSONL、self-play 输出、摘要和临时 reasoner/challenger skills 属于本地评估产物，不应提交进发布仓库。
 
 ## 适用场景
 
