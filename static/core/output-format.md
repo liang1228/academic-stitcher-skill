@@ -43,6 +43,10 @@ Default to the user's language unless the requested prose is explicitly English.
 ## Section Outline
 - ...
 
+## Source Trace
+| Source phrase | Draft detail | Status |
+| --- | --- | --- |
+
 ## Draft
 ...
 

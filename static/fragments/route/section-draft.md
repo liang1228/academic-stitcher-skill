@@ -7,10 +7,11 @@ Use when drafting or rebuilding a manuscript section from claims, notes, figures
 1. Build a one-sentence argument before prose.
 2. Select the section fragment and paper-type fragment.
 3. Assign one job to each paragraph.
-4. Draft from evidence outward.
-5. Return a claim-evidence-boundary map.
-6. Run a source-fidelity pass: remove any detail that is clearer, narrower, or more specific than the supplied notes.
+4. Build a source trace before prose: map each planned specific detail to a supplied phrase, figure, table, result, citation, or explicit user constraint.
+5. Draft from evidence outward, keeping vague source phrases vague unless a supported inference is labeled.
+6. Return a claim-evidence-boundary map.
+7. Run a source-fidelity pass: remove or relabel any detail that is clearer, narrower, or more specific than the supplied notes.
 
 ## Boundary
 
-Do not fill missing results, citations, mechanisms, examples, or applications with invented content. Use placeholders such as `[Evidence needed: ablation for module X]`. If the source only says an application is possible, keep it at that level or mark the specific application as a proposal.
+Do not fill missing results, citations, mechanisms, examples, or applications with invented content. Use placeholders such as `[Evidence needed: ablation for module X]`. If the source only says an application is possible, keep it at that level or mark the specific application as a proposal. In the source trace, use `direct`, `inferred`, `proposal`, or `needs evidence` as the status.
