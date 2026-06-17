@@ -42,7 +42,7 @@ Initial no-login check applied to the 33 core videos:
 | Videos without subtitles | 33 |
 | Request errors | 0 |
 
-After the user provided a temporary Bilibili `SESSDATA`, the 75 BVIDs represented in `work/transcripts_raw/` were retried through the same metadata/player/subtitle path. The credential was used only as an environment variable for the run and was not written into deliverables.
+After the user provided a temporary Bilibili login credential, the 75 BVIDs represented in the source transcript set were retried through the same metadata/player/subtitle path. The credential was used only as an environment variable for the run and was not written into deliverables.
 
 | Metric | Result |
 | --- | ---: |
@@ -77,7 +77,7 @@ The skill keeps the useful teaching pattern while converting unsafe wording into
 - `references/video-index.md`: strict source index and core/support table.
 - `references/strict-video-catalog.csv`: all 528 verified records with labels.
 - `references/biligpt-core-evidence.csv`: subtitle availability evidence for the 33 core videos.
-- `references/ai-transcript-coverage.csv`: SESSDATA-based subtitle coverage and relevance audit for 75 selected transcript BVIDs.
+- `references/ai-transcript-coverage.csv`: authenticated subtitle coverage and relevance audit for 75 selected transcript BVIDs.
 - `references/transcript-distillation-audit.md`: audit of the current distilled transcript directory.
 - `references/transcript-derived-playbook.md`: aggregated safe rules from the 26 usable transcript records.
 - `references/playbook.md`: reusable templates and operating patterns.

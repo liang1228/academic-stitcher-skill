@@ -2,6 +2,15 @@
 
 Use this reference when a task needs deeper structure than the main `SKILL.md`.
 
+## Table Of Contents
+
+- [Diagnostic Questions](#diagnostic-questions)
+- [Paper Matrix Fields](#paper-matrix-fields)
+- [Story Patterns](#story-patterns)
+- [Section Templates](#section-templates)
+- [Red Flags](#red-flags)
+- [Preferred Response Style](#preferred-response-style)
+
 ## Diagnostic Questions
 
 Ask or infer:

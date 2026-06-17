@@ -1,116 +1,84 @@
 ---
 name: academic-stitcher-skill
 description: |
-  将一系列相关的论文、基线模型、模块、实验结果或粗糙的毕业论文想法，转化为逻辑自洽、能够经得起审阅的“学术论文故事”。
-  适用场景：当用户要求“缝论文”、“做学术裁缝”、结合 A+B 论文、寻找论文创新点模块、构建 SCI/毕业论文大纲、解释工作量与创新性、撰写相关工作（Related Work）/方法（Method）章节，或将现有实验结果包装为合规的学术叙事时使用。
-  严禁用于：伪造实验数据、伪造引用、学术造假或洗稿抄袭。
+  Turn related papers, baselines, modules, experiment results, or rough thesis ideas into a defensible academic paper story.
+  Use when the user asks to stitch/combine papers, build an academic stitching plan, design A+B paper innovation, find research gaps/modules, draft a thesis or SCI paper outline, write Related Work or Method sections, explain workload/novelty, or package real experiment results into a compliant problem-mechanism-evidence narrative.
+  使用场景包括“缝论文”“学术裁缝”“论文故事”“A+B 组合”“相关工作”“方法章节”“毕业论文大纲”“SCI/顶会故事线”。Refuse fabricated data, fake citations, plagiarism, hidden reuse, or academic misconduct.
 ---
 
-# Paper Tailor Story (学术裁缝与论文故事编撰)
+# Academic Stitcher Skill
 
-> “学术裁缝的核心不是缝模块，而是编故事；不是简单的 A+B，而是为了解决 A 的缺陷引入了 B，并用严谨的实验证明 A+B 的有效性。”
+Use this skill to turn paper ingredients into a defensible research story. The core move is not "A+B" for its own sake; it is "A has failure mode X, B addresses X through mechanism Y, and evidence Z proves the delta."
 
-本 Skill 提炼自 B 站 UP 主「水论文的程序猿-水导」的数十期关于“学术裁缝”、“缝论文”与“编故事”的核心指导视频。
-核心理念在于：合规的学术裁缝绝不是学术不端。通过合规的模块拼接、合理的逻辑推导与完整的实验论证，能够将微小的创新点（A+B+C+D）转化为符合顶会、顶刊或学位论文标准的高质量学术产出。
+## Load Resources Selectively
 
-## 来源与证据边界 (Source Boundary)
+Keep `SKILL.md` as the execution guide. Load bundled resources only when the task needs them:
 
-本 skill 的来源证据采用分层口径：公开上传页显示 547 个视频；公开搜索和 view API 可验证 528 条；其中目标相关分类为 33 条 core、88 条 support、104 条 background、303 条 out。详见 `references/video-index.md` 与 `references/strict-video-audit.md`。
+- Read `references/playbook.md` for deeper templates: diagnostic questions, paper matrix fields, story patterns, section templates, and red flags.
+- Read `references/transcript-derived-playbook.md` when the user asks where the distilled rules came from or needs source-backed heuristics.
+- Read `references/video-index.md` when the user asks about video coverage, core/support sources, BVIDs, or source scope.
+- Read `references/strict-video-audit.md` when the user challenges the 547/528/19 acquisition boundary or subtitle method.
+- Read `references/transcript-distillation-audit.md` and `references/ai-transcript-coverage.csv` before relying on any individual transcript-derived note.
+- Search `references/strict-video-catalog.csv` with `rg "<keyword>|<BVID>" references/strict-video-catalog.csv` instead of loading the whole CSV.
+- Search `transcripts_distilled/` with `rg "<BVID>|<theme>|Decision|Use for method" transcripts_distilled` and then open only the matching file.
 
-后续使用用户临时提供的 Bilibili `SESSDATA` 对 `work/transcripts_raw/` 中的 75 份核心/支撑逐字稿对应 BVID 重新抓取 AI 字幕：70 条拿到可下载字幕，5 条不可用。但自动字幕并不等于可用证据，审计发现其中存在标题与字幕内容不匹配、字幕过短、以及摘要把灰色做法写成直接建议的问题。最终已重建 `transcripts_distilled/`：75 份全覆盖，其中 26 份用于方法蒸馏，49 份只记录证据边界。使用逐字稿材料前必须先查看 `references/transcript-distillation-audit.md`、`references/ai-transcript-coverage.csv` 和 `references/transcript-derived-playbook.md`。
+Do not load all transcript notes into context. Do not import raw transcript text into answers.
 
-如果来源摘要含有“防查重、规避抄袭、伪装创新、造假、隐藏复用”等表述，必须改写为合规边界或拒绝项，不能作为执行建议。
+## Operating Model
 
-## 核心思维流派 (Operating Model)
+For every paper-stitching request, identify four layers:
 
-处理任何论文构思时，必须将其拆分为以下四个维度的层次：
+1. **Goal**: thesis pass, course paper, SCI, conference, top venue, rebuttal, or outline.
+2. **Inheritance**: the baseline model, task family, dataset, or paper lineage being extended.
+3. **Delta**: the module, loss, data process, evaluation, analysis, or writing move being added.
+4. **Story**: the problem-mechanism-evidence chain that makes the delta necessary and testable.
 
-1. **目标 (Goal)**：明确产出类型（学位大论文、课程小论文、SCI 四区、顶会顶刊、Rebuttal 回复还是组会汇报）。目标决定了工作量上限与故事包装的深度。
-2. **基座 (Inheritance)**：这篇工作站在哪个基线模型（Baseline）、任务场景或经典论文家族之上。
-3. **变量 (Delta)**：在基座之上，你引入了什么改变（新的模块、损失函数、数据预处理方法、评价指标等）。
-4. **故事 (Story)**：将基座与变量连接起来的逻辑链条（问题-机制-证据）。解释为什么这个改变是“必需的”且“有效的”，而不是强行拼凑。
+## Workflow
 
-## 执行工作流 (Workflow)
+1. Triage the user's target, field, venue level, deadline, word/page constraint, and available artifacts.
+2. Inventory real evidence: papers, code, baseline results, datasets, figures, failed runs, and existing draft sections.
+3. Build a paper matrix of 8-20 directly related papers before proposing modules. Extract task, baseline, delta, claimed bottleneck, mechanism, evidence, reusable idea, and risk.
+4. Write the inheritance sentence:
+   `This work inherits [baseline/task] from [paper family], but [specific failure mode] remains under [scenario], so it introduces [delta] to address [mechanism].`
+5. Convert each proposed module into a mechanism claim. Keep it only if it has a failure mode, compatibility rationale, and measurable evidence plan.
+6. Map claims backward into sections: title, abstract, introduction, related work, method, experiments, limitations.
+7. Run the compliance check before final output.
 
-当协助用户进行“学术裁缝”时，严格按照以下步骤执行：
+## Compliance Check
 
-### 第一步：盘点与确立目标 (Triage & Target)
-- 询问并确认用户的领域、具体任务、目标发表级别以及字数/页数要求。
-- 盘点用户手头已有的资源：跑通的 Baseline、代码、数据集、跑挂了的实验结果、已经画好的图表。
-- **裁缝铁律**：选择最小且最诚实的目标。如果没有顶会的命和数据，就先缝出一个能稳妥毕业/发表的四区或学位论文框架。
+Reject or reframe requests that ask to fabricate, hide, or launder academic work.
 
-### 第二步：建立文献锚点矩阵 (Build The Paper Matrix)
-学术裁缝不能凭空想象，必须基于领域内文献。协助用户构建一个包含 8-20 篇相关论文的矩阵：
-- **原则**：只找同领域、同任务场景下与你直接相关的论文。
-- **提取重点**：对于“找模块”的需求，重点提取其他论文中模块的输入、输出、解决的痛点及计算代价。
-- **相关工作写法**：相关工作（Related Work）不是简单罗列 1000 篇论文，而是将领域内 100 篇相关论文分层次介绍，突出它们没做好的地方，从而引出你的工作。
+- Do not fabricate data, citations, baselines, author contributions, or experiment results.
+- Do not hide copied modules, formulas, code, datasets, or writing. Require attribution.
+- Do not turn "rewrite to avoid detection" requests into operational advice. Reframe as legitimate synthesis with citation and original analysis.
+- Do not overclaim top-venue novelty when the evidence supports only a thesis, workshop, negative-result, or incremental paper.
+- Treat unavailable, too-short, or likely mismatched transcript notes as evidence-boundary records, not method sources.
 
-### 第三步：推导继承链与缝合逻辑 (Inheritance & Stitching)
-用一句话明确这篇论文的继承链：
-> `本工作继承了 [某论文/模型] 的 [基准任务]，但因为发现其在 [特定场景/缺陷] 表现不佳，因此引入了 [变量模块] 来解决。`
-
-**A+B 工作量的合规化：**
-- 简单的 A+B 是不够的。如果你的工作是 E = A + B + C + D。
-- 必须证明 E (优化后性能 99%) > A(98%)、B(97%)、C(95%)、D(96%)。
-- 对于硕士大论文，可以将多个模块打包成独立的工作量章节（例如：第3章介绍 A+b+c，第4章介绍在前者基础上的 d+e）。
-
-### 第四步：将“拼凑”转化为“机制解释” (Convert A+B into Mechanism)
-针对每一个要“缝”进来的模块，必须回答以下灵魂拷问：
-1. A 模型的什么缺陷（Failure mode）需要 B 模块来弥补？
-2. B 模块的数据分布和假设，与 A 模型的场景是否匹配？（**避免强行跨领域缝合导致的不适配**）
-3. 需要设计什么消融实验（Ablation study）、定量指标或误差分析来证明这个缝合是有效的？
-- **铁律**：如果一个模块仅仅是因为“流行”而缝合，且无法解释其机制，宁可丢弃。
-
-### 第五步：撰写论文故事主线 (Write The Story Spine)
-使用以下经典的“四段式故事结构”帮助用户打磨论文大纲：
-1. **领域痛点 (Field pressure)**：在当前的 XXX 任务中，现有的方法通常难以处理 `[具体瓶颈]`。
-2. **研究缺口 (Gap)**：之前的工作要么 `[缺陷1]`，要么 `[缺陷2]`，留下了一个 `[未解决的盲区]`。
-3. **破局思路 (Move)**：为此，我们提出了一种基于 `[新缝合模块/Delta]` 的方法，该方法能够通过 `[具体机制]` 解决上述问题。
-4. **证据支撑 (Evidence)**：在 `[特定数据集]` 上的实验表明，我们的方法达到了 `[具体的提升效果]`，尤其是在 `[某个极端/困难场景]` 下表现尤为出色。
-
-### 第六步：反向映射各个章节 (Map Sections Backward)
-基于故事主线，指导用户填充论文的具体章节（而不是看着代码瞎写）：
-- **标题 (Title)**：任务场景 + 核心机制 + 最终收益。
-- **摘要 (Abstract)**：痛点 -> 方法提出 -> 实验证据 -> 局限性。
-- **引言 (Introduction)**：详细阐述真实存在的问题，现有工作的不足，以及本工作的三点核心贡献（Contribution list）。
-- **方法 (Method)**：不要罗列代码！将整个流程描述为从输入到输出的数据流变换，并用数学公式或流程图定义每个缝合模块的职责。
-- **实验 (Experiments)**：主实验证明 SOTA，**消融实验证明每一个缝进去的模块都不是白给的**。
-
-### 第七步：学术底线与合规自检 (Evidence & Ethics Check)
-在交付任何方案前，进行严厉的底线审计：
-- **绝不捏造**：没有跑出来的结果不能写，负面结果可以转化为诚实的 `Limitation` 讨论。
-- **必须引用**：缝合过来的任何模块、公式和思想，必须明确提供引用来源（Attribution）。
-- **杜绝洗稿**：不鼓励简单的英译中、跨领域盲目套壳。必须要有自己重新组合后的机制解释。
-
----
-
-## 默认输出格式 (Output Format)
-
-在处理用户的“学术裁缝”请求时，请默认输出以下格式的结构化规划：
+## Default Output
 
 ```markdown
-## 🪡 论文裁缝地图 (Paper Tailor Map)
-- **目标设定**: [明确发表级别与工作量要求]
-- **核心继承链**: [基于什么 Baseline]
-- **缝合的痛点 (Gap)**: [为什么要缝]
-- **候选拼图 (Delta)**: [拟引入的模块/机制]
-- **取舍建议**: [哪些模块建议保留，哪些因为难以解释建议丢弃]
+## Paper Stitching Map
+- Target: [venue/thesis goal and workload]
+- Inheritance: [baseline/task/paper lineage]
+- Gap: [specific failure mode or missing capability]
+- Delta: [candidate module/method/story move]
+- Keep/drop decision: [what survives the mechanism and evidence check]
 
-## 📖 核心故事主线 (Story Spine)
-1. **领域痛点**: ...
-2. **研究缺口**: ...
-3. **破局思路**: ...
-4. **实验证据**: ...
+## Story Spine
+1. Field pressure: ...
+2. Research gap: ...
+3. Proposed move: ...
+4. Evidence: ...
 
-## 📝 章节写作与实验对照表
-| 论文章节 | 核心叙事目标 (What to say) | 需要的实验证据 (Evidence needed) |
+## Section And Evidence Table
+| Section | Narrative job | Evidence needed |
 | --- | --- | --- |
-| 引言/相关工作 | ... | 引用文献矩阵 |
-| 方法说明 | 解释模块 B 是如何融入 A 的 | 架构图 / 公式推导 |
-| 实验分析 | 证明缝合后的 A+B 优于单纯的 A | 消融实验结果 / 性能对比表 |
+| Introduction / Related Work | ... | Paper matrix |
+| Method | Explain how the delta enters the baseline | Architecture, equations, algorithm |
+| Experiments | Prove the delta improves or explains the baseline | Main table, ablation, robustness, failure cases |
 
-## ⚠️ 合规与自检风险提示
-- **证据缺口**: [当前还缺什么实验数据来支撑这个故事]
-- **过度包装风险**: [哪些宣称可能过头了，需要往回找补]
-- **学术诚信确认**: [提醒必须引用的来源]
+## Compliance Risks
+- Evidence gaps: [...]
+- Overclaim risks: [...]
+- Required attribution: [...]
 ```

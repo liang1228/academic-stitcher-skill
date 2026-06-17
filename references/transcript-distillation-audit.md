@@ -1,8 +1,18 @@
 # Transcript Distillation Audit
 
+## Table Of Contents
+
+- [Verdict](#verdict)
+- [Coverage](#coverage)
+- [AI Subtitle Fetch Result](#ai-subtitle-fetch-result)
+- [Relevance And Use Decision](#relevance-and-use-decision)
+- [Integrity Checks](#integrity-checks)
+- [Not-Used Records](#not-used-records)
+- [Use Rules For This Skill](#use-rules-for-this-skill)
+
 ## Verdict
 
-`outputs/academic-stitcher-skill/transcripts_distilled/` has been regenerated and is now complete for the 75-video transcript set.
+`transcripts_distilled/` is complete for the 75-video transcript set included with this skill.
 
 The regenerated directory is safe to use as an audited evidence layer because every BVID has an explicit source status, relevance status, and distillation decision. Videos with unavailable, too-short, or likely mismatched subtitles are recorded but not used to derive method rules. Grey-area academic wording is converted into compliance boundaries instead of executable advice.
 
@@ -10,7 +20,7 @@ The regenerated directory is safe to use as an audited evidence layer because ev
 
 | Item | Count |
 | --- | ---: |
-| Raw timestamped transcript files in `work/transcripts_raw/` | 75 |
+| Source transcript BVIDs audited | 75 |
 | Regenerated distilled markdown files | 75 |
 | Missing distilled files | 0 |
 | Extra distilled files without coverage row | 0 |
@@ -19,11 +29,11 @@ The regenerated directory is safe to use as an audited evidence layer because ev
 | Used for method distillation | 26 |
 | Recorded but not used | 49 |
 
-A backup of the previous 65-file first pass was saved under `work/transcripts_distilled_backup_*`.
+The earlier incomplete first pass is not part of the published skill package.
 
 ## AI Subtitle Fetch Result
 
-Using the temporary Bilibili `SESSDATA`, Bilibili AI subtitle fetching was retried for the 75 raw transcript BVIDs. The credential was not written into scripts, reports, or deliverables.
+Using a temporary Bilibili login credential, AI subtitle fetching was retried for the 75 source transcript BVIDs. The credential was not written into scripts, reports, or deliverables.
 
 | Status | Count |
 | --- | ---: |

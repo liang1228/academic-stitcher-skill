@@ -2,6 +2,14 @@
 
 This index records the strict public-video evidence used to distill `academic-stitcher-skill` from `水论文的程序猿-水导`'s Bilibili uploads. It focuses on videos about `学术裁缝`, `缝论文`, paper-story construction, reading papers for writing, related work, method sections, journals, and thesis survival.
 
+## Table Of Contents
+
+- [Coverage Boundary](#coverage-boundary)
+- [Core Target Videos](#core-target-videos)
+- [Supporting Target Sample](#supporting-target-sample)
+- [Distilled Themes](#distilled-themes)
+- [Use Notes](#use-notes)
+
 ## Coverage Boundary
 
 As of 2026-06-17, the public upload page for `mid=383551518` displayed `547` uploads and `14` pages. Direct upload pagination through Bilibili's `x/space/wbi/arc/search` path was blocked by risk controls in this environment: shell requests returned `code=-352`, and browser page-2 loading surfaced `Request Error: [412]`. The strict dataset therefore records the verified public-access boundary instead of claiming a private scrape.
@@ -15,15 +23,15 @@ As of 2026-06-17, the public upload page for `mid=383551518` displayed `547` upl
 | Supporting target videos | 88 | Secondary evidence for thesis, journal, reading, and workflow tactics |
 | Background/context videos | 104 | Used only for audience, tone, and boundary context |
 | Out-of-scope videos | 303 | Excluded from the distilled method |
-| Initial no-login core subtitle exposure | 0/33 | Earlier BiliGPT-style check without SESSDATA exposed no subtitle list |
-| User-provided SESSDATA transcript set | 75 | Selected core/support BVIDs from `work/transcripts_raw/` |
+| Initial no-login core subtitle exposure | 0/33 | Earlier BiliGPT-style check without a login credential exposed no subtitle list |
+| Authenticated transcript set | 75 | Selected core/support BVIDs from the source transcript set |
 | Downloadable AI subtitles in transcript set | 70/75 | Technical fetch success; relevance still requires audit |
 | Likely relevant AI subtitles in transcript set | 23/75 | Heuristic only; see `ai-transcript-coverage.csv` |
 | Regenerated distilled transcript notes | 75/75 | 26 used for method distillation, 49 kept as evidence-boundary records |
 
 Full exported catalog: `strict-video-catalog.csv`.
 BiliGPT no-login subtitle evidence for the 33 core videos: `biligpt-core-evidence.csv`.
-User-provided SESSDATA transcript coverage: `ai-transcript-coverage.csv`.
+Authenticated transcript coverage: `ai-transcript-coverage.csv`.
 Transcript distillation audit: `transcript-distillation-audit.md`.
 Transcript-derived method playbook: `transcript-derived-playbook.md`.
 Detailed acquisition notes: `strict-video-audit.md`.
@@ -103,3 +111,9 @@ The full supporting set has 88 videos. The sample below shows the newest 20; see
 - Method reading should extract input, output, assumptions, variables, ablations, and reusable deltas.
 - Paper stories should be narrow, testable, and bounded by available experiments.
 - Ethical boundaries are non-negotiable: no fabricated data, fake citations, hidden reuse, or claims beyond evidence.
+
+## Use Notes
+
+- Use this file to answer source-coverage questions, not to derive new method rules.
+- For a specific video, search by BVID first, then read the matching note under `../transcripts_distilled/`.
+- For full classification across all 528 verified records, search `strict-video-catalog.csv` with `rg "<keyword>|<BVID>" references/strict-video-catalog.csv`.
