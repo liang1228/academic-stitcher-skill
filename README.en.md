@@ -2,7 +2,7 @@
 
 > English README | [中文说明](README.md)
 
-`academic-stitcher-skill` is a structured Codex skill for academic paper planning, manuscript drafting, Nature-style polishing, and reviewer-facing self-audit. It turns papers, baselines, modules, thesis constraints, draft sections, and experiment results into a defensible problem-mechanism-evidence narrative.
+`academic-stitcher-skill` is a structured Codex skill for academic paper planning, manuscript drafting, Nature-style polishing, reviewer-facing self-audit, and Ctx2Skill-style skill maintenance. It turns papers, baselines, modules, thesis constraints, draft sections, and experiment results into a defensible problem-mechanism-evidence narrative.
 
 The repository follows the router-style design of [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills): a lean `SKILL.md`, a declarative `manifest.yaml`, always-loaded `static/core` files, task-specific `static/fragments`, and deeper `references` loaded only when needed. It also preserves the local distilled knowledge from paper-stitching and graduate-research planning materials.
 
@@ -12,6 +12,7 @@ The repository follows the router-style design of [Yuan1z0825/nature-skills](htt
 - [Repository Layout](#repository-layout)
 - [Skill Flow](#skill-flow)
 - [Routes](#routes)
+- [Ctx2Skill Self-Audit](#ctx2skill-self-audit)
 - [Typical Use Cases](#typical-use-cases)
 - [Out Of Scope](#out-of-scope)
 - [Installation](#installation)
@@ -27,6 +28,7 @@ The repository follows the router-style design of [Yuan1z0825/nature-skills](htt
 - **Evidence-first writing**: every major claim must map to data, citation, experiment, figure, or explicit limitation.
 - **Compliant synthesis**: treat phrases such as "paper stitching" as user vocabulary, then convert them into transparent, attributable, reproducible research planning.
 - **Bilingual usability**: support Chinese research notes, Chinese thesis/proposal contexts, and English manuscript prose.
+- **Self-evaluation loop**: add a `ctx2skill-audit` route for maintaining the skill with challenger tasks, rubrics, failure diagnosis, and replay gates.
 
 ## Repository Layout
 
@@ -52,7 +54,8 @@ academic-stitcher-skill/
 └── references/
     ├── playbook.md
     ├── writing-suite.md
-    └── transcript-derived-playbook.md
+    ├── transcript-derived-playbook.md
+    └── ctx2skill-evaluation.md
 ```
 
 ## Skill Flow
@@ -75,6 +78,19 @@ The skill works as a router:
 | `nature-polish` | Structural polishing, Nature-style English, Chinese-to-English manuscript prose, overclaim control |
 | `reviewer-audit` | Methodology, domain, skeptical-reviewer, and integrity checks |
 | `full-pipeline` | Intake, paper matrix, story architecture, evidence gate, drafting, audit, revision roadmap |
+| `ctx2skill-audit` | Ctx2Skill-style challenger tasks, rubrics, failure taxonomy, and replay gates for maintaining this skill |
+
+## Ctx2Skill Self-Audit
+
+When the user asks to optimize or evaluate this skill with Ctx2Skill, route to `ctx2skill-audit`:
+
+1. Build a context pack from `SKILL.md`, `manifest.yaml`, core rules, and relevant fragments.
+2. Generate 3-5 challenger tasks that require this skill's context rather than generic academic-writing ability.
+3. Give each task 8-15 binary rubric checks covering routing, evidence boundaries, compliance, output contract, and progressive disclosure.
+4. Classify failures as content gap, structure gap, constraint violation, reasoning error, task misunderstanding, or system-prompt non-compliance.
+5. Make the smallest bounded file update and apply a replay gate to confirm the change helps hard tasks without bloating easy tasks.
+
+If the actual Ctx2Skill framework, model API, judge, and replay selection were not run, label the result as a deterministic local audit rather than a completed self-play run.
 
 ## Typical Use Cases
 
@@ -85,6 +101,7 @@ The skill works as a router:
 - Polish Chinese notes into bounded English manuscript prose.
 - Stress-test a manuscript from a reviewer perspective.
 - Translate advisor constraints into a concrete research roadmap.
+- Evaluate the skill's own routes, quality gates, and maintenance gaps with Ctx2Skill-style tasks.
 
 ## Out Of Scope
 
@@ -160,3 +177,12 @@ For English manuscript work, return polished English first. If the source materi
 - [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex): Codex suite orchestration, inline role passes, and reviewer independence.
 - Local project distillation: paper positioning, inheritance chains, module stitching, compliance translation of grey vocabulary, and graduate-research scenarios.
 
+## Maintenance Rules
+
+- Put common runtime rules in `static/core`.
+- Put route, paper-type, section, and language variants in `static/fragments`.
+- Put deeper templates and source-informed summaries in `references`.
+- Keep raw transcripts, per-video notes, fetch tables, upstream examples, tests, and scripts out of the main skill unless an evidence package is explicitly requested.
+- Keep `SKILL.md` lean and router-focused.
+- Keep skill self-evaluation rules in the `ctx2skill-audit` fragment and `references/ctx2skill-evaluation.md`; do not commit temporary audit logs to the installable package.
+- After major edits, run `quick_validate.py` and scan for local paths, credentials, and intermediate artifacts.
