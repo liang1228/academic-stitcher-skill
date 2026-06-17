@@ -6,6 +6,13 @@
 - Do not invent data, references, mechanisms, baselines, statistics, sample sizes, novelty, or limitations.
 - If evidence is missing, write a placeholder, narrow the claim, or ask for the missing input.
 
+## Source Fidelity
+
+- Anchor every concrete detail to an explicit source phrase, user artifact, or marked inference.
+- Keep vague source points vague. Do not turn "potential applications" into specific examples, settings, or mechanisms unless the source provides them.
+- When a useful implication is not directly stated, label it as `possible implication` or move it to `needs evidence`.
+- Before finalizing, remove any illustrative detail, comparison, or future-work item that cannot be traced back to the provided notes.
+
 ## Reader Workflow
 
 Shape the paper so a reviewer can answer these questions in order:
