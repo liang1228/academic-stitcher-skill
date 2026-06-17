@@ -160,10 +160,4 @@ Skill is valid!
 - [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex)：Codex suite orchestration、inline role passes、reviewer independence。
 - 本项目 B 站视频与逐字稿蒸馏：论文定位、继承链、模块拼接、灰色话术合规转译和研究生实用场景。
 
-## 维护原则
 
-- 新增常用规则优先进入 `static/core` 或 `static/fragments`。
-- 大模板、细节表、来源型总结进入 `references/`。
-- 不把原始字幕、逐视频笔记、抓取表、上游 examples/tests/scripts 放进主仓库。
-- `SKILL.md` 保持精炼，只做触发、路由和边界。
-- 每次重大修改后运行 `quick_validate.py` 和路径/凭据残留扫描。
