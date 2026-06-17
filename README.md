@@ -2,9 +2,9 @@
 
 > 中文说明 | [English README](README.en.md)
 
-`academic-stitcher-skill` 是一个面向 Codex 的结构化学术写作 Skill。它把“缝论文 / 论文故事 / A+B 组合 / 研究生开题 / SCI 写作 / Nature-style polishing / 预审稿”统一成一条可执行的 Skill flow：先识别目标与证据，再构建问题-机制-证据链，最后输出章节、实验、审稿风险和下一步工作包。
+`academic-stitcher-skill` 是一个面向 Codex 的结构化学术写作 Skill。它把“缝论文 / 论文故事 / A+B 组合 / 研究生开题 / SCI 写作 / Nature-style polishing / 预审稿 / Ctx2Skill 自评估”统一成一条可执行的 Skill flow：先识别目标与证据，再构建问题-机制-证据链，最后输出章节、实验、审稿风险和下一步工作包。
 
-该仓库参考了 [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) 的 router-style 结构，吸收了其 `manifest.yaml`、`static/core`、`static/fragments`、按需加载和质量门思路；同时保留本项目从 “缝论文 / 论文故事”材料中蒸馏出的研究规划、论文包装、灰色话术合规转译与研究生场景经验。
+该仓库参考了 [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills) 的 router-style 结构，吸收了其 `manifest.yaml`、`static/core`、`static/fragments`、按需加载和质量门思路；同时保留本项目从 B 站“缝论文 / 论文故事”材料中蒸馏出的研究规划、论文包装、灰色话术合规转译与研究生场景经验。
 
 ## 目录
 
@@ -12,6 +12,7 @@
 - [仓库结构](#仓库结构)
 - [Skill Flow](#skill-flow)
 - [Routes](#routes)
+- [Ctx2Skill 自评估](#ctx2skill-自评估)
 - [适用场景](#适用场景)
 - [不适用场景](#不适用场景)
 - [安装方式](#安装方式)
@@ -27,6 +28,7 @@
 - **证据优先**：每个 claim 都必须绑定数据、引用、实验、图表或显式 limitation。
 - **合规研究转译**：保留“缝论文”等用户语言作为触发词，但执行层只给透明、可引用、可复现、可辩护的方案。
 - **中英双语可用**：支持中文研究笔记、中文开题/毕业场景，以及英文 manuscript prose。
+- **自评估可迭代**：新增 `ctx2skill-audit` route，用 Ctx2Skill 的 challenger / judge / failure diagnosis / replay 思路维护 skill 本身。
 
 ## 仓库结构
 
@@ -52,7 +54,8 @@ academic-stitcher-skill/
 └── references/
     ├── playbook.md
     ├── writing-suite.md
-    └── transcript-derived-playbook.md
+    ├── transcript-derived-playbook.md
+    └── ctx2skill-evaluation.md
 ```
 
 ## Skill Flow
@@ -74,6 +77,19 @@ academic-stitcher-skill/
 | `nature-polish` | 结构润色、Nature-style 英文、中文笔记转英文、过度声称降级 |
 | `reviewer-audit` | 方法学、领域适配、怀疑型审稿人、诚信风险预审 |
 | `full-pipeline` | 从 intake 到文献矩阵、故事线、证据门、写作、审稿、修改路线的全流程 |
+| `ctx2skill-audit` | 用 Ctx2Skill 式挑战任务、rubric、失败分类和 replay gate 评估/优化本 skill |
+
+## Ctx2Skill 自评估
+
+当用户要求“用 Ctx2Skill 优化这个 skill”或“检查这个 skill 是否稳定”时，路由到 `ctx2skill-audit`：
+
+1. 从 `SKILL.md`、`manifest.yaml`、核心规则和相关 fragment 构建 context pack。
+2. 生成 3-5 个必须依赖本 skill 上下文的 challenger tasks。
+3. 为每个任务设计 8-15 个二元 rubric，覆盖路由、证据边界、合规、输出合同和渐进式加载。
+4. 按失败类型归因：内容缺口、结构缺口、约束违反、推理错误、任务误解或系统指令不合规。
+5. 只做最小必要文件更新，并通过 replay gate 检查是否改善 hard tasks、保留 easy tasks、没有引入上下文膨胀。
+
+如果没有实际运行 Ctx2Skill 框架、模型 API、judge 和 replay selection，必须标注为本地确定性审计，而不是完整 self-play run。
 
 ## 适用场景
 
@@ -84,6 +100,7 @@ academic-stitcher-skill/
 - “把中文草稿润色成 Nature-style 英文。”
 - “从审稿人视角挑这篇论文的硬伤。”
 - “导师让我做个方向，帮我拆成可执行 work packages。”
+- “用 Ctx2Skill 检查这个 skill 的路由、质量门和维护缺口。”
 
 ## 不适用场景
 
@@ -160,4 +177,11 @@ Skill is valid!
 - [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex)：Codex suite orchestration、inline role passes、reviewer independence。
 - 本项目 B 站视频与逐字稿蒸馏：论文定位、继承链、模块拼接、灰色话术合规转译和研究生实用场景。
 
+## 维护原则
 
+- 新增常用规则优先进入 `static/core` 或 `static/fragments`。
+- 大模板、细节表、来源型总结进入 `references/`。
+- 不把原始字幕、逐视频笔记、抓取表、上游 examples/tests/scripts 放进主仓库。
+- `SKILL.md` 保持精炼，只做触发、路由和边界。
+- Skill 自评估规则进入 `ctx2skill-audit` fragment 和 `references/ctx2skill-evaluation.md`，不要把临时评估日志放进主包。
+- 每次重大修改后运行 `quick_validate.py` 和路径/凭据残留扫描。
