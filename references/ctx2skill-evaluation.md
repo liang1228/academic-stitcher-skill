@@ -10,6 +10,7 @@ Use this reference when maintaining `academic-stitcher-skill` with a Ctx2Skill-s
 - [Rubric Dimensions](#rubric-dimensions)
 - [Failure Taxonomy](#failure-taxonomy)
 - [Update Rules](#update-rules)
+- [Orchestrated Run](#orchestrated-run)
 - [Run Summary](#run-summary)
 - [Replay Gate](#replay-gate)
 - [Observed Replay Seed](#observed-replay-seed)
@@ -87,6 +88,19 @@ Use one primary label per failed check:
 - Add or update `scripts` only for deterministic maintenance steps such as context-pack generation, run summarization, or package checks.
 - Avoid putting raw evidence packages, generated audit logs, or temporary Ctx2Skill outputs in the installable skill.
 - Prefer one targeted addition over broad rewrites of existing working fragments.
+
+## Orchestrated Run
+
+Use `scripts/run_ctx2skill_selfplay.py` when a local Ctx2Skill run is desired. It should:
+
+- generate a fresh context pack;
+- refuse to claim a run when the API key environment variable is missing;
+- call `ctx2skill-selfplay` only after the context pack is built;
+- capture stdout and stderr to a local log file;
+- summarize JSONL output with `scripts/summarize_ctx2skill_run.py`;
+- return nonzero when the run did not complete or the summary has warnings.
+
+Set secrets through environment variables, not command-line arguments. Do not write API keys, generated logs, generated summaries, or self-play output files into the published skill package.
 
 ## Run Summary
 

@@ -4,11 +4,11 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 
 ## Procedure
 
-1. Build a context pack from `SKILL.md`, `manifest.yaml`, loaded core files, route fragments, and any requested references. Prefer `scripts/build_ctx2skill_input.py` when available so the input pack is reproducible.
+1. Build a context pack from `SKILL.md`, `manifest.yaml`, loaded core files, route fragments, and any requested references. Prefer `scripts/run_ctx2skill_selfplay.py` for the full local loop or `scripts/build_ctx2skill_input.py` when only an input pack is needed.
 2. Generate 3-5 hard challenger tasks that require the context pack, not generic academic-writing ability.
 3. Give each task a binary rubric with 8-15 checks covering routing, evidence boundaries, compliance, output contract, and progressive disclosure.
 4. Solve or inspect the tasks using the current skill behavior.
-5. Summarize the run output with `scripts/summarize_ctx2skill_run.py` when a Ctx2Skill JSONL result exists; do not infer success from process exit code alone.
+5. Summarize the run output with `scripts/summarize_ctx2skill_run.py` when a Ctx2Skill JSONL result exists; do not infer success from process exit code alone. The orchestrator should return nonzero if the API key is unavailable, the output file is missing, or the run summary has warnings.
 6. Classify each failure as one of: content gap, format/structure gap, constraint violation, reasoning error, task misunderstanding, or system-prompt non-compliance.
 7. Propose the smallest bounded update to `SKILL.md`, `manifest.yaml`, `static/`, `references/`, or deterministic maintenance scripts.
 8. Re-run repository validation and mark which checks were actually executed.
