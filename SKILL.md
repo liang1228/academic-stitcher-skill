@@ -1,117 +1,91 @@
 ---
 name: academic-stitcher-skill
 description: |
-  Turn related papers, baselines, modules, experiment results, or rough thesis ideas into a defensible academic paper story.
-  Use when the user asks to stitch/combine papers, build an academic stitching plan, design A+B paper innovation, find research gaps/modules, draft a thesis, opening report, advisor-facing research plan, SCI paper outline, Nature-style section draft, manuscript polish, reviewer-style audit, write Related Work or Method sections, explain workload/novelty, or package real experiment results into a compliant problem-mechanism-evidence narrative.
-  使用场景包括“缝论文”“学术裁缝”“论文故事”“A+B 组合”“相关工作”“方法章节”“毕业论文大纲”“SCI/顶会故事线”。Refuse fabricated data, fake citations, plagiarism, hidden reuse, or academic misconduct.
+  Structured academic paper-stitching and manuscript-writing skill. Use when the user asks to combine or extend papers, build an A+B research idea, design a defensible thesis/SCI/conference paper story, create an opening report or advisor-facing plan, draft or polish Nature-style manuscript sections, write Related Work/Method/Experiments/Discussion, simulate reviewer objections, or convert rough modules/results into a claim-evidence-boundary narrative. Trigger on English or Chinese requests such as paper stitching, academic tailor, research story, A+B idea, thesis proposal, manuscript draft, Nature-style writing, 论文故事, 缝论文, 学术裁缝, 小论文, 开题, 相关工作, 方法章节, SCI写作. Refuse fabricated data, fake citations, hidden copying, plagiarism, weakened baselines, undisclosed cherry-picking, or academic misconduct.
 ---
 
 # Academic Stitcher Skill
 
 Use this skill to turn paper ingredients into a defensible research story. The core move is not "A+B" for its own sake; it is "A has failure mode X, B addresses X through mechanism Y, and evidence Z proves the delta."
 
-## Load Resources Selectively
+## Router Protocol
 
-Keep `SKILL.md` as the execution guide. Load bundled resources only when the task needs them:
+Follow this protocol for every request.
 
-- Read `references/playbook.md` for deeper templates: diagnostic questions, paper matrix fields, story patterns, graduate target triage, advisor communication, opening-report scaffolds, SCI section templates, experiment checks, and red flags.
-- Read `references/writing-suite.md` for Codex-suite style writing routes: section drafting, Nature-style polishing, reviewer-panel passes, staged checkpoints, and quality gates.
-- Read `references/transcript-derived-playbook.md` when the user asks what was distilled from the video/transcript audit or needs source-informed heuristics.
+1. Read `manifest.yaml`.
+2. Read every file listed under `always_load`.
+3. Detect the request axes from the manifest:
+   - `route`: stitch-plan, section-draft, nature-polish, reviewer-audit, or full-pipeline.
+   - `paper_type`: research, methods, algorithmic, review, or proposal-thesis.
+   - `section`: title, abstract, introduction, related-work, method, experiments, discussion, or conclusion.
+   - `language`: zh-cn or en.
+4. State the detected route in one compact line before producing substantive work.
+5. Load only the matching `static/fragments/...` files. Do not load every fragment.
+6. Use `references/` only on demand, following `manifest.yaml` reference triggers.
 
-The repository intentionally keeps only the distilled core. Per-video notes, raw transcripts, subtitle coverage tables, and acquisition audit tables are intermediate artifacts and are not part of the published skill.
+If the request supplies only a broad topic, route to scoping and paper-matrix work before drafting. If the user already has results, figures, or a draft, route directly to section architecture, polishing, or reviewer audit.
+
+## Source Hierarchy
+
+Apply sources in this priority order:
+
+1. User-provided artifacts, data, drafts, advisor constraints, venue rules, and current results.
+2. Core stance/workflow/output rules from `static/core/`.
+3. Route, paper-type, section, and language fragments selected by `manifest.yaml`.
+4. Deep references in `references/` when the selected task needs more templates or distilled heuristics.
+
+Do not invent missing evidence. If a claim, baseline, dataset, citation, statistic, or mechanism is absent, write a placeholder, downgrade the claim, or ask for the missing input.
 
 ## Operating Model
 
-For every paper-stitching request, identify four layers:
+For every task, identify:
 
-1. **Goal**: thesis pass, course paper, SCI, conference, top venue, rebuttal, or outline.
-2. **Inheritance**: the baseline model, task family, dataset, or paper lineage being extended.
-3. **Delta**: the module, loss, data process, evaluation, analysis, or writing move being added.
-4. **Story**: the problem-mechanism-evidence chain that makes the delta necessary and testable.
+1. **Goal**: thesis pass, proposal, SCI, conference, top venue, rebuttal, advisor memo, or manuscript section.
+2. **Inheritance**: the baseline, paper family, task, dataset, lab lineage, or method tradition being extended.
+3. **Delta**: the module, loss, data process, evaluation, writing move, or contribution being added.
+4. **Mechanism**: why the delta should address the failure mode.
+5. **Evidence**: main result, ablation, robustness, complexity, qualitative case, citation, or explicit limitation.
+6. **Boundary**: where the claim stops.
 
-For graduate-thesis or advisor-facing requests, also identify the practical constraint: graduation rule, advisor expectation, authorship/contribution boundary, time left, target outlet, and whether the paper is needed for graduation, a PhD path, or a job path.
+For graduate-thesis or advisor-facing requests, also capture graduation rule, advisor expectation, authorship boundary, time left, target outlet, and minimum viable research product.
 
-For drafting, polishing, or review requests, also identify the writing route: paper type, target section, source language, venue/journal level, evidence state, and requested checkpoint. State this route briefly before producing a draft so the user can correct it cheaply.
-
-## Suite Routes
-
-Use these route names internally:
-
-1. **Stitch Plan**: turn papers/modules/results into a feasible story and experiment plan.
-2. **Section Draft**: draft or rebuild Abstract, Introduction, Related Work, Method, Experiments, Discussion, Conclusion, or Title.
-3. **Nature-Style Polish**: fix paper-type logic, section job, paragraph flow, claim strength, terminology, and sentence clarity in that order.
-4. **Reviewer Audit**: simulate methodology, domain, and skeptical-reviewer checks before a synthesis.
-5. **Full Pipeline**: move through intake, story architecture, evidence audit, drafting, review, revision plan, and final integrity check with visible checkpoints.
-
-## Workflow
-
-1. Triage the user's target, field, venue level, graduation requirement, advisor constraint, deadline, word/page constraint, and available artifacts.
-2. Select the route: `Stitch Plan`, `Section Draft`, `Nature-Style Polish`, `Reviewer Audit`, or `Full Pipeline`.
-3. Inventory real evidence: papers, code, baseline results, datasets, figures, failed runs, and existing draft sections.
-4. Build a paper matrix of 8-20 directly related papers before proposing modules. Extract task, baseline, delta, claimed bottleneck, mechanism, evidence, reusable idea, and risk.
-5. Write the inheritance sentence:
-   `This work inherits [baseline/task] from [paper family], but [specific failure mode] remains under [scenario], so it introduces [delta] to address [mechanism].`
-6. Convert each proposed module into a mechanism claim. Keep it only if it has a failure mode, compatibility rationale, and measurable evidence plan.
-7. For writing tasks, build a one-sentence argument, terminology ledger, section architecture, paragraph jobs, and claim-evidence-boundary map before sentence-level polish.
-8. For opening reports or thesis plans, map the plan to topic basis, research status, research questions, method route, feasibility, innovation, schedule, and references.
-9. Map claims backward into sections: title, abstract, introduction, related work, method, experiments, limitations.
-10. Run the compliance and quality gates before final output.
-
-## Compliance Check
+## Compliance Boundary
 
 Reject or reframe requests that ask to fabricate, hide, or launder academic work.
 
-- Do not fabricate data, citations, baselines, author contributions, or experiment results.
-- Do not hide copied modules, formulas, code, datasets, or writing. Require attribution.
-- Do not turn "rewrite to avoid detection" requests into operational advice. Reframe as legitimate synthesis with citation and original analysis.
-- Do not overclaim top-venue novelty when the evidence supports only a thesis, workshop, negative-result, or incremental paper.
-- Do not recommend cherry-picking weak baselines, weakening reproduced baselines, hiding failed runs, claiming selected examples are random, or omitting material negative evidence.
-- Grey phrases such as "缝论文", "水文", "编故事", "科研 trick", and "造航母" may be retained as user vocabulary and diagnostic labels. Convert them into compliant research planning before giving steps.
-- Treat unavailable, too-short, or likely mismatched source material as excluded evidence, not method rules.
-
-## Quality Gates
-
-Before finalizing a plan, section, or manuscript audit, check:
-
-1. **Evidence integrity**: no invented data, citations, baselines, mechanisms, or statistics.
-2. **Claim-evidence-boundary**: every major claim is supported, marked as inferred, or downgraded.
-3. **Section job**: each paragraph has one job and the section serves the paper's one-sentence argument.
-4. **Terminology**: abbreviations, model names, datasets, metrics, and notation stay canonical.
-5. **Fair comparison**: baseline selection, reproduced/reported numbers, tuning budget, ablations, and qualitative examples are disclosed.
-6. **Reviewer pressure**: methodology, domain, and skeptical-reviewer objections are preserved until resolved by evidence.
-7. **Target fit**: the story matches the user's venue, graduation, advisor, and workload constraints.
+- Do not fabricate data, citations, baselines, author contributions, experiment results, or peer-review history.
+- Do not hide copied modules, formulas, code, datasets, figures, or writing. Require attribution.
+- Do not give operational advice for plagiarism, detection evasion, weakened baselines, fake randomness, or selective omission of material negative evidence.
+- Grey phrases such as "缝论文", "水文", "编故事", "科研 trick", and "造航母" may be retained as vocabulary and diagnostic labels. Convert them into transparent, attributable, evidence-bound research planning.
 
 ## Default Output
 
+Use the output format from `static/core/output-format.md`. At minimum include:
+
 ```markdown
-## Paper Stitching Map
-- Target: [venue/thesis goal and workload]
-- Route: [Stitch Plan / Section Draft / Nature-Style Polish / Reviewer Audit / Full Pipeline]
-- Inheritance: [baseline/task/paper lineage]
-- Gap: [specific failure mode or missing capability]
-- Delta: [candidate module/method/story move]
-- Keep/drop decision: [what survives the mechanism and evidence check]
+## Route
+- Route:
+- Paper type:
+- Section:
+- Target:
+- Evidence state:
 
 ## Story Spine
-1. Field pressure: ...
-2. Research gap: ...
-3. Proposed move: ...
-4. Evidence: ...
+1. Field pressure:
+2. Failure mode:
+3. Proposed move:
+4. Mechanism:
+5. Evidence:
+6. Boundary:
 
-## Section And Evidence Table
-| Section | Narrative job | Evidence needed |
-| --- | --- | --- |
-| Introduction / Related Work | ... | Paper matrix |
-| Method | Explain how the delta enters the baseline | Architecture, equations, algorithm |
-| Experiments | Prove the delta improves or explains the baseline | Main table, ablation, robustness, failure cases |
-
-## Compliance Risks
-- Evidence gaps: [...]
-- Overclaim risks: [...]
-- Required attribution: [...]
+## Claim-Evidence Map
+| Claim | Evidence | Status | Boundary |
+| --- | --- | --- | --- |
 
 ## Quality Gates
-- Claim-evidence-boundary: [...]
-- Reviewer objections: [...]
-- Next checkpoint: [...]
+- Evidence:
+- Citation/attribution:
+- Fair comparison:
+- Reviewer pressure:
+- Next checkpoint:
 ```

@@ -1,4 +1,4 @@
 interface:
   display_name: "学术缝合裁缝"
-  short_description: "把论文模块、开题计划、实验结果、Nature式写作和审稿自检整合成合规研究故事"
-  default_prompt: "Use $academic-stitcher-skill to turn my papers, opening plan, draft sections, and experiment results into a defensible academic story with claim-evidence quality gates."
+  short_description: "结构化整合论文构思、开题计划、Nature式写作、实验叙事和审稿自检"
+  default_prompt: "Use $academic-stitcher-skill to route my paper idea, draft section, or experiment results into a defensible academic story with evidence, attribution, and reviewer quality gates."

@@ -2,6 +2,17 @@
 
 This reference compresses external academic-writing skill patterns into one Codex-native route. It is distilled structure, not copied upstream content. It keeps the repository core-only: no upstream examples, raw transcripts, tests, scripts, or local acquisition artifacts.
 
+## Table Of Contents
+
+- [Source-Informed Design](#source-informed-design)
+- [Route Selection](#route-selection)
+- [Inline Role Passes](#inline-role-passes)
+- [Section Moves](#section-moves)
+- [Nature-Style Polish](#nature-style-polish)
+- [Reviewer Audit](#reviewer-audit)
+- [Quality Gates](#quality-gates)
+- [Output Patterns](#output-patterns)
+
 ## Source-Informed Design
 
 - `Master-cai/Research-Paper-Writing-Skills`: section-by-section drafting, paragraph-flow checks, claim-evidence alignment, and reviewer-facing presentation.
