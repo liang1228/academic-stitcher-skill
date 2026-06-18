@@ -2,9 +2,17 @@
 
 Default to the user's language unless the requested prose is explicitly English.
 
+Before any route-specific heading, write one compact detection line:
+
+`Route: <route>; paper_type=<paper_type>; section=<section or none>; language=<language>`
+
+This line satisfies the `SKILL.md` route announcement requirement. It does not replace the required headings below.
+
 ## Planning Output
 
 ```markdown
+Route: stitch-plan; paper_type=<paper_type>; section=none; language=<language>
+
 ## Route
 - Route:
 - Paper type:
@@ -45,6 +53,8 @@ Default to the user's language unless the requested prose is explicitly English.
 ## Section Draft Output
 
 ```markdown
+Route: section-draft; paper_type=<paper_type>; section=<section>; language=<language>
+
 ## Route
 - Route:
 - Paper type:
@@ -72,6 +82,8 @@ Default to the user's language unless the requested prose is explicitly English.
 ## Review Output
 
 ```markdown
+Route: reviewer-audit; paper_type=<paper_type>; section=<section or none>; language=<language>
+
 ## Independent Reviewer: Methodology
 ...
 

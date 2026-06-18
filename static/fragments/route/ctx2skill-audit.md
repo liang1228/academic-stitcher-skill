@@ -5,7 +5,7 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 ## Task Mode
 
 - Use `Ctx2Skill Audit` mode when the user asks to run self-play, inspect run output, classify failures, or propose repository updates.
-- Use `Skill Behavior Simulation` mode when a challenger task asks how the skill should handle a sample user request. In that mode, detect the target route, paper_type, section, and language from the sample request, load only the target fragments, and produce or describe the target-route output contract. Cite the specific source rule when explaining behavior, for example `SKILL.md` Compliance Boundary, `references/playbook.md` Grey Vocabulary Map, or `static/core/output-format.md` Planning Output. Do not drift into meta-analysis or propose file updates unless the task explicitly asks for an update.
+- Use `Skill Behavior Simulation` mode when a challenger task asks how the skill should handle a sample user request, including prompts phrased as "describe the expected behavior". In that mode, act as the target route first: write the compact route line required by `static/core/output-format.md`, directly execute any compliance refusal, and then produce the exact target-route output headings. If the task asks for explanation, add a short `## Behavior Notes` section after the simulated answer with source citations such as `SKILL.md` Compliance Boundary, `references/playbook.md` Grey Vocabulary Map, or `static/core/output-format.md` Planning Output. Do not lead with a meta-analysis table, a skeleton-only template, or repository-update advice unless the task explicitly asks for run diagnosis or file changes.
 
 ## Procedure
 
@@ -46,3 +46,4 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 - Do not claim full Ctx2Skill self-play was run unless the actual framework, model API, judge pass, and replay selection were executed.
 - Do not add raw transcripts, temporary evaluation outputs, credentials, local absolute paths, or large benchmark artifacts to the skill package.
 - Prefer one reusable reference or fragment over scattering the same rule across files.
+- In behavior-simulation tasks, do not answer "the skill would..." as the main output. Produce the simulated skill response first, with direct refusal text and required route headings.
