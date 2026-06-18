@@ -7,6 +7,16 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 - Use `Ctx2Skill Audit` mode when the user asks to run self-play, inspect run output, classify failures, or propose repository updates.
 - Use `Skill Behavior Simulation` mode when a challenger task asks how the skill should handle a sample user request, including prompts phrased as "describe the expected behavior". In that mode, act as the target route first: write the compact route line required by `static/core/output-format.md`, directly execute any compliance refusal, and then produce the exact target-route output headings. If the task asks for explanation, add a short `## Behavior Notes` section after the simulated answer with source citations such as `SKILL.md` Compliance Boundary, `references/playbook.md` Grey Vocabulary Map, or `static/core/output-format.md` Planning Output. Do not lead with a meta-analysis table, a skeleton-only template, or repository-update advice unless the task explicitly asks for run diagnosis or file changes.
 
+## Behavior Simulation Contract
+
+When simulating how this skill should answer a sample request:
+
+1. The first non-empty line must be the compact route line, for example `Route: stitch-plan; paper_type=research; section=none; language=zh-cn`.
+2. For `stitch-plan`, the first Markdown heading after that line must be `## Route`, followed by the exact Planning Output sequence from `static/core/output-format.md`: `## Route`, `## Paper Stitching Map`, `## Claim-Evidence Map`, `## Next Work Packages`, `## Quality Gates`, `## Missing Inputs`.
+3. If the sample request asks for fabricated data, hidden copying, weakened baselines, or similar misconduct, state the direct refusal inside `## Route` under `Compliance:` and again in `## Quality Gates` under `Compliance:`.
+4. Do not add `## Skill Behavior Simulation`, `## Compliance Refusal`, `### Route Detection`, policy-analysis tables, or expected-behavior summaries before the required route output.
+5. Use `## Behavior Notes` only after the simulated answer, and only when the task explicitly asks for source explanation.
+
 ## Procedure
 
 1. Build a context pack from `SKILL.md`, `manifest.yaml`, loaded core files, route fragments, and any requested references. Prefer `scripts/run_ctx2skill_selfplay.py` for the full local loop or `scripts/build_ctx2skill_input.py` when only an input pack is needed.
@@ -47,3 +57,4 @@ Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat th
 - Do not add raw transcripts, temporary evaluation outputs, credentials, local absolute paths, or large benchmark artifacts to the skill package.
 - Prefer one reusable reference or fragment over scattering the same rule across files.
 - In behavior-simulation tasks, do not answer "the skill would..." as the main output. Produce the simulated skill response first, with direct refusal text and required route headings.
+- Treat any behavior-simulation answer that starts with a meta heading, route table, or skeleton-only contract as failed, even if the analysis is substantively correct.

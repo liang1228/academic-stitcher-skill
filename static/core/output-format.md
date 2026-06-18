@@ -8,6 +8,8 @@ Before any route-specific heading, write one compact detection line:
 
 This line satisfies the `SKILL.md` route announcement requirement. It does not replace the required headings below.
 
+For route outputs that require exact headings, do not insert extra headings before the required sequence. Put any direct compliance refusal inside the relevant required section, usually `## Route` and `## Quality Gates`.
+
 ## Planning Output
 
 ```markdown
@@ -19,6 +21,7 @@ Route: stitch-plan; paper_type=<paper_type>; section=none; language=<language>
 - Target:
 - Evidence state:
 - Checkpoint:
+- Compliance:
 
 ## Paper Stitching Map
 - Inheritance:
@@ -41,6 +44,7 @@ Route: stitch-plan; paper_type=<paper_type>; section=none; language=<language>
 - Attribution:
 - Fair comparison:
 - Reviewer pressure:
+- Compliance:
 
 ## Missing Inputs
 - Dataset / corpus:
