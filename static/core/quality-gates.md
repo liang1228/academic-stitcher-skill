@@ -26,6 +26,13 @@ Use only the gates relevant to the current request.
 - The topic sentence states the job.
 - Each sentence has a cause, contrast, consequence, refinement, or example relation to the previous one.
 
+## Output Contract Gate
+
+- Use the exact section headings required by `static/core/output-format.md` for the selected route.
+- Before finalizing, scan the answer against the route's mandatory headings and any explicit rubric requirements.
+- Do not substitute a Story Spine table for `Paper Stitching Map` when the route expects Planning Output.
+- If the task asks for a claim-evidence map, missing inputs, fair baseline comparison, or robustness testing, include those items explicitly rather than only implying them.
+
 ## Reviewer Gate
 
 - Methodology objections are separated from domain objections.

@@ -97,6 +97,8 @@ academic-stitcher-skill/
 
 仓库提供三步维护脚本：`scripts/build_ctx2skill_input.py` 用于从当前 skill 文件生成 Ctx2Skill JSONL 输入；`scripts/run_ctx2skill_selfplay.py` 用于编排输入生成、self-play 调用、日志捕获和摘要生成；`scripts/summarize_ctx2skill_run.py` 用于把 self-play JSONL 结果汇总成失败 rubric、proposed skill 和 replay 线索。生成的 JSONL、self-play 输出、日志、摘要和临时 reasoner/challenger skills 属于本地评估产物，不应提交进发布仓库。
 
+`scripts/run_ctx2skill_selfplay.py` 会从 `OPENAI_MODEL` 读取统一模型名，也可用 `--model` 或 `--challenger-model`、`--reasoner-model`、`--judge-model`、`--proposer-model`、`--generator-model` 显式覆盖；Windows 下会解析 `ctx2skill-selfplay.cmd` 后再调用。
+
 ## 适用场景
 
 - “我有几篇论文，帮我缝一个能写的小论文方向。”

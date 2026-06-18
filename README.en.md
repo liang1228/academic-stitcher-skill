@@ -98,6 +98,8 @@ If the actual Ctx2Skill framework, model API, judge, and replay selection were n
 
 The repository includes a three-step maintenance toolchain: `scripts/build_ctx2skill_input.py` generates a Ctx2Skill JSONL input from the current skill files; `scripts/run_ctx2skill_selfplay.py` orchestrates input generation, self-play execution, log capture, and summary generation; and `scripts/summarize_ctx2skill_run.py` summarizes self-play JSONL results into failed rubrics, proposed skills, and replay leads. Generated JSONL inputs, self-play outputs, logs, summaries, and temporary reasoner/challenger skills are local evaluation artifacts and should not be committed to the published skill package.
 
+`scripts/run_ctx2skill_selfplay.py` reads a shared model name from `OPENAI_MODEL`, or accepts `--model` plus per-role overrides such as `--challenger-model`, `--reasoner-model`, `--judge-model`, `--proposer-model`, and `--generator-model`; on Windows it resolves `ctx2skill-selfplay.cmd` before launching the framework.
+
 ## Typical Use Cases
 
 - Turn several related papers into a realistic small-paper or SCI story.

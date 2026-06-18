@@ -20,6 +20,10 @@ Default to the user's language unless the requested prose is explicitly English.
 - Evidence:
 - Boundary:
 
+## Claim-Evidence Map
+| Claim | Evidence | Status | Boundary |
+| --- | --- | --- | --- |
+
 ## Next Work Packages
 | Work package | Output | Evidence needed | Risk |
 | --- | --- | --- | --- |
@@ -29,6 +33,13 @@ Default to the user's language unless the requested prose is explicitly English.
 - Attribution:
 - Fair comparison:
 - Reviewer pressure:
+
+## Missing Inputs
+- Dataset / corpus:
+- Metrics:
+- Baselines:
+- Compute / time budget:
+- Advisor / venue constraints:
 ```
 
 ## Section Draft Output

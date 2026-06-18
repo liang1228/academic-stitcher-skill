@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -34,6 +35,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--selfplay-cmd", default="ctx2skill-selfplay", help="Ctx2Skill self-play command.")
     parser.add_argument("--api-key-env", default="OPENAI_API_KEY", help="Environment variable that holds the API key.")
     parser.add_argument("--base-url-env", default="OPENAI_BASE_URL", help="Optional environment variable that holds the API base URL.")
+    parser.add_argument("--model", default=os.getenv("OPENAI_MODEL"), help="Model name for all Ctx2Skill roles. Defaults to OPENAI_MODEL.")
+    parser.add_argument("--challenger-model", help="Model name for the challenger role.")
+    parser.add_argument("--reasoner-model", help="Model name for the reasoner role.")
+    parser.add_argument("--judge-model", help="Model name for the judge role.")
+    parser.add_argument("--proposer-model", help="Model name for the proposer role.")
+    parser.add_argument("--generator-model", help="Model name for the generator role.")
     parser.add_argument("--max-samples", type=int, default=1)
     parser.add_argument("--num-iterations", type=int, default=1)
     parser.add_argument("--num-tasks", type=int, default=1)
@@ -91,8 +98,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Missing API key environment variable: {args.api_key_env}", file=sys.stderr)
         return 0 if args.allow_missing_key else 2
 
+    selfplay_cmd = shutil.which(args.selfplay_cmd) or args.selfplay_cmd
     command = [
-        args.selfplay_cmd,
+        selfplay_cmd,
         "--input",
         str(input_path),
         "--output",
@@ -110,6 +118,16 @@ def main(argv: list[str] | None = None) -> int:
     ]
     if base_url:
         command.extend(["--base-url", base_url])
+    model_flags = [
+        ("--challenger-model", args.challenger_model or args.model),
+        ("--reasoner-model", args.reasoner_model or args.model),
+        ("--judge-model", args.judge_model or args.model),
+        ("--proposer-model", args.proposer_model or args.model),
+        ("--generator-model", args.generator_model or args.model),
+    ]
+    for flag, value in model_flags:
+        if value:
+            command.extend([flag, value])
     if args.skip_skill_selection:
         command.append("--skip-skill-selection")
 
@@ -118,7 +136,23 @@ def main(argv: list[str] | None = None) -> int:
     env.setdefault("PYTHONUTF8", "1")
     env.setdefault("PYTHONIOENCODING", "utf-8")
 
-    completed = subprocess.run(command, cwd=str(root), env=env, capture_output=True, text=True)
+    try:
+        completed = subprocess.run(command, cwd=str(root), env=env, capture_output=True, text=True)
+    except FileNotFoundError as exc:
+        log_text = [
+            "command: " + " ".join(command),
+            "returncode: command-not-found",
+            "",
+            "## stdout",
+            "",
+            "## stderr",
+            str(exc),
+        ]
+        log_path.write_text("\n".join(log_text), encoding="utf-8")
+        summary_text, _summary_errors = _write_summary(run_path, summary_path)
+        print(f"Wrote {summary_path}")
+        print(summary_text, end="")
+        return 1
     log_text = [
         "command: " + " ".join(command),
         f"returncode: {completed.returncode}",

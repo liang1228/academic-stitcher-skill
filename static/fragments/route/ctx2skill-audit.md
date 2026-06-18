@@ -2,6 +2,11 @@
 
 Use this route to evaluate or improve `academic-stitcher-skill` itself. Treat the skill repository as the artifact under test, not as source material for a paper section.
 
+## Task Mode
+
+- Use `Ctx2Skill Audit` mode when the user asks to run self-play, inspect run output, classify failures, or propose repository updates.
+- Use `Skill Behavior Simulation` mode when a challenger task asks how the skill should handle a sample user request. In that mode, detect the target route, paper_type, section, and language from the sample request, load only the target fragments, and produce or describe the target-route output contract. Cite the specific source rule when explaining behavior, for example `SKILL.md` Compliance Boundary, `references/playbook.md` Grey Vocabulary Map, or `static/core/output-format.md` Planning Output. Do not drift into meta-analysis or propose file updates unless the task explicitly asks for an update.
+
 ## Procedure
 
 1. Build a context pack from `SKILL.md`, `manifest.yaml`, loaded core files, route fragments, and any requested references. Prefer `scripts/run_ctx2skill_selfplay.py` for the full local loop or `scripts/build_ctx2skill_input.py` when only an input pack is needed.
