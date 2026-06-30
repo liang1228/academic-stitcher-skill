@@ -180,10 +180,12 @@ Skill is valid!
 
 ## 设计来源
 
-- [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills)：router-style skill layout、manifest axes、static fragments、quality gates。
+- [Yuan1z0825/nature-skills](https://github.com/Yuan1z0825/nature-skills)：router-style skill layout、manifest axes、static fragments、quality gates、Terminology Ledger、Reader Cognitive Model、AI Traffic-Light 伦理分级、Failure-Mode Diagnosis 优先级、One-Sentence Argument、Paragraph-to-Job Mapping。
 - [Master-cai/Research-Paper-Writing-Skills](https://github.com/Master-cai/Research-Paper-Writing-Skills)：分章节写作、段落流、claim-evidence alignment。
-- [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex)：Codex suite orchestration、inline role passes、reviewer independence。
-- 本项目 B 站视频与逐字稿蒸馏：论文定位、继承链、模块拼接、灰色话术合规转译和研究生实用场景。
+- [Imbad0202/academic-research-skills-codex](https://github.com/Imbad0202/academic-research-skills-codex)：Codex suite orchestration、inline role passes、reviewer independence、Material Passport 交接模式、7 种审稿人角色、Citation 存在性验证。
+- [wanshuiyin/Auto-claude-code-research-in-sleep](https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep)：5 层审计链、Dual-Axis Control（努力度 vs 审计严格度）、跨模型对抗审稿。
+- [alchaincyf/nuwa-skill](https://github.com/alchaincyf/nuwa-skill)：三重验证蒸馏方法论、矛盾处理原则、质量自检清单。
+- 本项目 B 站视频与逐字稿蒸馏（149 个字幕文件，UP主: 慧研格真）：论文定位、继承链、模块拼接、灰色话术合规转译、实验设计策略、选刊投稿流程、答辩盲审技巧和研究生实用场景。
 
 ## 维护原则
 

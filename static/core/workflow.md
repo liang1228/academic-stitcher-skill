@@ -46,3 +46,24 @@ Run methodology, domain, skeptical-reviewer, and integrity checks. Preserve diss
 ## 9. Checkpoint
 
 Stop at the requested boundary: intake, outline, draft, audit, revision roadmap, or final check. Do not silently continue past the user's checkpoint.
+
+## Reader Cognitive Model
+
+After loading fragments, verify the draft serves this 5-question sequence in order:
+
+1. Is this relevant to my field or venue?
+2. What is new compared with prior work?
+3. Do I trust the method and evidence?
+4. Can I reuse the method, dataset, argument, or insight?
+5. What are the boundaries and limitations?
+
+If any question cannot be answered from the current draft, flag the gap before proceeding.
+
+## Dual-Axis Control
+
+Two independent axes govern every task:
+
+- **Effort axis:** lite -> standard -> deep -> beast (how much work to do)
+- **Assurance axis:** draft -> internal -> submission (how strict the quality gates are)
+
+A task at "beast" effort but "draft" assurance does maximum exploration with minimal audit. A task at "standard" effort but "submission" assurance does focused work with maximum checking. The user sets both independently.

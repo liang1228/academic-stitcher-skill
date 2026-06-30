@@ -1,46 +1,191 @@
-# Core Distilled Playbook
+# 核心蒸馏手册
 
-This is the retained core distillation from the audited 75-video transcript set. It keeps only reusable method rules and excludes unavailable, too-short, or likely mismatched source material from method distillation.
+本文件是从全部蒸馏文档（A-写作方法论、B-修辞与实验设计、C-投稿答辩）中提炼的可复用规则汇总。保留仅方法规则，排除不可用、过短或明显不匹配的原始素材。
 
-The repository intentionally omits intermediate artifacts such as raw transcripts, per-video distilled notes, subtitle coverage CSVs, and acquisition audit tables. Use this file as the compact source-informed rule summary.
+仓库有意省略中间产物（原始字幕、逐篇蒸馏笔记、字幕覆盖率表、采集审计表）。本文件作为精简的规则来源摘要。
 
-## Coverage
+## 覆盖范围
 
-| Bucket | Count |
+| 维度 | 数量/说明 |
 | --- | ---: |
-| Distilled files generated | 75 |
-| Used for method distillation | 26 |
-| Recorded but not used | 49 |
-| likely_relevant | 23 |
-| mixed_review | 3 |
-| too_short | 19 |
-| likely_mismatch | 25 |
-| unavailable | 5 |
+| 蒸馏文档 | 3（A-写作方法论、B-修辞与实验、C-投稿答辩） |
+| 覆盖原始视频 | 50+（来自字幕文件的独立BV号） |
+| 核心方法论规则（三层验证） | 7 条 |
+| 修辞与表达规则 | 6 条 |
+| 实验设计规则 | 4 组 |
+| 投稿与答辩规则 | 3 组 |
+| 决策启发式 | 10 条 |
 
-## Reusable Rules
+---
 
-| Theme | Evidence hits | Safe rule | Example BVIDs |
-| --- | ---: | --- | --- |
-| 目标层级与发表定位 | 24 | 先确定最低可接受目标和真实资源，再反推论文故事、工作量和实验深度。 | `BV11D421J79N`, `BV12xPceUEDn`, `BV16y421q7jy`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1GX4y1k7jn`, `BV1MX4y1p7UY` |
-| 继承链与基线选择 | 23 | 先找到可复现、可引用、可解释的基座；没有基座时先补文献和复现实验，不直接编创新。 | `BV12xPceUEDn`, `BV16y421q7jy`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1GX4y1k7jn`, `BV1MX4y1p7UY`, `BV1Qs4y1d7BF` |
-| 模块拼接与变量设计 | 22 | 每个新增模块都必须对应一个失败模式、机制解释和可验证的增量贡献。 | `BV12xPceUEDn`, `BV16y421q7jy`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1GX4y1k7jn`, `BV1MX4y1p7UY`, `BV1UB4y1j7Vv` |
-| 论文故事与写作主线 | 26 | 把模块列表改写成问题-机制-证据链；相关工作按论证角色组织，而不是堆论文。 | `BV11D421J79N`, `BV12xPceUEDn`, `BV16y421q7jy`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1GX4y1k7jn`, `BV1MX4y1p7UY` |
-| 实验与证据链 | 24 | 每个关键 claim 至少绑定一种证据：主结果、消融、鲁棒性、复杂度或失败案例。 | `BV11D421J79N`, `BV12xPceUEDn`, `BV16y421q7jy`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1MX4y1p7UY`, `BV1Qs4y1d7BF` |
-| 检索、投稿与返修流程 | 19 | 把论文工作拆成可执行流程：检索矩阵、证据补齐、选刊匹配、返修逐点响应。 | `BV11D421J79N`, `BV12xPceUEDn`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1MX4y1p7UY`, `BV1Qs4y1d7BF`, `BV1YT411T7MD` |
-| 学术诚信与风险边界 | 22 | 所有复用必须有引用和真实增量；数据、引用、署名、实验结果不允许虚构或隐藏。 | `BV11D421J79N`, `BV12xPceUEDn`, `BV17s421N7am`, `BV19jCrYsEoE`, `BV1CP411G7VX`, `BV1GX4y1k7jn`, `BV1MX4y1p7UY`, `BV1UB4y1j7Vv` |
+## 一、核心方法论规则（三层验证：跨视频复现3+、生成性强、非泛泛之谈）
 
-## Final Distillation
+### 规则 1: 论文的 A+B+C 结构模型
 
-- Start with the realistic venue or graduation target; do not inflate claims beyond evidence.
-- Build a paper matrix before proposing modules; every module needs a cited origin and a reason to exist.
-- Convert A+B into a mechanism: name A's failure mode, why B addresses it, and how the experiment proves it.
-- Write related work as an argument for the gap, not as an unordered literature dump.
-- Bind every claim to evidence: main result, ablation, robustness, complexity, qualitative cases, or explicit limitation.
-- Treat all shortcut or misconduct-adjacent wording as a refusal boundary and replace it with attribution, reproducibility, and bounded claims.
+- **规则**：绝大多数论文（非纯理论创新类）可解构为"基准模型(A) + 模块(B) [+ 模块(C)]"。学术裁缝的核心操作是对模块进行排列组合。
+- **置信度**: direct | **验证**: 跨视频5+
+- **来源**: `BV1npKfzPEuC`, `BV1rDMHzTEEd`, `BV1W5EAzLErh`, `BV1ut34zuEfS`, `BV1qv4y1n7dx`
+- **应用**: 理解论文结构、寻找可借鉴论文、构建自己的论文框架
 
-## Excluded Intermediate Artifacts
+### 规则 2: 读论文的核心是"逐段逐部分"而非"逐字逐句"
 
-- Do not import raw transcript text.
-- Do not import rules from rows that were marked `likely_mismatch`, `too_short`, or `unavailable` during audit without manual review.
-- Do not turn grey-area statements into operational advice.
-- Do not use title-only evidence as proof that a transcript contains that topic.
+- **规则**：通过标点符号（句号）和转折词划分段落结构，从大方向把握论文，不纠结细节。摘要结构：领域介绍→前人做法→发现问题→解决方法→性能。相关工作结构：总-分-分[总]。
+- **置信度**: direct | **验证**: 跨视频4+
+- **来源**: `BV1rPGdz3E2V`, `BV1UZZUY6E6X`, `BV1W5EAzLErh`, `BV12WJ6zoEa6`
+- **应用**: 高效阅读论文、快速判断论文价值
+
+### 规则 3: 只看一区和四区论文
+
+- **规则**：SCI一区学写作手法/编故事；SCI四区看清A+B+C模块拼凑手法。二三区不上不下最鸡肋，不看普刊/EI会议/中文核心。
+- **置信度**: direct | **验证**: 跨视频2+
+- **来源**: `BV1UZZUY6E6X`, `BV1rDMHzTEEd`
+- **应用**: 论文选读策略
+
+### 规则 4: 先找模块拼上去，再编故事
+
+- **规则**：正确操作顺序：找baseline(开源可复现) → 找模块拼上去 → 通过实验证明有效性 → 反向编故事（发现问题→解决问题）。绝不能先编故事再找模块。
+- **置信度**: direct | **验证**: 跨视频4+
+- **来源**: `BV1npKfzPEuC`, `BV1qv4y1n7dx`, `BV1dzNWewExA`, `BV1fW4y1W7dS`
+- **应用**: 论文写作全流程
+
+### 规则 5: 编故事的核心是"发现问题→解决问题"
+
+- **规则**：论文创新的包装方式：在领域中发现N个问题(123)，然后用一个方法同时解决这些问题。向导师汇报时要说"发现了问题"而非"发现了模块"。客观事实可以吹牛，但讲的一定要是真的。
+- **置信度**: direct | **验证**: 跨视频4+
+- **来源**: `BV1qv4y1n7dx`, `BV1dzNWewExA`, `BV1ut34zuEfS`, `BV1npKfzPEuC`
+- **应用**: 编写引言、摘要、向导师汇报
+
+### 规则 6: 方法章节按数据流从输入到输出介绍
+
+- **规则**：先总后分——先概述整体架构和思路，再分模块详细介绍每个组件。确定好模型架构图后，按数据流分块介绍，加数学公式。
+- **置信度**: direct | **验证**: 跨视频4+
+- **来源**: `BV1ut34zuEfS`, `BV1Lgt7eMEZd`, `BV1cpx7eGEyY`, `BV1fW4y1W7dS`
+- **应用**: 写作方法章节
+
+### 规则 7: 写作顺序是 方法→实验→相关工作→引言→摘要→总结
+
+- **规则**：因为摘要和引言需要基于已有的方法和结果来编故事，所以最后写。先写你做了什么（方法），再写结果如何（实验），最后包装成故事。
+- **置信度**: direct | **验证**: 跨视频3+
+- **来源**: `BV1fW4y1W7dS`, `BV1ut34zuEfS`, `BV12WJ6zoEa6`
+- **应用**: 论文写作全流程管理
+
+---
+
+## 二、修辞与表达规则
+
+### 2.1 灰色话术映射（Top 8 最重要的映射）
+
+| 灰色表达 | 合规学术表达 | BVID来源 |
+| --- | --- | --- |
+| 缝论文/学术裁缝 | 模块化组合创新 | `BV1mK411C7WH`, `BV1ne41157Gn` |
+| 水论文 | 高效产出合规论文 | `BV1fP411F7ke`, `BV1st4y1w7u5` |
+| 编故事 | 构建研究叙事框架 | `BV1ne41157Gn`, `BV1cH4y1j742` |
+| 营造信息差 | 选择性信息呈现 | `BV1Ns4y197EM`, `BV1fV4y1B72F` |
+| 数据美化 | 系统性参数调优 | `BV19jCrYsEoE`, `BV1dg411p7QP` |
+| 造航母 | 过大的研究课题 | `BV19jCrYsEoE`, `BV18Ve6zvEBT` |
+| 炼丹 | 系统性超参数搜索 | `BV1LK9ZYYErM` |
+| 仿造同行写 | 仿照同领域已发表论文的结构和风格 | `BV1st4y1w7u5`, `BV12M4y1J737` |
+
+### 2.2 声明校准规则
+
+- **置信度**: direct | **来源**: `BV1cH4y1j742`, `BV17s4y127VF`, `BV1EV4y1P7PQ`, `BV1Ns4y197EM`
+- 创新点不应客观实事求是，而应包装为"发现领域问题→设计方法→解决问题"的叙事（跨视频4+）
+- 摘要写到中学生都能看懂的程度；结论可以写得深奥、用专业术语（跨视频2+）
+- 对你有利的信息大张旗鼓地写；不利的信息要么不写，要么换个形式写到不起眼的角落（跨视频3+）
+- 不懂的东西不要写上去；你不知道，审稿人也未必知道（跨视频4+）
+
+### 2.3 信息不对称原则
+
+- **规则**：你知道的审稿人不一定知道——这是所有策略的核心前提。
+- **置信度**: direct | **验证**: 跨视频5+
+- **来源**: `BV1EV4y1P7PQ`, `BV1Ns4y197EM`, `BV1fV4y1B72F`, `BV1dg411p7QP`
+- 写了的一定要是真的，没写的可以不说——区分"信息差"和"造假"的边界。
+
+---
+
+## 三、实验设计规则
+
+### 3.1 基线选择（Baseline Selection）
+
+- **置信度**: direct | **来源**: `BV19jCrYsEoE`, `BV1vt4y1T7sy`, `BV1ne41157Gn`, `BV1dg411p7QP`, `BV12M4y1J737`
+- 同领域找同领域基准和模块；找不到就去相似领域找（跨视频4+）
+- 性能比较一定要拿顶刊中最差的比，不能只跟水刊比（可信度问题）（跨视频2+）
+- 基准模型尽量用近几年的，太旧的不合适（跨视频2+）
+- 仿照目标期刊近两年论文的风格和框架写，中稿率提高（跨视频2+）
+
+### 3.2 消融实验策略（Ablation Strategy）
+
+- **置信度**: direct | **来源**: `BV1fV4y1B72F`, `BV1fW4y1W7dS`, `BV1rDMHzTEEd`
+- 消融实验需要 A < A+B 且 A+B < A+B+C 的递增关系（跨视频2+）
+- 当消融关系不成立时，分别为每个配置调参（跨视频1，needs-verification）
+- 如果去掉某模块后效果反而变好，就把该模块和相邻模块合并成一个整体描述（跨视频2+）
+
+### 3.3 数据集原则（Dataset Principles）
+
+- **置信度**: direct | **来源**: `BV19jCrYsEoE`, `BV18Ve6zvEBT`
+- 能用公共数据集，不用私有数据集（跨视频4+）
+- 公共数据集的好处：可以直接缝模块、看效果，省去数据处理环节（跨视频3+）
+- 对比实验的内容要参考同领域论文，别人有什么你就有什么（跨视频2+）
+
+### 3.4 弱结果处理（Weak Result Handling）
+
+- **置信度**: direct | **来源**: `BV1LK9ZYYErM`, `BV19jCrYsEoE`, `BV1fV4y1B72F`
+- 实验效果没提升是常态，用排列组合的方法多试几组模块组合（跨视频3+）
+- 效果没提升就继续找模块拼凑，直到找到有效组合（跨视频2+）
+- 指标效果不好的可以不提运行时间等不利信息（除非领域惯例要求）
+
+---
+
+## 四、投稿与答辩规则
+
+### 4.1 答辩"只答不辩"原则
+
+- **置信度**: direct | **验证**: 跨视频3+
+- **来源**: `BV1SPLU6ZEk4`, `BV11X4y127rB`, `BV1eD421A7Bh`
+- 答辩专家质疑的都是对的，点头哈腰认错道歉。即使专家说的是错的，答辩结束后不改即可，没必要当场争辩。
+- 答辩老师看的是态度；PPT图多字少，没把握的内容不加入。
+- 被问到不会的问题：态度诚恳说"对不起，这方面确实不足，我下去改"。
+
+### 4.2 盲审准备
+
+- **置信度**: direct | **来源**: `BV1mP411Z7tn`, `BV17s4y127VF`, `BV1eD421A7Bh`
+- 盲审是按比例挂人的（工科通过率约70%），你只需要比同届的人稍好
+- 摘要和格式是审稿人首先看的两项；格式乱的直接挂
+- 每一章的结论/总结写好 + 摘要写好 + 格式整洁 = 九成把握通过盲审
+- 摘要写给中学生看都能懂；结论可以从理论层面用专业术语写得深奥一些
+
+### 4.3 期刊分类与选择
+
+- **置信度**: direct | **来源**: `BV1v841117EV`, `BV1jvxEzaECD`, `BV12M4y1J737`, `BV1sD4y1C7SP`
+- 研究生培养计划是最高准则：满足最低要求即可毕业
+- 水刊不如水会：水期刊难且慢（5个月+），水会议快且易（3个月必出结果）
+- EI会议"有手就行"：实操案例——CCFC被拒的论文原封不动投EI会议，5天录用
+- 三步选刊法：Google Scholar搜关键词 → 收集论文所属期刊+年份+级别 → 整理表格选择
+
+---
+
+## 五、决策启发式（Top 10 最有用的启发式规则）
+
+以下规则综合全部蒸馏文档，按实用性排序。每条标注来源和验证层级。
+
+| # | 规则 | 来源 | 验证层级 |
+| - | --- | --- | --- |
+| 1 | **你知道的审稿人不一定知道** —— 所有策略的核心前提，贯穿信息差、基线选择、消融呈现等一切操作 | `BV1EV4y1P7PQ`, `BV1Ns4y197EM`, `BV1fV4y1B72F` | 5+ 视频 |
+| 2 | **先找模块拼上去，再编故事** —— 绝不能先编故事再找模块；先做后编是学术裁缝的核心操作顺序 | `BV1npKfzPEuC`, `BV1qv4y1n7dx`, `BV1dzNWewExA`, `BV1fW4y1W7dS` | 4+ 视频 |
+| 3 | **写了的一定是真的，没写的可以不说** —— 区分"信息差"和"造假"的关键边界；不说假话但不必说全部真相 | `BV1EV4y1P7PQ`, `BV1Ns4y197EM` | 3 视频 |
+| 4 | **消融实验模块合并技巧** —— 去掉某模块后性能反而变好，就合并为一个整体描述；baseline和完整模型分别调参 | `BV1fV4y1B72F`, `BV1fW4y1W7dS` | 2 视频 |
+| 5 | **论文写作顺序：方法→实验→相关工作→引言→摘要→总结** —— 摘要和引言必须基于已有结果编故事，所以最后写 | `BV1fW4y1W7dS`, `BV1ut34zuEfS`, `BV12WJ6zoEa6` | 3+ 视频 |
+| 6 | **只看一区和四区论文** —— 一区学编故事，四区看清拼凑手法；二三区不上不下最鸡肋 | `BV1UZZUY6E6X`, `BV1rDMHzTEEd` | 2+ 视频 |
+| 7 | **能用公共数据集不用私有数据集** —— 私有数据集容易"造航母"；公共数据集可以直接缝模块快速验证 | `BV19jCrYsEoE`, `BV18Ve6zvEBT` | 4+ 视频 |
+| 8 | **答辩只答不辩 + PPT图多字少** —— 专家说什么就是什么；文字暴露漏洞，图的解释权在你手里 | `BV1SPLU6ZEk4`, `BV11X4y127rB`, `BV1eD421A7Bh` | 3 视频 |
+| 9 | **跨领域搬运是最简单的创新** —— A领域的方法放到B领域，加一点修改并改名即可；一个点不够就堆叠两个 | `BV1vt4y1T7sy`, `BV1ne41157Gn`, `BV1W5EAzLErh` | 4 视频 |
+| 10 | **水刊不如水会；时间来不及就投EI会议** —— 水期刊5个月+且难中，EI会议3个月必出结果，版面费一两百 | `BV1sD4y1C7SP`, `BV1jy4y1K7gu` | 2+ 视频 |
+
+---
+
+## 附录：排除中间产物
+
+- 不导入原始字幕文本。
+- 不导入审计中标记为 `likely_mismatch`、`too_short` 或 `unavailable` 的规则（除非人工复核）。
+- 不将灰色话术表述直接转化为操作建议——必须经过合规映射。
+- 不以标题仅有关键词作为该字幕包含该主题的证据。

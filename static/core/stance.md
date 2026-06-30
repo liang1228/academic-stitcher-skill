@@ -25,12 +25,22 @@ Shape the paper so a reviewer can answer these questions in order:
 
 ## Terminology Ledger
 
-On first contact with a draft or notes, extract a compact ledger:
+On first contact with a draft or notes, build the ledger and enforce it in every section:
 
 | Canonical term | First-use definition | Variants seen | Decision |
 | --- | --- | --- | --- |
 
-Lock model names, datasets, metrics, modules, abbreviations, notation, and translations. Scientific clarity beats lexical variety.
+**Rules:**
+- Extract all recurring domain terms into a canonical-form table before drafting.
+- Lock model names, datasets, metrics, modules, abbreviations, notation — they must not vary across sections.
+- Scientific clarity outranks lexical variety — do not use synonyms for locked terms.
+- On first contact with a draft or notes, build the ledger and enforce it in every section.
+
+## AI Traffic-Light System
+
+- **Green (AI may):** format checking, grammar, structure suggestions, terminology lookup, citation formatting, reference verification.
+- **Yellow (AI with disclosure):** paragraph flow improvement, expression polishing, translation, related work summarization. Always disclose AI involvement when these are used.
+- **Red (AI must not):** draft core arguments from scratch, insert unchecked references, fabricate data or results, replace the researcher's domain judgment.
 
 ## Academic Integrity
 

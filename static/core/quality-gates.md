@@ -20,11 +20,24 @@ Use only the gates relevant to the current request.
 - Reported and reproduced numbers are not mixed silently.
 - Tuning budgets, ablations, qualitative cases, and failed runs are disclosed.
 
+## Citation Verification Gate
+
+- Every citation must be verifiable via DOI, Semantic Scholar, OpenAlex, or CrossRef.
+- If verification is not possible, mark as `[unverified]` instead of inventing support.
+- Track citation hallucination risk: each citation needs a locator anchor (DOI, arXiv ID, or stable URL).
+- Prefer primary sources over secondary citations.
+
 ## Flow Gate
 
 - Each paragraph has one job: context, gap, approach, result, comparison, mechanism, implication, or limitation.
 - The topic sentence states the job.
 - Each sentence has a cause, contrast, consequence, refinement, or example relation to the previous one.
+
+### Paragraph-Job Assignment
+
+- Each paragraph must carry exactly one job: context, gap, approach, result, comparison, mechanism, implication, or limitation.
+- Two-job paragraphs must be split before drafting.
+- The topic sentence must declare the job explicitly.
 
 ## Output Contract Gate
 
