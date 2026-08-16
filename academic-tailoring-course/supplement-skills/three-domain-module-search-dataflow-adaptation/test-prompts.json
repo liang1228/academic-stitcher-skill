@@ -1,0 +1,52 @@
+{
+  "skill": "three-domain-module-search-dataflow-adaptation",
+  "version": "0.1.0",
+  "source_book": "《学术裁缝课程》补充 RIA++ skills",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我已经有可复现的视频描述基线，想从通用、本领域和相似领域各找一些模块；请按机制、输入输出和数据流筛选候选。",
+      "expected_behavior": "应激活 three-domain-module-search-dataflow-adaptation，建立三域候选池和接口/数据流台账。",
+      "notes": "正面场景：三域搜索与数据流接入点。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "候选模块输入输出形状完全匹配，分数也提高了，但训练时需要部署阶段不存在的辅助标注；它能直接算可迁移的 B′ 吗？",
+      "expected_behavior": "应激活本 skill，区分训练契约与部署契约，检查泄漏/任务改变并要求无辅助标注推理对照，不能只凭分数确认 B′。",
+      "notes": "正面场景：训练—部署生命周期与接口假匹配。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "我把论文里的 B 扩展成多头并改名为 B′，需要记录哪些来源、许可证、实际改动、参数成本和单模块实验才能写进方法？",
+      "expected_behavior": "应激活本 skill，输出来源/许可/改动台账、训练部署契约、成本披露和单模块验证计划。",
+      "notes": "正面场景：已有模块的真实适配与审计。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "三篇连续论文共享一个完整系统，我要判断本轮 A 应该包住哪些旧模块，以及哪些旧贡献不能重复计算。",
+      "expected_behavior": "不应激活本 skill，应优先激活 variable-granularity-abc-research-architecture。",
+      "notes": "跨 skill 混淆诱饵：当前是基准粒度和历史贡献边界。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "请给我列 20 篇模块迁移相关论文，不需要检查接口、数据权限或实验。",
+      "expected_behavior": "不应激活本 skill；这是普通资料检索，不具备基线和迁移契约。",
+      "notes": "非目标诱饵：只要文献清单。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "我还没有稳定复现基线，但已经找到几个看起来很强的模块，能不能先把它们组合起来试？",
+      "expected_behavior": "不应直接激活本 skill 执行迁移；应先要求建立可复现基线或转到基线复现/论文拆解流程，再谈模块接入。",
+      "notes": "边界：有模块兴趣，但缺少本 skill 的前置基线。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case；每个 skill 至少一条 should_not_trigger 是同书兄弟 skill 的跨 skill 混淆测试。"
+}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "三域模块与数据流适配"
+  short_description: "跨域搜索研究模块并核验数据流、接口与训练部署契约及单模块验证"
+  default_prompt: "Use $three-domain-module-search-dataflow-adaptation to search modules across domains and validate dataflow, contracts, and B-prime changes."

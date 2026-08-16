@@ -1,0 +1,4 @@
+interface:
+  display_name: "方向可行性与基础地图"
+  short_description: "研究方向可行性、资源硬门与最小复现退出条件审查流程"
+  default_prompt: "Use $direction-feasibility-foundation-map to assess a research direction with evidence, hard gates, and a time-boxed minimum reproduction."

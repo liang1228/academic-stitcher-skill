@@ -1,0 +1,52 @@
+{
+  "skill": "purpose-driven-paper-decomposition",
+  "version": "0.1.0",
+  "source_book": "《学术裁缝课程》补充 RIA++ skills",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我有 40 篇相关论文和两周时间，请按我的复现目标分成必读、选读、暂不读，并告诉我每篇要从哪四处取证。",
+      "expected_behavior": "应激活 purpose-driven-paper-decomposition，先声明阅读目的和深度，再建立摘要/引言/方法/实验证据矩阵。",
+      "notes": "正面场景：论文筛选与阅读深度分层。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "请从这篇论文提取任务、基准、模块、输入输出和消融证据；正文看起来自洽，但公开代码的预处理和数据划分不一样。",
+      "expected_behavior": "应激活本 skill，输出可追溯组件表并保留正文/代码冲突，把实现降级为条件性参考而不是强行确认。",
+      "notes": "正面场景：具体论文拆解与代码归属冲突。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "不要给我普通摘要，帮我把这篇论文拆成可复现实验的 A/B/C 组件，并标出哪些只是作者声称、哪些有消融支持。",
+      "expected_behavior": "应激活本 skill，按阅读任务和四入口证据定位 A/B/C、接口、来源与待核验边界。",
+      "notes": "正面场景：从论文抽取可实验部件而非摘要。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "第二篇论文完整复用了第一篇系统，我要按当前主张重画 A 的包络，避免把旧模块重复算成新增贡献。",
+      "expected_behavior": "不应激活本 skill，应优先激活 variable-granularity-abc-research-architecture。",
+      "notes": "跨 skill 混淆诱饵：论文证据已经明确，当前任务是研究架构与贡献边界。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "请把这段英文摘要翻译成中文并润色成自然的学术表达。",
+      "expected_behavior": "不应激活本 skill；这是翻译润色，不需要组件证据或阅读路由。",
+      "notes": "非目标诱饵：普通语言任务。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "这是一篇质性研究论文，没有标准模型或消融表，但我仍想提取研究对象、基础方法和变化单元，方便后续比较。",
+      "expected_behavior": "应谨慎激活本 skill，允许临时映射为 A/B/C，但必须标明这是抽象结构，不把 B/C 当成已验证贡献。",
+      "notes": "边界：论文没有神经网络式组件，但仍有研究对象和方法结构。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case；每个 skill 至少一条 should_not_trigger 是同书兄弟 skill 的跨 skill 混淆测试。"
+}

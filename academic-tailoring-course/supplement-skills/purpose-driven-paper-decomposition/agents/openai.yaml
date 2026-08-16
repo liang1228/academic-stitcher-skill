@@ -1,0 +1,4 @@
+interface:
+  display_name: "目的驱动的论文拆解"
+  short_description: "按研究目的拆解论文组件、接口并核验来源证据链与复现边界"
+  default_prompt: "Use $purpose-driven-paper-decomposition to triage papers and extract reproducible components with provenance evidence."

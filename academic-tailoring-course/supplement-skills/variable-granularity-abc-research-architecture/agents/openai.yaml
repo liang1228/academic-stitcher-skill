@@ -1,0 +1,4 @@
+interface:
+  display_name: "可变粒度 A+B+C 架构"
+  short_description: "按当前主张重画 A/B/C、继承工作与新增贡献边界"
+  default_prompt: "Use $variable-granularity-abc-research-architecture to redraw A/B/C roles and separate inherited work from new contribution."
