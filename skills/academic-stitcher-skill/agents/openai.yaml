@@ -1,0 +1,4 @@
+interface:
+  display_name: "学术裁缝"
+  short_description: "证据约束的研究规划、论文写作、结构润色、审稿与技能审计"
+  default_prompt: "Use $academic-stitcher-skill to route this academic research, hybrid-paper, research-story, or manuscript task; preserve provenance and evidence states; and return the smallest defensible output at my requested checkpoint."

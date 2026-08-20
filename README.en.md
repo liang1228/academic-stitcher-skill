@@ -1,17 +1,17 @@
 # academic-stitcher-skill
 
-[![Version](https://img.shields.io/badge/version-3.0.0-blue?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill)
-[![Skills](https://img.shields.io/badge/skills-5-7c3aed?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
-[![Validation](https://img.shields.io/badge/validation-30%2F30%20passed-2ea44f?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
+[![Version](https://img.shields.io/badge/version-3.1.0-blue?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill)
+[![Skills](https://img.shields.io/badge/skills-6-7c3aed?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
+[![Validation](https://img.shields.io/badge/validation-core%208%2F8%20%7C%20routes%2030%2F30-2ea44f?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
 [![Platform](https://img.shields.io/badge/platform-Codex%20Skills-lightgrey?style=flat-square)]()
 [![Language](https://img.shields.io/badge/language-zh--cn%20%7C%20en-orange?style=flat-square)](README.md)
 [![Last commit](https://img.shields.io/github/last-commit/liang1228/academic-stitcher-skill?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/commits/main)
 
 > [中文说明](README.md) | English README
 
-**Structured academic research-planning skills for AI coding agents — turning research directions, paper evidence, module transfer, contribution review, and thesis delivery into an executable Skill Flow.**
+**Structured academic research skills for AI coding agents — using an evidence-bound research-story and writing core to connect direction, paper evidence, module transfer, contribution review, and thesis delivery.**
 
-The repository provides five independent entry points: direction feasibility, purpose-driven paper decomposition, variable-granularity A/B/C architecture, three-domain module and dataflow adaptation, and an innovation/workload dual-axis delivery review. Each entry keeps evidence state, boundaries, rollback conditions, and the next checkpoint explicit.
+The repository provides one `academic-stitcher-skill` core router/writing base plus five independent specialist entries. The core handles hybrid-paper story architecture, section construction, reviewer audit, and end-to-end checks; the five siblings handle direction, paper evidence, A/B/C boundaries, module adaptation, and innovation/workload. Every entry keeps evidence state, boundaries, rollback conditions, and the next checkpoint explicit.
 
 ```mermaid
 flowchart LR
@@ -22,7 +22,8 @@ flowchart LR
     C --> F["A/B/C architecture"]
     C --> G["Module and dataflow"]
     C --> H["Innovation/workload"]
-    D & E & F & G & H --> I["📋 Evidence matrix"]
+    C --> S["Research story/writing core"]
+    D & E & F & G & H & S --> I["📋 Evidence matrix"]
     I --> J["✅ Quality and stop gates"]
     J --> K["📄 Auditable work plan"]
 
@@ -62,7 +63,7 @@ flowchart LR
 
 | Feature | Description |
 |---------|-------------|
-| 🧭 **Five entry routes** | Select the smallest skill for direction, papers, architecture, modules, or delivery |
+| 🧭 **Core + five entries** | The core handles story/writing/review; five siblings handle narrow research-planning tasks |
 | 📐 **Independent installation** | Every directory is a standalone Codex skill that can be copied and validated |
 | 🔬 **Evidence-first** | Connect claims to materials, code, data, controls, ablations, and versions |
 | 🧱 **Explicit boundaries** | Trigger conditions, neighboring skills, stop conditions, and non-goals stay visible |
@@ -116,6 +117,20 @@ flowchart LR
 - Train/deploy contract differences;
 - A single-module control, rollback conditions, cost, and B-prime ledger.
 
+### Example 4: Turn a hybrid design into a research story
+
+**Your input:**
+
+> I have three papers: A is the baseline, B is a module from a nearby domain, and C is a data-processing change. Explain why the combination is necessary and rebuild the argument order for the Introduction, Method, Experiments, and Discussion without inventing results.
+
+**Auto-routed to:** `academic-stitcher-skill` → `story-architecture`
+
+**Expected output:**
+
+- pressure → baseline failure → gap → design principle → mechanism → prediction → evidence → boundary;
+- source, actual change, attribution, and falsifiable test for every module;
+- a Story Spine, Claim–Evidence–Boundary Map, section/figure/experiment order, and reviewer stress test.
+
 ---
 
 ## Design Goals
@@ -125,6 +140,7 @@ flowchart LR
 - **Define A/B/C relative to the claim**: do not recount inherited components as new work after relabeling.
 - **Adapt modules along the dataflow**: names, shapes, and a single score do not prove mechanism validity.
 - **Separate innovation and delivery**: record new claims, experiments, engineering, chapters, and deliverables on separate axes.
+- **Treat story as evidence organization**: a story may reorder evidence and explain mechanisms, but it cannot replace missing experiments or hide negative results.
 - **Keep uncertainty visible**: missing evidence, current rules, and rights remain pending rather than becoming fabricated certainty.
 
 ## Repository Layout
@@ -133,11 +149,19 @@ flowchart LR
 academic-stitcher-skill/
 ├── README.md                              # Chinese overview, badges, quick start, maintenance
 ├── README.en.md                           # English overview and installation
-├── INDEX.md                               # Five entries, relationship map, recommended order
+├── INDEX.md                               # Core + five entries, relationship map, recommended order
 ├── DIGEST.md                               # Reader-facing method digest
 ├── GLOSSARY.md                             # Shared terms and working definitions
 │
 └── skills/
+    ├── academic-stitcher-skill/            # Story, writing, review, and full-pipeline core
+    │   ├── SKILL.md
+    │   ├── manifest.yaml
+    │   ├── agents/openai.yaml
+    │   ├── static/                         # core, route, paper type, section, language
+    │   ├── references/                     # planning, writing, and evaluation playbooks
+    │   ├── scripts/                        # local validation and skill-maintenance scripts
+    │   └── tests/                          # 41 core route/boundary fixtures
     ├── direction-feasibility-foundation-map/
     │   ├── SKILL.md
     │   ├── agents/openai.yaml
@@ -165,13 +189,13 @@ academic-stitcher-skill/
         └── test-results.md
 ```
 
-The root is not a single callable skill. It is a public collection of five independent entry points.
+The root is not a single callable skill. It is a public collection of one core base and five independent sibling entries.
 
 ## Skill Flow
 
 At runtime, the workflow is:
 
-1. **Identify the task**: direction, papers, architecture, module transfer, or delivery.
+1. **Identify the task**: research story, manuscript work, review, direction, papers, architecture, module transfer, or delivery.
 2. **Select an entry**: read the matching SKILL.md and check neighboring routes.
 3. **Freeze the boundary**: state the claim, comparison object, inputs/outputs, formal constraints, and missing data.
 4. **Build the evidence matrix**: record facts, assumptions, rights, versions, changes, controls, ablations, and limitations.
@@ -182,6 +206,7 @@ At runtime, the workflow is:
 
 | Route | Purpose | Typical trigger |
 | --- | --- | --- |
+| academic-stitcher-skill | Hybrid-paper stories, manuscript sections, structural polish, reviewer audit, proposals, and full pipeline | “Turn these modules into one research argument” |
 | direction-feasibility-foundation-map | Direction, foundation map, resource gates, minimum pilot | “Can this direction run?” |
 | purpose-driven-paper-decomposition | Paper triage, four-entry reading, baseline/module/interface evidence | “Decompose these papers for reproduction” |
 | variable-granularity-abc-research-architecture | Reuse across papers, A/B/C, inherited versus new work | “What did the second paper actually add?” |
@@ -198,6 +223,7 @@ See [INDEX.md](INDEX.md) for the relationship map.
 - Search for modules across domains and validate the real dataflow;
 - Separate innovation evidence, engineering workload, experiment coverage, and chapters;
 - Prepare reviewable work packages for proposals, papers, milestones, or audits.
+- Turn multi-paper or multi-module combinations into a bounded research story with a central claim, mechanism chain, and evidence boundary.
 
 ## Out Of Scope
 
@@ -233,7 +259,7 @@ Copy the selected skill directory, including SKILL.md, agents/openai.yaml,
 test-prompts.json, and test-results.md, into the Codex skills directory.
 ```
 
-### Windows PowerShell: install all five
+### Windows PowerShell: install all six
 
 ```powershell
 $repo = "C:/path/to/academic-stitcher-skill"
@@ -243,7 +269,7 @@ Get-ChildItem (Join-Path $repo "skills") -Directory | ForEach-Object {
 }
 ```
 
-### macOS / Linux: install all five
+### macOS / Linux: install all six
 
 ```bash
 for skill in skills/*; do
@@ -282,11 +308,13 @@ Every entry should print:
 Skill is valid!
 ```
 
-The published package also retains five test files with 30 routing cases:
+The published package contains 30 routing cases for the five sibling skills plus 41 route/boundary fixtures for the core base:
 
 - should_trigger: 15/15
 - should_not_trigger: 10/10
 - edge_case: 5/5
+
+The core base has **8/8 deterministic maintenance tests**. The new `story-architecture` prompts are included as fixtures; independent model blind-test results are not mixed with deterministic checks.
 
 ## Output Contract
 
@@ -297,6 +325,7 @@ A complete response should usually include:
 | **Intent & Route** | Current task, selected entry, and why neighboring routes were not selected |
 | **State Ledger** | Facts, assumptions, gaps, pending items, and stop conditions |
 | **Evidence Matrix** | Claims, materials, versions, code, data, controls, and ablations |
+| **Story Spine** | Pressure, failure mode, gap, mechanism, prediction, evidence, and boundary |
 | **Work Packages** | Executable, reversible, reviewable experiment/engineering/chapter steps |
 | **Risks & Boundaries** | Rights, reproducibility, attribution, cost, leakage, and formal-rule checks |
 | **Next Checkpoint** | Next action, pass condition, deadline, and exit path |
@@ -306,6 +335,7 @@ For English manuscript work, return polished English first. If the input is Chin
 ## Design Principles
 
 - **Evidence state beats narrative completeness**: mark pending instead of guessing.
+- **Every research story must be traceable**: keep unsupported transitions as missing/proposed instead of strengthening the prose.
 - **Smallest executable action beats module stacking**: validate the baseline and contract first.
 - **Neighboring entries have explicit roles**: do not let a broad route swallow a narrow task.
 - **Historical attribution survives relabeling**: redrawing A/B/C does not reset contribution history.
@@ -345,6 +375,7 @@ No LICENSE file is currently included at the repository root. Add an explicit li
 
 | Version | Date | Description |
 |---------|------|-------------|
+| v3.1.0 | 2026-08-21 | Restored the public core base, added the story-architecture route, hybrid-paper story fixtures, and core maintenance validation |
 | v3.0.0 | 2026-08-20 | Replaced the repository root with five independent academic research-planning skills and refreshed README, badges, installation, and validation docs |
 | v2.x | Historical | Previous router-style academic-writing repository, superseded by the current root layout |
 
