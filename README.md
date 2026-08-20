@@ -1,244 +1,265 @@
 # academic-stitcher-skill
 
-[![Version](https://img.shields.io/badge/version-3.1.0-blue?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill)
-[![Skills](https://img.shields.io/badge/skills-6-7c3aed?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
-[![Validation](https://img.shields.io/badge/validation-core%208%2F8%20%7C%20routes%2030%2F30-2ea44f?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/tree/main/skills)
-[![Platform](https://img.shields.io/badge/platform-Codex%20Skills-lightgrey?style=flat-square)]()
-[![Language](https://img.shields.io/badge/language-zh--cn%20%7C%20en-orange?style=flat-square)](README.en.md)
-[![Last commit](https://img.shields.io/github/last-commit/liang1228/academic-stitcher-skill?style=flat-square)](https://github.com/liang1228/academic-stitcher-skill/commits/main)
+<div align="center">
 
-> 中文说明 | [English README](README.en.md)
+<p>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.1.0-2563eb?style=for-the-badge" alt="Version 3.1.0"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/skills-1%20core%20%2B%205%20specialists-7c3aed?style=for-the-badge" alt="One core and five specialists"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-8%2F8%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
+</p>
+<p>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/platform-Codex%20Skills-0f172a?style=flat-square" alt="Codex Skills"></a>
+  <a href="README.en.md"><img src="https://img.shields.io/badge/language-zh--cn%20%7C%20en-f97316?style=flat-square" alt="Chinese and English documentation"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/commits/main"><img src="https://img.shields.io/github/last-commit/liang1228/academic-stitcher-skill?style=flat-square" alt="Last commit"></a>
+</p>
 
-**面向 AI Coding Agent 的结构化学术研究 Skills —— 用一个证据约束的研究故事/写作基座，串起方向、论文证据、模块迁移、创新判断和论文交付。**
+<h3>把科研问题变成可核查、可回滚、可交付的研究工作流</h3>
 
-仓库包含一个 `academic-stitcher-skill` 核心路由/写作基座，以及五个独立窄域入口。核心基座负责杂交论文的故事主线、章节构建、审稿和端到端检查；五个兄弟 skill 负责方向、论文证据、A/B/C、模块适配和创新—工作量。所有入口都强调证据状态、边界条件、可回滚步骤和下一检查点。
+<p>
+  面向 AI Coding Agent 的结构化学术研究 Skills：<br>
+  用证据约束的研究故事与写作基座，串起方向、论文证据、模块迁移、创新判断和论文交付。
+</p>
 
-```mermaid
-flowchart LR
-    A["📝 研究请求"] --> B["🧭 Skill Selection"]
-    B --> C{"🔍 任务边界"}
-    C --> D["方向可行性"]
-    C --> E["论文证据"]
-    C --> F["A/B/C 架构"]
-    C --> G["模块与数据流"]
-    C --> H["创新/工作量"]
-    C --> S["科研故事/写作基座"]
-    D & E & F & G & H & S --> I["📋 证据矩阵"]
-    I --> J["✅ 质量门与停止条件"]
-    J --> K["📄 可核查工作计划"]
+<p>
+  <a href="#-三分钟开始">🚀 三分钟开始</a> ·
+  <a href="#routes">🧭 选择入口</a> ·
+  <a href="INDEX.md">📚 阅读索引</a> ·
+  <a href="GLOSSARY.md">🧩 查术语</a>
+</p>
 
-    style A fill:#e3f2fd,stroke:#1565c0
-    style B fill:#fff3e0,stroke:#e65100
-    style C fill:#f3e5f5,stroke:#6a1b9a
-    style I fill:#e8f5e9,stroke:#2e7d32
-    style J fill:#fff8e1,stroke:#f57f17
-    style K fill:#e3f2fd,stroke:#1565c0
-```
+</div>
 
----
+> [!NOTE]
+> 这不是提示词合集，而是一套“路由 + 证据账本 + 质量门 + 下一检查点”的公开 skill 集合。故事可以组织证据，但不能替代缺失实验、隐藏负结果或补造归属。
 
-## 目录
+<table align="center">
+  <tr>
+    <td align="center" width="25%"><strong>1 + 5</strong><br><sub>一个核心基座<br>五个独立窄域入口</sub></td>
+    <td align="center" width="25%"><strong>Story-first</strong><br><sub>问题压力 → 机制 → 证据<br>让论文主线可回溯</sub></td>
+    <td align="center" width="25%"><strong>Evidence-bound</strong><br><sub>主张、材料、对照、消融<br>和边界逐项对齐</sub></td>
+    <td align="center" width="25%"><strong>Rollback-ready</strong><br><sub>最小动作、停止条件<br>和下一步都可验收</sub></td>
+  </tr>
+</table>
+
+## Contents
+
+<details>
+<summary><strong>展开目录</strong></summary>
 
 - [✨ 核心特性](#-核心特性)
-- [🚀 快速上手](#-快速上手)
-- [设计目标](#设计目标)
+- [🚀 三分钟开始](#-三分钟开始)
+- [研究故事主线](#研究故事主线)
 - [仓库结构](#仓库结构)
 - [Skill Flow](#skill-flow)
 - [Routes](#routes)
-- [适用场景](#适用场景)
-- [不适用场景](#不适用场景)
-- [前置要求](#前置要求)
+- [适用与边界](#适用与边界)
 - [安装方式](#安装方式)
 - [验证](#验证)
 - [输出标准](#输出标准)
-- [设计原则](#设计原则)
-- [维护原则](#维护原则)
+- [设计与维护原则](#设计与维护原则)
 - [Contributing](#contributing)
 - [License / 许可](#license--许可)
 - [Changelog](#changelog)
 
----
+</details>
 
 ## ✨ 核心特性
 
-| 特性 | 说明 |
-|------|------|
-| 🧭 **核心 + 五入口** | 核心基座负责故事/写作/审稿，五个兄弟入口负责研究规划窄域 |
-| 📐 **独立安装** | 每个目录都是可单独复制、验证和调用的 Codex skill |
-| 🔬 **证据优先** | 要求把主张连接到材料、代码、数据、对照、消融和版本 |
-| 🧱 **边界清晰** | 明确触发条件、相邻 skill、不可用场景和停止条件 |
-| 🔁 **可组合工作流** | 方向 → 论文证据 → A/B/C → 模块适配 → 双轴交付 |
-| 🌏 **中英双语** | 中文 README 与 English README 同步维护 |
-| ✅ **可验证交付** | 每个 skill 都有结构校验、触发测试、诱饵测试和边界测试 |
+| 能力 | 你会得到什么 |
+|------|--------------|
+| 🧭 **核心 + 五入口** | 核心基座负责故事、写作、审稿和全流程；五个兄弟入口负责研究规划窄域 |
+| 🔬 **证据优先** | 把主张连接到材料、代码、数据、对照、消融、版本和权利条件 |
+| 🧱 **边界清晰** | 公开写清触发条件、相邻 skill、不可用场景、停止条件和待核验项 |
+| 🔁 **可组合工作流** | 方向 → 论文证据 → A/B/C → 模块适配 → 故事/章节 → 交付 |
+| 📐 **独立安装** | 每个目录都是可以单独复制、验证和调用的 Codex skill |
+| ✅ **可验证交付** | 结构校验、路由 fixture、兄弟 skill 诱饵、边界测试和确定性维护测试 |
 
----
+## 🚀 三分钟开始
 
-## 🚀 快速上手
+### 1. 先按问题选择入口
 
-### 示例 1：判断研究方向能不能做
+| 如果你正在问…… | 从这里开始 | 第一份交付 |
+|---|---|---|
+| 这个方向能不能做？ | <code>direction-feasibility-foundation-map</code> | 基础、资源硬门和最小试点 |
+| 这批论文该怎么读？ | <code>purpose-driven-paper-decomposition</code> | 按目的筛选的证据卡和论文地图 |
+| 第二篇到底新增了什么？ | <code>variable-granularity-abc-research-architecture</code> | A/B/C 继承—改动—新增账本 |
+| 这个模块能不能接进基线？ | <code>three-domain-module-search-dataflow-adaptation</code> | 数据流、训练/部署契约和单模块对照 |
+| 方法不够新还是实验不够？ | <code>innovation-workload-dual-axis</code> | 创新轴 × 工作量轴的补强计划 |
+| 多篇论文怎样讲成一条主线？ | <code>academic-stitcher-skill</code> → <code>story-architecture</code> | Story Spine、主张—证据—边界图和章节顺序 |
 
-**你的输入：**
+### 2. 用一个明确的请求启动
+
+```text
+我有三篇论文：A 是基线，B 是相邻领域模块，C 是数据处理改动。
+请先冻结每个组件的来源、实际改动和证据状态，再判断组合是否必要；
+最后重建 Introduction、Method、Experiments、Discussion 的顺序。
+没有证据的地方标记 missing/proposed，不要编结果。
+```
+
+### 3. 保留完整入口目录
+
+不要只复制 <code>SKILL.md</code>。运行时入口、manifest、references、static、scripts 和验证文件共同构成一个可复核 skill。
+
+<p align="center">
+  <a href="INDEX.md"><strong>→ 查看入口关系图与推荐顺序</strong></a>
+</p>
+
+## 研究故事主线
+
+核心基座不是替用户“包装结果”，而是把已有证据组织成一条可追问、可证伪的论证链：
+
+| 阶段 | 要回答的问题 | 不能偷换成 |
+|---|---|---|
+| <strong>01 · 压力</strong> | 当前任务为什么值得解决？ | 热点、兴趣或口号 |
+| <strong>02 · 失效</strong> | 继承基线在哪个具体条件下失效？ | 事后编出的缺点 |
+| <strong>03 · 缺口</strong> | 现有方法为什么无法直接解决？ | 没有证据的 gap |
+| <strong>04 · 设计</strong> | 为什么选择这个模块、数据流或接口？ | 只因名字相似或形状匹配 |
+| <strong>05 · 机制</strong> | 改动通过什么机制产生可测预测？ | 把分数提升当因果解释 |
+| <strong>06 · 证据</strong> | 哪个对照、消融或失败结果支持它？ | 只保留最漂亮的结果 |
+| <strong>07 · 边界</strong> | 哪些条件下结论会变弱或失效？ | 用更强措辞掩盖 pending |
+
+```text
+问题压力 → 继承基线 → 失败模式 → 未解缺口 → 设计原则
+     → 变更模块 → 机制 → 可测预测 → 证据 → 边界
+```
+
+## Skill Flow
+
+```mermaid
+flowchart LR
+    Q(["📝 研究问题"]) --> R{"🧭 先冻结什么？"}
+    R --> D["方向 / 可行性"]
+    R --> P["论文 / 证据"]
+    R --> A["A/B/C / 架构"]
+    R --> M["模块 / 数据流"]
+    R --> W["创新 / 工作量"]
+    R --> S["科研故事 / 写作"]
+    D & P & A & M & W & S --> L["📒 Evidence Ledger"]
+    L --> T["🧵 Story Spine"]
+    T --> X["🧪 实验 · 章节 · 审稿"]
+    X --> K(["✅ 下一检查点"])
+
+    classDef input fill:#eff6ff,stroke:#2563eb,color:#0f172a
+    classDef route fill:#f5f3ff,stroke:#7c3aed,color:#1e1b4b
+    classDef ledger fill:#ecfdf5,stroke:#059669,color:#064e3b
+    classDef output fill:#fff7ed,stroke:#ea580c,color:#431407
+    class Q,K input
+    class D,P,A,M,W,S route
+    class L,T ledger
+    class X output
+```
+
+运行时遵循六步：
+
+1. **识别任务**：判断是故事、写作、审稿，还是方向、论文、架构、模块和交付。
+2. **选择入口**：读取匹配目录的 <code>SKILL.md</code>，检查相邻 skill 是否更合适。
+3. **冻结边界**：写清主张、比较对象、输入输出、制度约束和缺失信息。
+4. **建立证据账本**：记录事实、假设、权利、版本、改动、对照、消融和限制。
+5. **执行最小动作**：优先选择可回滚、可复现、可验收的动作。
+6. **返回检查点**：给出通过条件、停止条件、pending 项和下一动作。
+
+## Routes
+
+| 入口 | 适合什么 | 典型触发 |
+|---|---|---|
+| <code>academic-stitcher-skill</code> | 杂交论文故事、章节写作、结构润色、审稿、开题与全流程 | “把这些模块讲成一条科研主线” |
+| <code>direction-feasibility-foundation-map</code> | 研究方向、基础地图、资源硬门、最小试点 | “这个方向能不能做” |
+| <code>purpose-driven-paper-decomposition</code> | 论文筛选、四入口阅读、基线/模块/接口证据 | “按复现目标拆这批论文” |
+| <code>variable-granularity-abc-research-architecture</code> | 连续论文复用、A/B/C、继承与新增边界 | “第二篇到底新增了什么” |
+| <code>three-domain-module-search-dataflow-adaptation</code> | 跨域模块搜索、数据流、B′/C′、训练部署契约 | “这个模块能不能接进基线” |
+| <code>innovation-workload-dual-axis</code> | 创新不足、工作量不足、章节和实验交付 | “该补方法还是补实验” |
+
+详细关系图见 [INDEX.md](INDEX.md)；方法精华见 [DIGEST.md](DIGEST.md)；共享术语见 [GLOSSARY.md](GLOSSARY.md)。
+
+## Quick Examples
+
+<details>
+<summary><strong>Example 1 · 判断方向是否值得继续</strong></summary>
 
 > 我有一个很热门的视觉研究方向，但组内没人做，数据只有口头承诺；请按基础、资源和最小复现判断要不要继续。
 
-**自动路由：** direction-feasibility-foundation-map
+**自动路由：** <code>direction-feasibility-foundation-map</code>
 
-**输出重点：**
+**输出重点：** 文献活跃度、知识地图、支持条件、资源硬门、最小试点、截止时间和继续/缩题/换题条件。
 
-1. 文献活跃度、知识地图、支持条件和资源硬门；
-2. 理论、实验、数据、设备和复现能力缺口；
-3. 最小试点任务、截止时间和继续/缩题/换题条件。
+</details>
 
-### 示例 2：按目的拆解论文
-
-**你的输入：**
+<details>
+<summary><strong>Example 2 · 按复现目的拆解论文</strong></summary>
 
 > 我有 40 篇论文和两周时间，请按复现目标分成必读、选读和暂不读，并抽取基线、模块、接口与消融证据。
 
-**自动路由：** purpose-driven-paper-decomposition
+**自动路由：** <code>purpose-driven-paper-decomposition</code>
 
-**输出重点：**
+**输出重点：** 取证任务、组件输入输出、依赖版本、实现冲突、作者主张、对照和 pending 检查。
 
-- 摘要、引言、方法、实验和代码各自承担什么取证任务；
-- 组件输入、输出、依赖、版本和实现冲突；
-- 哪些是作者主张，哪些有对照或消融支持。
+</details>
 
-### 示例 3：已有基线后迁移模块
+<details>
+<summary><strong>Example 3 · 验证跨域模块能否接入</strong></summary>
 
-**你的输入：**
+> 我的基线已经能复现，候选模块形状匹配但部署时没有辅助标注，能不能直接算 B′？
 
-> 我的基线已经能复现，想从相似领域找模块；候选形状匹配但部署时没有辅助标注，能不能直接算 B′？
+**自动路由：** <code>three-domain-module-search-dataflow-adaptation</code>
 
-**自动路由：** three-domain-module-search-dataflow-adaptation
+**输出重点：** 三域候选池、真实数据流、训练/部署契约、单模块对照、回滚条件和 B′ 改动台账。
 
-**输出重点：**
+</details>
 
-- 三域候选池、机制问题和真实数据流；
-- 训练契约与部署契约差异；
-- 单模块对照、回滚条件、成本和 B′ 改动台账。
+<details>
+<summary><strong>Example 4 · 把杂交方案讲成一条科研故事</strong></summary>
 
-### 示例 4：把杂交方案讲成一条科研故事
+> 我有三篇论文：A 是基线，B 是相邻领域模块，C 是数据处理改动。请先解释为什么必须组合，再重建 Introduction、Method、Experiments、Discussion 的论证顺序，不要编结果。
 
-**你的输入：**
+**自动路由：** <code>academic-stitcher-skill</code> → <code>story-architecture</code>
 
-> 我有三篇论文：A 是基线，B 是相邻领域模块，C 是数据处理改动。请先解释为什么必须组合，并重建 Introduction、Method、Experiments、Discussion 的论证顺序，不要编结果。
+**输出重点：** Story Spine、Claim–Evidence–Boundary Map、模块归属、可证伪实验、章节/图表/实验顺序和审稿人压力测试。
 
-**自动路由：** `academic-stitcher-skill` → `story-architecture`
-
-**输出重点：**
-
-- 问题压力 → 基线失效 → 缺口 → 设计原则 → 机制 → 预测 → 证据 → 边界；
-- 每个模块的来源、实际改动、归因和可证伪实验；
-- Story Spine、Claim–Evidence–Boundary Map、章节/图表/实验顺序和审稿人压力测试。
-
----
-
-## 设计目标
-
-- **先判断能不能做**：把热点、兴趣和资源约束拆成可核验的方向卡。
-- **按决定读取论文**：让阅读深度服从复现、比较、拆解或设计任务。
-- **按当前主张定义 A/B/C**：不把继承组件改名后重复计作新贡献。
-- **沿数据流适配模块**：不以名称相似、形状匹配或单一分数替代机制验证。
-- **分开创新和工作量**：把新主张、实验、工程、章节和交付证据分别记账。
-- **把故事当作证据的组织方式**：故事可以重排证据和解释机制，不能替代缺失实验或隐藏负结果。
-- **保留不确定性**：缺失证据、当前规则和权利条件都标为 pending，而不是补造结论。
+</details>
 
 ## 仓库结构
 
 ```text
 academic-stitcher-skill/
-├── README.md                              # 中文入口、徽标、快速上手和维护说明
-├── README.en.md                           # English overview and installation
-├── INDEX.md                               # 核心 + 五个入口、关系图和推荐顺序
-├── DIGEST.md                               # 面向读者的方法精华
-├── GLOSSARY.md                             # 共享术语与工作性定义
-│
+├── README.md / README.en.md       # 双语入口、徽标、快速上手和安装
+├── INDEX.md / DIGEST.md           # 关系图、推荐顺序和方法精华
+├── GLOSSARY.md                    # 共享术语与工作性定义
 └── skills/
-    ├── academic-stitcher-skill/            # 故事、写作、审稿和全流程核心基座
+    ├── academic-stitcher-skill/   # 故事、写作、审稿和全流程核心基座
     │   ├── SKILL.md
     │   ├── manifest.yaml
-    │   ├── agents/openai.yaml
-    │   ├── static/                         # core、route、paper type、section、language
-    │   ├── references/                     # planning、writing、evaluation playbooks
-    │   ├── scripts/                        # 本地验证和 skill 维护脚本
-    │   └── tests/                          # 41 条基座路由/边界测试题
-    ├── direction-feasibility-foundation-map/
-    │   ├── SKILL.md
-    │   ├── agents/openai.yaml
-    │   ├── test-prompts.json
-    │   └── test-results.md
-    ├── purpose-driven-paper-decomposition/
-    │   ├── SKILL.md
-    │   ├── agents/openai.yaml
-    │   ├── test-prompts.json
-    │   └── test-results.md
-    ├── variable-granularity-abc-research-architecture/
-    │   ├── SKILL.md
-    │   ├── agents/openai.yaml
-    │   ├── test-prompts.json
-    │   └── test-results.md
-    ├── three-domain-module-search-dataflow-adaptation/
-    │   ├── SKILL.md
-    │   ├── agents/openai.yaml
-    │   ├── test-prompts.json
-    │   └── test-results.md
-    └── innovation-workload-dual-axis/
-        ├── SKILL.md
-        ├── agents/openai.yaml
-        ├── test-prompts.json
-        └── test-results.md
+    │   ├── static/                # core、route、paper type、section、language
+    │   ├── references/            # planning、writing、evaluation playbooks
+    │   ├── scripts/               # 本地验证和维护脚本
+    │   └── tests/                 # 41 条基座路由/边界 fixture
+    └── five specialist entries/   # 方向、论文、A/B/C、模块、创新/工作量
 ```
 
 根目录不是一个需要单独调用的 skill，而是一个核心基座和五个独立兄弟入口的公开集合。
 
-## Skill Flow
+## 适用与边界
 
-运行时按以下顺序工作：
-
-1. **识别任务**：判断用户是在讲科研故事、写论文、做审稿，还是选方向、读论文、冻结架构、迁移模块和规划交付。
-2. **选择入口**：读取对应目录的 SKILL.md，并检查相邻 skill 是否更合适。
-3. **冻结边界**：写清当前主张、比较对象、输入输出、制度约束和缺失信息。
-4. **建立证据矩阵**：记录事实、假设、权利、版本、改动、对照、消融和限制。
-5. **执行最小动作**：优先使用可回滚、可复现、可验收的最小任务。
-6. **输出检查点**：给出通过条件、停止条件、待核验项和下一步。
-
-## Routes
-
-| Route | 用途 | 典型触发 |
-| --- | --- | --- |
-| academic-stitcher-skill | 杂交论文故事、章节写作、结构润色、审稿、开题与全流程 | “把这些模块讲成一条科研主线” |
-| direction-feasibility-foundation-map | 研究方向、基础地图、资源硬门、最小试点 | “这个方向能不能做” |
-| purpose-driven-paper-decomposition | 论文筛选、四入口阅读、基线/模块/接口证据 | “按复现目标拆这批论文” |
-| variable-granularity-abc-research-architecture | 连续论文复用、A/B/C、继承与新增边界 | “第二篇到底新增了什么” |
-| three-domain-module-search-dataflow-adaptation | 跨域模块搜索、数据流、B′/C′、训练部署契约 | “这个模块能不能接进基线” |
-| innovation-workload-dual-axis | 创新不足、工作量不足、章节和实验交付 | “该补方法还是补实验” |
-
-详细关系图见 [INDEX.md](INDEX.md)。
-
-## 适用场景
+### 适用场景
 
 - 选研究方向并评估基础、资源和期限风险；
 - 从大量论文中按目的筛选和拆解证据；
 - 处理连续论文中的基线复用与贡献边界；
 - 跨域寻找模块并核对真实输入—输出数据流；
 - 区分创新证据、工程工作量、实验覆盖和章节交付；
-- 为开题、论文、阶段检查或审稿准备可核查工作包。
 - 把多篇论文/多模块组合成有中心论点、机制链和证据边界的科研故事。
 
-## 不适用场景
-
-本仓库不提供以下帮助：
+### 明确不做
 
 - 伪造数据、引用、实验结果、作者贡献或评审记录；
 - 隐藏重复使用、洗稿、规避检测或掩盖归属；
-- 故意挑弱基线、删除负结果或制造公平比较；
+- 故意挑弱基线、删除负结果或制造不公平比较；
 - 把指标提升、论文数量或经验阈值直接写成创新或制度结论；
 - 在缺少当前正式规则、权利或关键实验时补造确定答案。
 
 ## 前置要求
 
 | 要求 | 说明 |
-|------|------|
+|---|---|
 | **AI Coding Agent** | Codex CLI、Codex Desktop、Claude Code 或其他支持 Codex Skills 的 Agent |
 | **skill-creator** | 仅运行结构校验时需要，可选 |
 | **Python 3.8+** | 仅本地批量验证测试文件时需要，可选 |
@@ -248,8 +269,6 @@ academic-stitcher-skill/
 ## 安装方式
 
 ### Codex 推荐提示
-
-把下面的任务交给 Codex：
 
 ```text
 Install the independent Codex skills from:
@@ -281,14 +300,14 @@ done
 
 ### 只安装一个入口
 
-将 skills/<skill-name>/ 整个目录复制到：
+将 <code>skills/&lt;skill-name&gt;/</code> 整个目录复制到：
 
 ```text
 %USERPROFILE%\.codex\skills\<skill-name>
 ~/.codex/skills/<skill-name>
 ```
 
-不要只复制 SKILL.md；agents/openai.yaml、运行验证文件及该入口的 bundled assets 应与它一起保留。
+不要只复制 <code>SKILL.md</code>；<code>agents/openai.yaml</code>、运行验证文件及该入口的 bundled assets 应与它一起保留。
 
 ## 验证
 
@@ -309,20 +328,21 @@ Get-ChildItem .\skills -Directory | ForEach-Object {
 Skill is valid!
 ```
 
-当前发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 41 条路由/边界测试题：
+当前发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 41 条路由/边界 fixture：
 
-- should_trigger：15/15
-- should_not_trigger：10/10
-- edge_case：5/5
+| 测试层 | 结果 |
+|---|---:|
+| should_trigger | 15 / 15 |
+| should_not_trigger | 10 / 10 |
+| edge_case | 5 / 5 |
+| 核心确定性维护测试 | **8 / 8** |
 
-核心基座的确定性维护测试为 **8/8**；其中新增的 `story-architecture` 测试题已纳入 fixture，独立模型盲测结果不与确定性测试混计。
+新增的 <code>story-architecture</code> 题目属于 fixture 覆盖，不与独立模型盲测结果混计。
 
 ## 输出标准
 
-默认输出应包含：
-
 | 输出项 | 说明 |
-|--------|------|
+|---|---|
 | **Intent & Route** | 当前任务、选用入口和不选相邻入口的理由 |
 | **State Ledger** | 事实、假设、缺口、pending 和停止条件 |
 | **Evidence Matrix** | 主张、材料、版本、代码、数据、对照和消融 |
@@ -333,7 +353,7 @@ Skill is valid!
 
 英文稿件优先输出 polished English；输入为中文笔记时，再附简短中文结构说明。
 
-## 设计原则
+## 设计与维护原则
 
 - **证据状态优先于叙事完整度**：不确定就标记 pending。
 - **科研故事必须可回溯**：没有证据的转场保留 missing/proposed，不用更强措辞填补。
@@ -343,30 +363,24 @@ Skill is valid!
 - **创新与交付分轴记录**：两种证据可以交叉，但不能重复计数。
 - **公开包与内部材料分层**：发布结构只保留可安装、可验证内容。
 
-## 维护原则
+维护 README 或 skill 后，请同步检查：
 
-- 保持每个 SKILL.md 精炼，重点维护触发条件、执行步骤和边界。
-- 共享术语和关系变化同步更新 INDEX.md 与 GLOSSARY.md。
-- 每次修改后运行 quick_validate.py、JSON 解析、链接检查和路径/凭据扫描。
-- 测试题必须覆盖正向触发、兄弟 skill 诱饵和边界情景。
-- 不把本机路径、凭据、缓存、内部审计和中间产物提交到公开根目录。
-- README 与 README.en.md 的徽标、目录、安装方式和验证数字保持同步。
+1. 中英文徽标、目录、安装方式和验证数字；
+2. Markdown 相对链接、JSON/YAML 和代码围栏；
+3. 本机路径、凭据、缓存、内部审计和中间产物；
+4. 正向触发、兄弟 skill 诱饵和边界情景。
 
 ## Contributing
 
 欢迎贡献！请遵循以下流程：
 
-1. Fork 本仓库。
-2. 创建 feature 分支：git checkout -b feature/your-feature。
-3. 修改后运行对应 skill 的 quick_validate.py。
-4. 检查 Markdown 链接、JSON/YAML 和敏感路径。
+1. Fork 本仓库；
+2. 创建 feature 分支：<code>git checkout -b feature/your-feature</code>；
+3. 修改后运行对应 skill 的 quick_validate.py；
+4. 检查 Markdown 链接、JSON/YAML 和敏感路径；
 5. 提交 Pull Request，说明修改动机、影响范围和验证结果。
 
-**贡献优先级：**
-
-- 🔴 触发边界、证据契约和验证错误修复
-- 🟡 新的窄域研究规划入口或关系图改进
-- 🟢 README、术语、示例和安装文档改进
+**贡献优先级：** 🔴 触发边界/证据契约/验证修复　🟡 新窄域入口/关系图　🟢 README/术语/示例/安装文档
 
 ## License / 许可
 
@@ -375,9 +389,15 @@ Skill is valid!
 ## Changelog
 
 | 版本 | 日期 | 说明 |
-|------|------|------|
-| v3.1.0 | 2026-08-21 | 恢复公开核心基座，新增 story-architecture 路由、杂交论文故事测试和核心维护验证 |
-| v3.0.0 | 2026-08-20 | 根目录替换为五个独立学术研究规划 skills，补齐公开 README、徽标、安装和验证说明 |
+|---|---|---|
+| Unreleased | 2026-08-21 | 重构双语 README 首屏、路线选择、科研故事主线和安装/验证信息层级 |
+| v3.1.0 | 2026-08-21 | 恢复公开核心基座，新增 story-architecture 路由、杂交论文故事 fixture 和核心维护验证 |
+| v3.0.0 | 2026-08-20 | 根目录替换为五个独立学术研究规划 skill，补齐公开 README、徽标、安装和验证说明 |
 | v2.x | 历史版本 | 旧版路由式学术写作仓库，已由当前根目录结构替代 |
 
-详细关系与方法说明见 [INDEX.md](INDEX.md)、[DIGEST.md](DIGEST.md) 和 [GLOSSARY.md](GLOSSARY.md)。
+<p align="center">
+  <a href="INDEX.md">INDEX</a> ·
+  <a href="DIGEST.md">DIGEST</a> ·
+  <a href="GLOSSARY.md">GLOSSARY</a> ·
+  <a href="README.en.md">English README</a>
+</p>
