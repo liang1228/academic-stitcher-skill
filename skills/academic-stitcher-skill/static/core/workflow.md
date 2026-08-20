@@ -46,6 +46,14 @@ For `story-architecture`:
 3. map that chain to sections, figures, and experiments before writing prose;
 4. stress-test alternative explanations and unsupported transitions.
 
+For `claim-driven-experiment`:
+
+1. freeze one dominant claim, supporting claims, and anti-claims before listing runs;
+2. map every claim to a primary test, comparator/control, ablation, robustness or failure check;
+3. order sanity, baseline, main, decision, and polish stages with explicit stop/go gates;
+4. predeclare success criteria, failure interpretations, seeds/uncertainty, cost, and paper placement;
+5. distinguish planned, running, observed, failed, and reproduced results, then feed failures back into the claim or story instead of repairing the story post hoc.
+
 ## 6. Independent Review
 
 Keep methodology, domain/positioning, skeptical-reader, editorial, and integrity concerns separate until synthesis. Convert each high-risk concern into an experiment, citation check, text edit, provenance action, or narrower claim.

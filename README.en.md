@@ -3,9 +3,9 @@
 <div align="center">
 
 <p>
-  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.1.0-2563eb?style=for-the-badge" alt="Version 3.1.0"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.2.0-2563eb?style=for-the-badge" alt="Version 3.2.0"></a>
   <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/skills-1%20core%20%2B%205%20specialists-7c3aed?style=for-the-badge" alt="One core and five specialists"></a>
-  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-8%2F8%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-9%2F9%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
 </p>
 <p>
   <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/platform-Codex%20Skills-0f172a?style=flat-square" alt="Codex Skills"></a>
@@ -17,7 +17,7 @@
 
 <p>
   Structured academic research skills for AI coding agents:<br>
-  an evidence-bound research-story and writing core connecting direction, paper evidence, module transfer, contribution review, and manuscript delivery.
+  an evidence-bound research-story, experiment-validation, and writing core connecting direction, paper evidence, module transfer, contribution review, and manuscript delivery.
 </p>
 
 <p>
@@ -67,7 +67,7 @@
 
 | Capability | What you get |
 |---|---|
-| 🧭 **Core + five entries** | The core handles story, writing, review, and the full pipeline; five siblings handle narrow research-planning tasks |
+| 🧭 **Core + five entries** | The core handles story, experiment validation, writing, review, and the full pipeline; five siblings handle narrow research-planning tasks |
 | 🔬 **Evidence-first** | Claims are connected to materials, code, data, controls, ablations, versions, and rights |
 | 🧱 **Explicit boundaries** | Triggers, neighboring skills, non-goals, stop conditions, and pending checks stay visible |
 | 🔁 **Composable workflow** | Direction → paper evidence → A/B/C → module adaptation → story/sections → delivery |
@@ -86,6 +86,7 @@
 | Can this module enter the baseline? | <code>three-domain-module-search-dataflow-adaptation</code> | Dataflow, train/deploy contracts, and a single-module control |
 | Is the gap in novelty or workload? | <code>innovation-workload-dual-axis</code> | An innovation-axis × workload-axis strengthening plan |
 | How do I turn several papers into one spine? | <code>academic-stitcher-skill</code> → <code>story-architecture</code> | Story Spine, Claim–Evidence–Boundary Map, and section order |
+| How do I turn a claim into falsifiable experiments? | <code>academic-stitcher-skill</code> → <code>claim-driven-experiment</code> | Claim Ladder, experiment matrix, gates, and failure reflux |
 
 ### 2. Start with an explicit request
 
@@ -123,6 +124,8 @@ The core does not “package” results for the user. It organizes existing evid
 problem pressure → inherited baseline → failure mode → unresolved gap → design principle
               → changed module → mechanism → measurable prediction → evidence → boundary
 ```
+
+Once the spine is frozen, <code>claim-driven-experiment</code> connects each central claim to a main test, control, ablation, robustness/failure check, run order, and paper placement. It designs the evidence bridge; it does not pretend to have run experiments.
 
 ## Skill Flow
 
@@ -163,7 +166,7 @@ At runtime, the workflow is:
 
 | Entry | Use it for | Typical trigger |
 |---|---|---|
-| <code>academic-stitcher-skill</code> | Hybrid-paper stories, manuscript sections, structural polish, review, proposals, and the full pipeline | “Turn these modules into one research argument” |
+| <code>academic-stitcher-skill</code> | Hybrid-paper stories, claim-driven experiments, manuscript sections, structural polish, review, proposals, and the full pipeline | “Turn these modules into one research argument” |
 | <code>direction-feasibility-foundation-map</code> | Direction, foundation map, resource gates, and a minimum pilot | “Can this direction run?” |
 | <code>purpose-driven-paper-decomposition</code> | Paper triage, four-entry reading, and baseline/module/interface evidence | “Decompose these papers for reproduction” |
 | <code>variable-granularity-abc-research-architecture</code> | Reuse across papers, A/B/C, and inherited versus new work | “What did the second paper actually add?” |
@@ -218,6 +221,17 @@ See [INDEX.md](INDEX.md) for the relationship map, [DIGEST.md](DIGEST.md) for th
 
 </details>
 
+<details>
+<summary><strong>Example 5 · Turn the central claim into an experiment loop</strong></summary>
+
+> The central claim and baseline are frozen. List the main test, strongest control, decisive ablation, robustness checks, run order, and stop/go gates; do not write any unobserved result.
+
+**Auto-routed to:** <code>academic-stitcher-skill</code> → <code>claim-driven-experiment</code>
+
+**Expected output:** a Claim Ladder, Claim–Evidence–Experiment Matrix, sanity → baseline → main → decision → polish order, failure interpretations, and main-paper/appendix placement.
+
+</details>
+
 ## Repository Layout
 
 ```text
@@ -232,7 +246,7 @@ academic-stitcher-skill/
     │   ├── static/                # core, route, paper type, section, language
     │   ├── references/            # planning, writing, evaluation playbooks
     │   ├── scripts/               # local validation and maintenance scripts
-    │   └── tests/                 # 41 core route/boundary fixtures
+    │   └── tests/                 # 48 core route/boundary fixtures
     └── five specialist entries/   # direction, papers, A/B/C, modules, innovation/workload
 ```
 
@@ -247,7 +261,7 @@ The root is not a single callable skill. It is a public collection of one core b
 - Resolve baseline reuse and contribution boundaries across papers;
 - Search for modules across domains and validate the real dataflow;
 - Separate innovation evidence, engineering workload, experiment coverage, and chapters;
-- Turn multi-paper or multi-module combinations into a bounded research story with a central claim, mechanism chain, and evidence boundary.
+- Turn multi-paper or multi-module combinations into a bounded research story with a central claim, mechanism chain, and evidence boundary, then translate that claim into falsifiable experiments.
 
 ### Explicit non-goals
 
@@ -329,16 +343,16 @@ Every entry should print:
 Skill is valid!
 ```
 
-The published package contains 30 routing cases for the five sibling skills plus 41 route/boundary fixtures for the core base:
+The published package contains 30 routing cases for the five sibling skills plus 48 route/boundary fixtures for the core base:
 
 | Test layer | Result |
 |---|---:|
 | should_trigger | 15 / 15 |
 | should_not_trigger | 10 / 10 |
 | edge_case | 5 / 5 |
-| Core deterministic maintenance tests | **8 / 8** |
+| Core deterministic maintenance tests | **9 / 9** |
 
-The new <code>story-architecture</code> prompts are fixture coverage; they are not mixed with independent model blind-test results.
+The new <code>story-architecture</code> and <code>claim-driven-experiment</code> prompts are fixture coverage; they are not mixed with independent model blind-test results.
 
 ## Output Contract
 
@@ -348,6 +362,7 @@ The new <code>story-architecture</code> prompts are fixture coverage; they are n
 | **State Ledger** | Facts, assumptions, gaps, pending items, and stop conditions |
 | **Evidence Matrix** | Claims, materials, versions, code, data, controls, and ablations |
 | **Story Spine** | Pressure, failure mode, gap, mechanism, prediction, evidence, and boundary |
+| **Claim–Evidence–Experiment Matrix** | Central claims, primary tests, controls, ablations, failure checks, run gates, and paper placement |
 | **Work Packages** | Executable, reversible, reviewable experiment/engineering/chapter steps |
 | **Risks & Boundaries** | Rights, reproducibility, attribution, cost, leakage, and formal-rule checks |
 | **Next Checkpoint** | Next action, pass condition, deadline, and exit path |
@@ -358,6 +373,7 @@ For English manuscript work, return polished English first. If the input is Chin
 
 - **Evidence state beats narrative completeness**: mark pending instead of guessing.
 - **Every research story must be traceable**: keep unsupported transitions as missing/proposed instead of strengthening the prose.
+- **Every experiment must serve a claim**: state what belief the run can change, how it can fail, and how the story will be revised if it fails.
 - **Smallest executable action beats module stacking**: validate the baseline and contract first.
 - **Neighboring entries have explicit roles**: do not let a broad route swallow a narrow task.
 - **Historical attribution survives relabeling**: redrawing A/B/C does not reset contribution history.
@@ -391,7 +407,8 @@ No LICENSE file is currently included at the repository root. Add an explicit li
 
 | Version | Date | Description |
 |---|---|---|
-| Unreleased | 2026-08-21 | Refined the bilingual README hero, route selection, research-story spine, and installation/validation hierarchy |
+| Unreleased | 2026-08-21 | Added the claim-driven experiment bridge and continued refining the bilingual README hierarchy |
+| v3.2.0 | 2026-08-21 | Added the claim-driven-experiment route, experiment matrix, decision gates, failure reflux, and 48 core fixtures |
 | v3.1.0 | 2026-08-21 | Restored the public core base, added the story-architecture route, hybrid-paper story fixtures, and core maintenance validation |
 | v3.0.0 | 2026-08-20 | Replaced the root with five independent academic research-planning skills and refreshed README, badges, installation, and validation docs |
 | v2.x | Historical | Previous router-style academic-writing repository, superseded by the current root layout |

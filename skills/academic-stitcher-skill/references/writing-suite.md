@@ -34,6 +34,8 @@ For a hybrid paper, keep a second ledger:
 
 Do not fill a missing transition with stronger prose. If a module has no failure mode, mechanism, or independent evidence, keep it out of the central claim or label it as a proposed exploratory branch.
 
+Once the spine is accepted and the user asks how to test it, hand off to `claim-driven-experiment`: convert each central link into a claim, primary test, control/ablation, failure interpretation, and paper placement before drafting result prose.
+
 ## 3. Section Jobs
 
 | Section | Primary job | Common failure |

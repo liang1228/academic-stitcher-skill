@@ -1,5 +1,5 @@
 name: academic-stitcher-skill
-version: 2.3.0
+version: 2.4.0
 description: >
   Declarative router for evidence-bound research planning, manuscript work,
   reviewer audit, thesis/proposal workflows, and skill regression testing.
@@ -17,8 +17,10 @@ axes:
       full-pipeline only for explicit end-to-end requests; reviewer-audit for
       critique, rebuttal, revision-response, or defense-risk work; nature-polish
       for existing prose; story-architecture for an explicit research story or
-      argument spine; section-draft for creating named sections; otherwise use
-      stitch-plan for in-domain research planning. Do not route unrelated
+      argument spine; claim-driven-experiment for an explicit claim-to-experiment,
+      evaluation, ablation, run-order, or result-analysis loop; section-draft for
+      creating named sections; otherwise use stitch-plan for in-domain research
+      planning. Do not route unrelated
       non-academic requests to the default.
     values:
       stitch-plan: static/fragments/route/stitch-plan.md
@@ -26,6 +28,7 @@ axes:
       nature-polish: static/fragments/route/nature-polish.md
       reviewer-audit: static/fragments/route/reviewer-audit.md
       story-architecture: static/fragments/route/story-architecture.md
+      claim-driven-experiment: static/fragments/route/claim-driven-experiment.md
       full-pipeline: static/fragments/route/full-pipeline.md
       ctx2skill-audit: static/fragments/route/ctx2skill-audit.md
     default: stitch-plan
@@ -73,7 +76,7 @@ axes:
 
 references:
   on_demand:
-    - condition: needs paper-matrix fields, research-story patterns, baseline/module planning, proposal/thesis scaffolds, or research-integrity checklists
+    - condition: needs paper-matrix fields, research-story patterns, baseline/module planning, claim-driven experiment/evaluation plans, proposal/thesis scaffolds, or research-integrity checklists
       path: references/playbook.md
     - condition: needs detailed section moves, structural polishing passes, reviewer-response matrices, or multi-section writing workflows
       path: references/writing-suite.md

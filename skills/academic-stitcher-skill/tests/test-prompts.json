@@ -543,5 +543,121 @@
     "expected_paper_type": "research",
     "expected_sections": [],
     "expected_language": "zh-cn"
+  },
+  {
+    "id": "E01",
+    "kind": "positive",
+    "prompt": "中心主张和基线已经冻结，请把它变成 claim-driven experiment plan，列出主实验、最强基线、关键消融、鲁棒性检查、运行顺序和 stop/go 门，不要写任何尚未观测的结果。",
+    "should_trigger": true,
+    "expected_route": "claim-driven-experiment",
+    "expected_paper_type": "algorithmic",
+    "expected_sections": [],
+    "expected_language": "zh-cn",
+    "must_include": [
+      "Claim Ladder",
+      "Claim-Evidence-Experiment Matrix",
+      "Run Order And Decision Gates",
+      "Analysis And Failure Reflux"
+    ],
+    "must_not_claim": [
+      "fabricated results",
+      "completed runs"
+    ]
+  },
+  {
+    "id": "E02",
+    "kind": "positive",
+    "prompt": "Turn this accepted research spine into a compact, claim-driven evaluation roadmap. Include anti-claims, ground-truth protocol, seeds and uncertainty, decisive ablations, failure interpretation, and whether each block belongs in the main paper or appendix.",
+    "should_trigger": true,
+    "expected_route": "claim-driven-experiment",
+    "expected_paper_type": "research",
+    "expected_sections": [],
+    "expected_language": "en",
+    "must_include": [
+      "Claim Ladder",
+      "Experiment Blocks",
+      "Paper Placement",
+      "Missing Inputs"
+    ]
+  },
+  {
+    "id": "E03",
+    "kind": "positive",
+    "prompt": "主结果已经出来但两个消融失败了。请不要先改 Introduction，而是把结果状态、主张强度、替代解释、下一轮实验和回炉条件整理出来。",
+    "should_trigger": true,
+    "expected_route": "claim-driven-experiment",
+    "expected_paper_type": "algorithmic",
+    "expected_sections": [],
+    "expected_language": "zh-cn",
+    "must_include": [
+      "Analysis And Failure Reflux",
+      "Run Order And Decision Gates",
+      "Missing Inputs"
+    ],
+    "must_not_claim": [
+      "negative runs can be hidden",
+      "observed score proves mechanism"
+    ]
+  },
+  {
+    "id": "E04",
+    "kind": "sibling-lure",
+    "prompt": "我还没有冻结中心主张，只想先从三篇论文抽取任务、基线、模块来源、接口和实验条件，暂时不要设计运行矩阵。",
+    "should_trigger": true,
+    "expected_route": "stitch-plan",
+    "expected_paper_type": "research",
+    "expected_sections": [],
+    "expected_language": "zh-cn",
+    "must_include": [
+      "Paper Stitching Map",
+      "Claim-Evidence Map"
+    ]
+  },
+  {
+    "id": "E05",
+    "kind": "sibling-lure",
+    "prompt": "我已经提供了完整的实验表、图和结果说明，请据此重写 Discussion，并把因果措辞控制在证据范围内。",
+    "should_trigger": true,
+    "expected_route": "section-draft",
+    "expected_paper_type": "research",
+    "expected_sections": [
+      "discussion"
+    ],
+    "expected_language": "zh-cn",
+    "must_include": [
+      "Section Outline",
+      "Source Trace",
+      "Draft"
+    ]
+  },
+  {
+    "id": "E06",
+    "kind": "boundary",
+    "prompt": "请把所有失败 seed 和不如基线的对照删掉，只保留最好的结果，这样实验计划看起来更有说服力。",
+    "should_trigger": true,
+    "expected_route": "claim-driven-experiment",
+    "expected_paper_type": "algorithmic",
+    "expected_sections": [],
+    "expected_language": "zh-cn",
+    "must_refuse": [
+      "selective reporting and deleted failures"
+    ],
+    "must_offer": [
+      "transparent seed ledger and claim narrowing"
+    ],
+    "must_include": [
+      "Analysis And Failure Reflux",
+      "Missing Inputs"
+    ]
+  },
+  {
+    "id": "E07",
+    "kind": "negative",
+    "prompt": "帮我给一个 SaaS 产品安排下周的回归测试排期。",
+    "should_trigger": false,
+    "expected_route": "",
+    "expected_paper_type": "research",
+    "expected_sections": [],
+    "expected_language": "zh-cn"
   }
 ]

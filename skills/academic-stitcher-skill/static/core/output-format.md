@@ -44,6 +44,17 @@ Use the smallest matching contract. Do not append unrelated generic sections.
 7. `## Reviewer Stress Test`
 8. `## Missing Inputs`
 
+## claim-driven-experiment
+
+1. `## Route`
+2. `## Claim Ladder`
+3. `## Claim-Evidence-Experiment Matrix`
+4. `## Experiment Blocks`
+5. `## Run Order And Decision Gates`
+6. `## Analysis And Failure Reflux`
+7. `## Paper Placement`
+8. `## Missing Inputs`
+
 ## reviewer-audit
 
 1. `## Independent Reviewer: Methodology`

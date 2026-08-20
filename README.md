@@ -3,9 +3,9 @@
 <div align="center">
 
 <p>
-  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.1.0-2563eb?style=for-the-badge" alt="Version 3.1.0"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.2.0-2563eb?style=for-the-badge" alt="Version 3.2.0"></a>
   <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/skills-1%20core%20%2B%205%20specialists-7c3aed?style=for-the-badge" alt="One core and five specialists"></a>
-  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-8%2F8%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-9%2F9%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
 </p>
 <p>
   <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/platform-Codex%20Skills-0f172a?style=flat-square" alt="Codex Skills"></a>
@@ -17,7 +17,7 @@
 
 <p>
   面向 AI Coding Agent 的结构化学术研究 Skills：<br>
-  用证据约束的研究故事与写作基座，串起方向、论文证据、模块迁移、创新判断和论文交付。
+  用证据约束的研究故事、实验验证与写作基座，串起方向、论文证据、模块迁移、创新判断和论文交付。
 </p>
 
 <p>
@@ -67,7 +67,7 @@
 
 | 能力 | 你会得到什么 |
 |------|--------------|
-| 🧭 **核心 + 五入口** | 核心基座负责故事、写作、审稿和全流程；五个兄弟入口负责研究规划窄域 |
+| 🧭 **核心 + 五入口** | 核心基座负责故事、实验验证、写作、审稿和全流程；五个兄弟入口负责研究规划窄域 |
 | 🔬 **证据优先** | 把主张连接到材料、代码、数据、对照、消融、版本和权利条件 |
 | 🧱 **边界清晰** | 公开写清触发条件、相邻 skill、不可用场景、停止条件和待核验项 |
 | 🔁 **可组合工作流** | 方向 → 论文证据 → A/B/C → 模块适配 → 故事/章节 → 交付 |
@@ -86,6 +86,7 @@
 | 这个模块能不能接进基线？ | <code>three-domain-module-search-dataflow-adaptation</code> | 数据流、训练/部署契约和单模块对照 |
 | 方法不够新还是实验不够？ | <code>innovation-workload-dual-axis</code> | 创新轴 × 工作量轴的补强计划 |
 | 多篇论文怎样讲成一条主线？ | <code>academic-stitcher-skill</code> → <code>story-architecture</code> | Story Spine、主张—证据—边界图和章节顺序 |
+| 主张怎样落成可证伪实验？ | <code>academic-stitcher-skill</code> → <code>claim-driven-experiment</code> | Claim Ladder、实验矩阵、运行门和失败回炉 |
 
 ### 2. 用一个明确的请求启动
 
@@ -122,6 +123,8 @@
 问题压力 → 继承基线 → 失败模式 → 未解缺口 → 设计原则
      → 变更模块 → 机制 → 可测预测 → 证据 → 边界
 ```
+
+当故事主线冻结后，<code>claim-driven-experiment</code> 把每个中心主张连接到主实验、对照、消融、鲁棒性/失败检查、运行顺序和论文落点；它只设计证据闭环，不冒充已经运行实验。
 
 ## Skill Flow
 
@@ -162,7 +165,7 @@ flowchart LR
 
 | 入口 | 适合什么 | 典型触发 |
 |---|---|---|
-| <code>academic-stitcher-skill</code> | 杂交论文故事、章节写作、结构润色、审稿、开题与全流程 | “把这些模块讲成一条科研主线” |
+| <code>academic-stitcher-skill</code> | 杂交论文故事、主张驱动实验、章节写作、结构润色、审稿、开题与全流程 | “把这些模块讲成一条科研主线” |
 | <code>direction-feasibility-foundation-map</code> | 研究方向、基础地图、资源硬门、最小试点 | “这个方向能不能做” |
 | <code>purpose-driven-paper-decomposition</code> | 论文筛选、四入口阅读、基线/模块/接口证据 | “按复现目标拆这批论文” |
 | <code>variable-granularity-abc-research-architecture</code> | 连续论文复用、A/B/C、继承与新增边界 | “第二篇到底新增了什么” |
@@ -217,6 +220,17 @@ flowchart LR
 
 </details>
 
+<details>
+<summary><strong>Example 5 · 把中心主张变成实验闭环</strong></summary>
+
+> 中心主张和基线已经冻结，请列出主实验、最强对照、关键消融、鲁棒性检查、运行顺序和 stop/go 门；不要写任何尚未观测的结果。
+
+**自动路由：** <code>academic-stitcher-skill</code> → <code>claim-driven-experiment</code>
+
+**输出重点：** Claim Ladder、Claim–Evidence–Experiment Matrix、sanity → baseline → main → decision → polish、失败解释和主文/附录落点。
+
+</details>
+
 ## 仓库结构
 
 ```text
@@ -231,7 +245,7 @@ academic-stitcher-skill/
     │   ├── static/                # core、route、paper type、section、language
     │   ├── references/            # planning、writing、evaluation playbooks
     │   ├── scripts/               # 本地验证和维护脚本
-    │   └── tests/                 # 41 条基座路由/边界 fixture
+    │   └── tests/                 # 48 条基座路由/边界 fixture
     └── five specialist entries/   # 方向、论文、A/B/C、模块、创新/工作量
 ```
 
@@ -246,7 +260,7 @@ academic-stitcher-skill/
 - 处理连续论文中的基线复用与贡献边界；
 - 跨域寻找模块并核对真实输入—输出数据流；
 - 区分创新证据、工程工作量、实验覆盖和章节交付；
-- 把多篇论文/多模块组合成有中心论点、机制链和证据边界的科研故事。
+- 把多篇论文/多模块组合成有中心论点、机制链和证据边界的科研故事；再把主张落成可证伪实验闭环。
 
 ### 明确不做
 
@@ -328,16 +342,16 @@ Get-ChildItem .\skills -Directory | ForEach-Object {
 Skill is valid!
 ```
 
-当前发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 41 条路由/边界 fixture：
+当前发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 48 条路由/边界 fixture：
 
 | 测试层 | 结果 |
 |---|---:|
 | should_trigger | 15 / 15 |
 | should_not_trigger | 10 / 10 |
 | edge_case | 5 / 5 |
-| 核心确定性维护测试 | **8 / 8** |
+| 核心确定性维护测试 | **9 / 9** |
 
-新增的 <code>story-architecture</code> 题目属于 fixture 覆盖，不与独立模型盲测结果混计。
+新增的 <code>story-architecture</code> 与 <code>claim-driven-experiment</code> 题目属于 fixture 覆盖，不与独立模型盲测结果混计。
 
 ## 输出标准
 
@@ -347,6 +361,7 @@ Skill is valid!
 | **State Ledger** | 事实、假设、缺口、pending 和停止条件 |
 | **Evidence Matrix** | 主张、材料、版本、代码、数据、对照和消融 |
 | **Story Spine** | 问题压力、失效模式、缺口、机制、预测、证据和边界 |
+| **Claim–Evidence–Experiment Matrix** | 中心主张、主实验、对照、消融、失败检查、运行门和论文落点 |
 | **Work Packages** | 可执行、可回滚、可验收的实验/工程/章节步骤 |
 | **Risks & Boundaries** | 权利、复现、归属、成本、泄漏和制度核验风险 |
 | **Next Checkpoint** | 下一动作、通过条件、截止时间和退出路径 |
@@ -357,6 +372,7 @@ Skill is valid!
 
 - **证据状态优先于叙事完整度**：不确定就标记 pending。
 - **科研故事必须可回溯**：没有证据的转场保留 missing/proposed，不用更强措辞填补。
+- **实验必须服务于主张**：每个运行块都要说明它改变哪个判断、如何失败以及失败后如何回炉。
 - **最小可执行动作优先于模块堆叠**：先验证基线和契约。
 - **相邻入口显式分工**：不让一个宽泛入口吞掉窄域任务。
 - **历史归属不随标签变化**：A/B/C 重画不等于贡献重置。
@@ -390,7 +406,8 @@ Skill is valid!
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
-| Unreleased | 2026-08-21 | 重构双语 README 首屏、路线选择、科研故事主线和安装/验证信息层级 |
+| Unreleased | 2026-08-21 | 新增 claim-driven-experiment 主张—实验闭环，并继续完善双语 README 层级 |
+| v3.2.0 | 2026-08-21 | 新增 claim-driven-experiment 路由、实验矩阵、运行决策门、失败回炉和 48 条核心 fixture |
 | v3.1.0 | 2026-08-21 | 恢复公开核心基座，新增 story-architecture 路由、杂交论文故事 fixture 和核心维护验证 |
 | v3.0.0 | 2026-08-20 | 根目录替换为五个独立学术研究规划 skill，补齐公开 README、徽标、安装和验证说明 |
 | v2.x | 历史版本 | 旧版路由式学术写作仓库，已由当前根目录结构替代 |

@@ -77,6 +77,13 @@ Keep/drop rule:
 
 Prefer tests that can disconfirm the story. If a module does not contribute, remove or reframe it. Do not redesign the ablation only to preserve the original claim.
 
+For a claim-driven experiment bridge, add a compact run ledger:
+
+| Milestone | Run state | Claim defended | Ground truth/protocol | Expected artifact | Success criterion | Failure interpretation | Paper placement |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+
+Use the default order `sanity -> baseline -> main -> decision -> polish`, but delete stages that cannot change a decision. Keep `planned`, `running`, `observed`, `failed`, and `reproduced` visible. A negative or inconclusive block is not a formatting defect: it may require narrowing the claim, removing a module, revising the mechanism, or returning to a missing-input gate.
+
 ## 7. Proposal And Thesis Planning
 
 Separate two axes:

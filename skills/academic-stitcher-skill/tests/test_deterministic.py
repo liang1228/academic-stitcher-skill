@@ -170,7 +170,7 @@ class DeterministicReleaseTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         payload = json.loads(result.stdout)
         self.assertTrue(payload["ok"])
-        self.assertEqual(payload["version"], "2.3.0")
+        self.assertEqual(payload["version"], "2.4.0")
 
     def test_story_architecture_route_is_declared(self) -> None:
         manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))
@@ -180,6 +180,20 @@ class DeterministicReleaseTests(unittest.TestCase):
         story_text = story_file.read_text(encoding="utf-8")
         for required in ("Story Spine", "Claim-Evidence-Boundary Map", "Reviewer Stress Test"):
             self.assertIn(required, story_text)
+
+    def test_claim_driven_experiment_route_is_declared(self) -> None:
+        manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))
+        route_path = manifest["axes"]["route"]["values"]["claim-driven-experiment"]
+        route_file = ROOT / route_path
+        self.assertTrue(route_file.is_file())
+        route_text = route_file.read_text(encoding="utf-8")
+        for required in (
+            "Claim Ladder",
+            "Claim-Evidence-Experiment Matrix",
+            "Run Order And Decision Gates",
+            "Analysis And Failure Reflux",
+        ):
+            self.assertIn(required, route_text)
 
 
 if __name__ == "__main__":
