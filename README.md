@@ -13,7 +13,7 @@
 
 五个独立入口分别处理方向可行性、目的驱动的论文拆解、可变粒度 A/B/C 架构、三域模块与数据流适配，以及创新—工作量双轴交付。每个入口都强调证据状态、边界条件、可回滚步骤和下一检查点。
 
-~~~mermaid
+```mermaid
 flowchart LR
     A["📝 研究请求"] --> B["🧭 Skill Selection"]
     B --> C{"🔍 任务边界"}
@@ -32,7 +32,7 @@ flowchart LR
     style I fill:#e8f5e9,stroke:#2e7d32
     style J fill:#fff8e1,stroke:#f57f17
     style K fill:#e3f2fd,stroke:#1565c0
-~~~
+```
 
 ---
 
@@ -129,7 +129,7 @@ flowchart LR
 
 ## 仓库结构
 
-~~~text
+```text
 academic-stitcher-skill/
 ├── README.md                              # 中文入口、徽标、快速上手和维护说明
 ├── README.en.md                           # English overview and installation
@@ -163,7 +163,7 @@ academic-stitcher-skill/
         ├── agents/openai.yaml
         ├── test-prompts.json
         └── test-results.md
-~~~
+```
 
 根目录不是一个需要单独调用的 skill，而是五个独立入口的公开集合。
 
@@ -225,41 +225,41 @@ academic-stitcher-skill/
 
 把下面的任务交给 Codex：
 
-~~~text
+```text
 Install the independent Codex skills from:
 https://github.com/liang1228/academic-stitcher-skill/tree/main/skills
 
 Copy the selected skill directory, including SKILL.md, agents/openai.yaml,
 test-prompts.json, and test-results.md, into the Codex skills directory.
-~~~
+```
 
 ### Windows PowerShell：安装全部五个
 
-~~~powershell
-$repo = "C:\path	ocademic-stitcher-skill"
+```powershell
+$repo = "C:/path/to/academic-stitcher-skill"
 $dest = Join-Path $env:USERPROFILE ".codex\skills"
 Get-ChildItem (Join-Path $repo "skills") -Directory | ForEach-Object {
     Copy-Item $_.FullName (Join-Path $dest $_.Name) -Recurse -Force
 }
-~~~
+```
 
 ### macOS / Linux：安装全部五个
 
-~~~bash
+```bash
 for skill in skills/*; do
   [ -d "$skill" ] || continue
   cp -R "$skill" "$HOME/.codex/skills/$(basename "$skill")"
 done
-~~~
+```
 
 ### 只安装一个入口
 
 将 skills/<skill-name>/ 整个目录复制到：
 
-~~~text
+```text
 %USERPROFILE%\.codex\skills\<skill-name>
 ~/.codex/skills/<skill-name>
-~~~
+```
 
 不要只复制 SKILL.md；agents/openai.yaml 和运行验证文件应与它一起保留。
 
@@ -267,20 +267,20 @@ done
 
 使用 skill-creator 的校验脚本：
 
-~~~powershell
+```powershell
 $env:PYTHONUTF8 = "1"
-$validator = "<skill-creator>\scripts\quick_validate.py"
+$validator = "skill-creator/scripts/quick_validate.py"
 
 Get-ChildItem .\skills -Directory | ForEach-Object {
     python $validator $_.FullName
 }
-~~~
+```
 
 每个入口都应显示：
 
-~~~text
+```text
 Skill is valid!
-~~~
+```
 
 当前发布包还保留 5 个测试文件，共 30 条路由案例：
 

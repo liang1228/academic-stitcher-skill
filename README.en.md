@@ -13,7 +13,7 @@
 
 The repository provides five independent entry points: direction feasibility, purpose-driven paper decomposition, variable-granularity A/B/C architecture, three-domain module and dataflow adaptation, and an innovation/workload dual-axis delivery review. Each entry keeps evidence state, boundaries, rollback conditions, and the next checkpoint explicit.
 
-~~~mermaid
+```mermaid
 flowchart LR
     A["📝 Research request"] --> B["🧭 Skill Selection"]
     B --> C{"🔍 Task boundary"}
@@ -32,7 +32,7 @@ flowchart LR
     style I fill:#e8f5e9,stroke:#2e7d32
     style J fill:#fff8e1,stroke:#f57f17
     style K fill:#e3f2fd,stroke:#1565c0
-~~~
+```
 
 ---
 
@@ -129,7 +129,7 @@ flowchart LR
 
 ## Repository Layout
 
-~~~text
+```text
 academic-stitcher-skill/
 ├── README.md                              # Chinese overview, badges, quick start, maintenance
 ├── README.en.md                           # English overview and installation
@@ -163,7 +163,7 @@ academic-stitcher-skill/
         ├── agents/openai.yaml
         ├── test-prompts.json
         └── test-results.md
-~~~
+```
 
 The root is not a single callable skill. It is a public collection of five independent entry points.
 
@@ -225,41 +225,41 @@ No extra Python dependency is needed at runtime.
 
 Give Codex the following task:
 
-~~~text
+```text
 Install the independent Codex skills from:
 https://github.com/liang1228/academic-stitcher-skill/tree/main/skills
 
 Copy the selected skill directory, including SKILL.md, agents/openai.yaml,
 test-prompts.json, and test-results.md, into the Codex skills directory.
-~~~
+```
 
 ### Windows PowerShell: install all five
 
-~~~powershell
-$repo = "C:\path	ocademic-stitcher-skill"
+```powershell
+$repo = "C:/path/to/academic-stitcher-skill"
 $dest = Join-Path $env:USERPROFILE ".codex\skills"
 Get-ChildItem (Join-Path $repo "skills") -Directory | ForEach-Object {
     Copy-Item $_.FullName (Join-Path $dest $_.Name) -Recurse -Force
 }
-~~~
+```
 
 ### macOS / Linux: install all five
 
-~~~bash
+```bash
 for skill in skills/*; do
   [ -d "$skill" ] || continue
   cp -R "$skill" "$HOME/.codex/skills/$(basename "$skill")"
 done
-~~~
+```
 
 ### Install one entry
 
 Copy the entire skills/<skill-name>/ directory to:
 
-~~~text
+```text
 %USERPROFILE%\.codex\skills\<skill-name>
 ~/.codex/skills/<skill-name>
-~~~
+```
 
 Do not copy only SKILL.md; keep agents/openai.yaml and the validation files with it.
 
@@ -267,20 +267,20 @@ Do not copy only SKILL.md; keep agents/openai.yaml and the validation files with
 
 Use the validator bundled with skill-creator:
 
-~~~powershell
+```powershell
 $env:PYTHONUTF8 = "1"
-$validator = "<skill-creator>\scripts\quick_validate.py"
+$validator = "skill-creator/scripts/quick_validate.py"
 
 Get-ChildItem .\skills -Directory | ForEach-Object {
     python $validator $_.FullName
 }
-~~~
+```
 
 Every entry should print:
 
-~~~text
+```text
 Skill is valid!
-~~~
+```
 
 The published package also retains five test files with 30 routing cases:
 
