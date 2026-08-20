@@ -1,0 +1,51 @@
+{
+  "skill": "innovation-workload-dual-axis",
+  "version": "0.1.0",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我的方法只有一个新模块、指标提升一般，但我完成了三个数据集复现、工程迁移和负结果分析；能不能直接判定创新和工作量都不足？",
+      "expected_behavior": "应激活 innovation-workload-dual-axis，把贡献/创新轴与工作量轴分开，分别映射主张、实验、章节和证据，不能连带推断。",
+      "notes": "正面场景：创新有限但工作量证据可能充分。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "我有两篇已录用论文，方法、数据和实验高度重叠，但还有一批未投稿的完整实验；请按独立主张和章节证据重算工作量，不要按篇数相加。",
+      "expected_behavior": "应激活本 skill，分离创新/工作量台账，识别重复计数并在必要时先转诚信/归属审查，不能把录用数量当工作量。",
+      "notes": "正面场景：论文数量与独立证据冲突。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "导师说我的大论文工作量不够，我不知道该补一个新方法还是补实验和工程材料；请结合当前培养方案把缺口映射到模块、实验和章节。",
+      "expected_behavior": "应激活本 skill，先冻结评估对象和正式规则，再建立双轴证据矩阵，区分补创新、补工作量和规则未核验。",
+      "notes": "正面场景：导师评价模糊，需要分轴和制度核验。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "请先确定这三篇论文在本轮研究中谁是 A、哪些是继承模块、哪些才是新增改动。",
+      "expected_behavior": "不应激活本 skill，应优先激活 variable-granularity-abc-research-architecture。",
+      "notes": "跨 skill 混淆诱饵：贡献/工作量评估尚未开始，当前是组件边界。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我有两个研究方向，一个数据和设备条件更好；请帮我判断哪个方向更可行并安排最小复现。",
+      "expected_behavior": "不应激活本 skill，应优先激活 direction-feasibility-foundation-map。",
+      "notes": "跨 skill 混淆诱饵：当前是方向和资源可行性。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "导师说小论文基本要两个模块才算一个工作量，我该不该照这个数量补模块？",
+      "expected_behavior": "应激活本 skill，先把这句话标为经验性说法，分开核对创新与工作量，并要求查询当前正式培养/评审规则，不把两个模块当通用阈值。",
+      "notes": "边界：用户带着一个看似量化的经验规则来求证。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case；每个 skill 至少一条 should_not_trigger 是同书兄弟 skill 的跨 skill 混淆测试。"
+}
