@@ -1,0 +1,4 @@
+interface:
+  display_name: "创新—工作量双轴架构"
+  short_description: "分离创新证据与可核查工作量并映射论文交付要求和制度核验边界"
+  default_prompt: "Use $innovation-workload-dual-axis to separate innovation evidence from auditable workload and map both to thesis deliverables."
