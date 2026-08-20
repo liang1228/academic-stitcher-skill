@@ -1,8 +1,16 @@
 # Academic Research Planning Skills — Method Digest
 
-> A concise reader guide to the five workflows. It is a method reference, not a policy, publication guarantee, or experimental result.
+> A concise reader guide to the core story/writing workflow and five specialist workflows. It is a method reference, not a policy, publication guarantee, or experimental result.
 
-The common problem is not a lack of papers or ideas. It is the failure to convert a research idea into a bounded, reproducible, and explainable sequence of decisions. The five skills form a chain: test whether the direction can carry the work, read papers as evidence-bearing components, freeze inherited and new boundaries, adapt modules along real contracts, and separate innovation from delivery workload.
+The common problem is not a lack of papers or ideas. It is the failure to convert a research idea into a bounded, reproducible, and explainable sequence of decisions. The core story/writing skill organizes the argument and manuscript lifecycle; the five specialist skills test whether the direction can carry the work, read papers as evidence-bearing components, freeze inherited and new boundaries, adapt modules along real contracts, and separate innovation from delivery workload.
+
+## 0. Build the story from evidence, not after the result
+
+For a hybrid paper, use one bounded spine:
+
+`pressure -> inherited baseline -> failure mode -> gap -> design principle -> mechanism -> prediction -> evidence -> boundary`
+
+Each transition needs a source, artifact, experiment, or explicit `missing`/`proposed` state. The story route maps that spine to Introduction, Related Work, Method, Experiments, Discussion, and Conclusion, then stress-tests alternative explanations, omitted negative evidence, and post-hoc motivation. It turns “讲好故事” into argument architecture without turning it into fabricated significance.
 
 ## 1. Make the research entry a feasible commitment
 

@@ -1,6 +1,15 @@
 # Shared Glossary
 
-> Working definitions for the five skills. These are operational terms, not institutional rules or universal claims.
+> Working definitions for the core story/writing skill and five specialist skills. These are operational terms, not institutional rules or universal claims.
+
+## Research story and manuscript architecture
+
+- **Story spine**: a bounded argument linking pressure, inherited baseline, failure mode, gap, design principle, mechanism, prediction, evidence, and boundary.
+- **Central claim**: the smallest sentence the paper must support; it is not a list of modules or a headline metric.
+- **Failure mode**: the concrete limitation of the inherited approach that motivates a change and predicts an observable difference.
+- **Design principle**: the reason a change should address the failure mode; it must be more specific than “add a stronger module”.
+- **Claim–evidence–boundary map**: a ledger connecting each claim to its evidence state and the conditions where it stops applying.
+- **Research story**: an evidence-preserving organization of a research argument, not post-hoc motivation, hidden reuse, or invented results.
 
 ## Research direction and foundations
 

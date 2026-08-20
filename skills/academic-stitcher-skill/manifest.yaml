@@ -1,0 +1,81 @@
+name: academic-stitcher-skill
+version: 2.3.0
+description: >
+  Declarative router for evidence-bound research planning, manuscript work,
+  reviewer audit, thesis/proposal workflows, and skill regression testing.
+
+always_load:
+  - static/core/stance.md
+  - static/core/workflow.md
+  - static/core/quality-gates.md
+  - static/core/output-format.md
+
+axes:
+  route:
+    detect: |
+      Apply SKILL.md Route Priority. Use ctx2skill-audit for skill maintenance;
+      full-pipeline only for explicit end-to-end requests; reviewer-audit for
+      critique, rebuttal, revision-response, or defense-risk work; nature-polish
+      for existing prose; story-architecture for an explicit research story or
+      argument spine; section-draft for creating named sections; otherwise use
+      stitch-plan for in-domain research planning. Do not route unrelated
+      non-academic requests to the default.
+    values:
+      stitch-plan: static/fragments/route/stitch-plan.md
+      section-draft: static/fragments/route/section-draft.md
+      nature-polish: static/fragments/route/nature-polish.md
+      reviewer-audit: static/fragments/route/reviewer-audit.md
+      story-architecture: static/fragments/route/story-architecture.md
+      full-pipeline: static/fragments/route/full-pipeline.md
+      ctx2skill-audit: static/fragments/route/ctx2skill-audit.md
+    default: stitch-plan
+    multi: false
+
+  paper_type:
+    detect: |
+      Use proposal-thesis for opening reports, graduate theses, advisor plans,
+      or defense preparation; algorithmic for model/module/ML system studies;
+      methods for protocols, datasets, benchmarks, or tools; review for evidence
+      synthesis; otherwise research.
+    values:
+      research: static/fragments/paper_type/research.md
+      methods: static/fragments/paper_type/methods.md
+      algorithmic: static/fragments/paper_type/algorithmic.md
+      review: static/fragments/paper_type/review.md
+      proposal-thesis: static/fragments/paper_type/proposal-thesis.md
+    default: research
+    multi: false
+
+  section:
+    detect: |
+      Select every manuscript section explicitly requested or supplied for work.
+      Skip the axis only for a pure research plan or whole-artifact audit.
+    values:
+      title: static/fragments/section/title.md
+      abstract: static/fragments/section/abstract.md
+      introduction: static/fragments/section/introduction.md
+      related-work: static/fragments/section/related-work.md
+      method: static/fragments/section/method.md
+      experiments: static/fragments/section/experiments.md
+      discussion: static/fragments/section/discussion.md
+      conclusion: static/fragments/section/conclusion.md
+    multi: true
+
+  language:
+    detect: |
+      Use zh-cn for Chinese or mixed Chinese-English output. Use en when the
+      requested deliverable is English manuscript prose or English documentation.
+    values:
+      zh-cn: static/fragments/language/zh-cn.md
+      en: static/fragments/language/en.md
+    default: zh-cn
+    multi: false
+
+references:
+  on_demand:
+    - condition: needs paper-matrix fields, research-story patterns, baseline/module planning, proposal/thesis scaffolds, or research-integrity checklists
+      path: references/playbook.md
+    - condition: needs detailed section moves, structural polishing passes, reviewer-response matrices, or multi-section writing workflows
+      path: references/writing-suite.md
+    - condition: asks to evaluate, maintain, distill, regression-test, or optimize a skill package with Ctx2Skill-style loops
+      path: references/ctx2skill-evaluation.md
