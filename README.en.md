@@ -255,8 +255,9 @@ Give Codex the following task:
 Install the independent Codex skills from:
 https://github.com/liang1228/academic-stitcher-skill/tree/main/skills
 
-Copy the selected skill directory, including SKILL.md, agents/openai.yaml,
-test-prompts.json, and test-results.md, into the Codex skills directory.
+Copy the selected skill directory intact, including SKILL.md, agents/openai.yaml,
+and its bundled manifest, references, static assets, scripts, and validation files,
+into the Codex skills directory.
 ```
 
 ### Windows PowerShell: install all six
