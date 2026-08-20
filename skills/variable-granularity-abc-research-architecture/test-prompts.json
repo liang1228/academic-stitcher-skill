@@ -1,0 +1,51 @@
+{
+  "skill": "variable-granularity-abc-research-architecture",
+  "version": "0.1.0",
+  "darwin_compatible": true,
+  "test_cases": [
+    {
+      "id": "should-trigger-01",
+      "type": "should_trigger",
+      "prompt": "我的第二篇论文完整复用了第一篇系统，导师让我说明第二篇到底新增了什么；请把第一篇整体作为当前基准，重画 A/B/C 和贡献台账。",
+      "expected_behavior": "应激活 variable-granularity-abc-research-architecture，冻结当前主张和 A 的包络，区分历史继承、实际改动与新增验证。",
+      "notes": "正面场景：连续论文的 nested reuse 与贡献边界。"
+    },
+    {
+      "id": "should-trigger-02",
+      "type": "should_trigger",
+      "prompt": "同一个预训练编码器在三篇论文里分别被当成基准和模块，第四篇只改了共同的数据清洗步骤，第四篇的 A/B/C 应该怎么画？",
+      "expected_behavior": "应激活本 skill，按第四篇主张选择当前 A，保留历史角色，把数据清洗的实际变化单独记录，禁止旧组件重复计数。",
+      "notes": "正面场景：跨论文角色变化与局部改动。"
+    },
+    {
+      "id": "should-trigger-03",
+      "type": "should_trigger",
+      "prompt": "请把我的基线、两个继承模块和一个新模块整理成当前粒度的 A/B/C 图，并列出来源、许可证、代码改动、消融和不能宣称的部分。",
+      "expected_behavior": "应激活本 skill，先冻结比较主张，再建立来源—继承—改动—证据台账，最后只对有独立证据的部分写候选贡献。",
+      "notes": "正面场景：研究设计中的粒度与贡献审计。"
+    },
+    {
+      "id": "should-not-trigger-01",
+      "type": "should_not_trigger",
+      "prompt": "请从论文摘要、引言、方法、实验和代码中找出基准与模块，先做证据矩阵。",
+      "expected_behavior": "不应激活本 skill，应优先激活 purpose-driven-paper-decomposition。",
+      "notes": "跨 skill 混淆诱饵：当前是阅读取证，不是按研究主张重画粒度。"
+    },
+    {
+      "id": "should-not-trigger-02",
+      "type": "should_not_trigger",
+      "prompt": "我已经有稳定基线，想从通用、本领域和相似领域搜索可迁移模块，并沿输入输出数据流测试 B′。",
+      "expected_behavior": "不应激活本 skill，应优先激活 three-domain-module-search-dataflow-adaptation。",
+      "notes": "跨 skill 混淆诱饵：当前是模块搜索与接口迁移。"
+    },
+    {
+      "id": "edge-01",
+      "type": "edge_case",
+      "prompt": "论文图里画了 A+B+C，但没有公开代码，也没有单独消融；我能不能直接把 B 和 C 写成我的创新模块？",
+      "expected_behavior": "应激活本 skill，但只能输出条件性边界：可画结构假设，不能把没有来源/改动/归因证据的 B/C 宣称为创新。",
+      "notes": "边界：存在 A/B/C 表面结构，但贡献证据没有闭合。"
+    }
+  ],
+  "minimum_pass_rate": 0.8,
+  "notes": "至少 3 条 should_trigger + 2 条 should_not_trigger + 1 条 edge_case；每个 skill 至少一条 should_not_trigger 是同书兄弟 skill 的跨 skill 混淆测试。"
+}
