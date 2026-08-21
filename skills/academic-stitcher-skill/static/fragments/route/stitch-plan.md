@@ -16,6 +16,12 @@ Do not use for polishing supplied prose, drafting a named section, auditing a ma
 
 ## Contract
 
-Use the `stitch-plan` headings from `static/core/output-format.md` exactly. Under `Quality Gates`, include compliance and fair-comparison findings. Under `Missing Inputs`, list only inputs that change the decision.
+Use the `stitch-plan` headings from `static/core/output-format.md` exactly, including the process card. Under `Quality Gates`, include compliance and fair-comparison findings. Under `Missing Inputs`, list only inputs that change the decision.
 
 If the user supplies no comparable papers or baseline evidence, produce a scoping matrix and retrieval plan rather than claiming a novel direction.
+
+## Boundary
+
+- Do not convert a topic, paper list, or module list into a novelty claim without a failure mode, mechanism, attribution, and falsifying test.
+- Do not draft completed results when the task has only authorized scoping or planning.
+- Hand off to `story-architecture` only after the component map and proposed claim chain are traceable.

@@ -4,6 +4,22 @@
 
 The common problem is not a lack of papers or ideas. It is the failure to convert a research idea into a bounded, reproducible, and explainable sequence of decisions. The core skill organizes the story, claim-to-experiment bridge, and manuscript lifecycle; the five specialist skills test whether the direction can carry the work, read papers as evidence-bearing components, freeze inherited and new boundaries, adapt modules along real contracts, and separate innovation from delivery workload.
 
+## Process contract: do not skip the gates
+
+Every call starts with scope and authorization, inventories inputs, locks one route, builds an evidence/provenance ledger, passes the integrity and fairness gate, freezes the claim or writing target, performs only the authorized work, audits the artifact, and stops at an observable checkpoint:
+
+`S0 scope -> S1 intake -> S2 route-lock -> S3 evidence-ledger -> S4 integrity-gate -> S5 architecture -> S6 authorized-work -> S7 independent-audit -> S8 delivery-stop`
+
+The process card must state what was executed and what was not. Missing evidence produces a `hold`/`blocked` checkpoint, not stronger prose. Downstream stages cannot be marked complete because an upstream plan exists.
+
+The boundary rules are equally strict: a plan is not an experiment; a reported result is not a reproduction; a metric difference is not mechanism proof; a research story is not post-hoc motivation; and deterministic package validation is not model or API evaluation.
+
+For manuscript work, run the alignment checkpoint before a long draft, lock a
+terminology ledger, classify result blocks before deciding their placement, and
+run a consistency sweep after content changes. Review lenses freeze before
+synthesis, while revision action, work status, verification evidence, and
+package readiness remain separate.
+
 ## 0. Build the story from evidence, not after the result
 
 For a hybrid paper, use one bounded spine:

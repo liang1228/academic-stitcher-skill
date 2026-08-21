@@ -12,7 +12,7 @@ from pathlib import Path
 import yaml
 
 
-EXPECTED_VERSION = "2.4.0"
+EXPECTED_VERSION = "2.6.0"
 ALLOWED_TOP_LEVEL = {
     "SKILL.md",
     "manifest.yaml",

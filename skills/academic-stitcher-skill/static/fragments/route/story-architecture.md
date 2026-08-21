@@ -45,7 +45,7 @@ This route organizes facts; it does not manufacture a motivating problem after s
 
 ## Contract
 
-Use the `story-architecture` headings from `static/core/output-format.md` exactly. The first line must identify the route and axes. `## Story Spine` must contain one bounded central claim plus the chain that supports it. `## Claim-Evidence-Boundary Map` must distinguish missing evidence from proposed work. `## Reviewer Stress Test` must include at least one alternative explanation or failure condition for a hybrid claim.
+Use the `story-architecture` headings from `static/core/output-format.md` exactly, including the process card. The first line must identify the route and axes. `## Story Spine` must contain one bounded central claim plus the chain that supports it. `## Claim-Evidence-Boundary Map` must distinguish missing evidence from proposed work. `## Reviewer Stress Test` must include at least one alternative explanation or failure condition for a hybrid claim.
 
 ## Boundary
 

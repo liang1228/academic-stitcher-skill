@@ -7,6 +7,19 @@
 - [Method digest](./DIGEST.md)
 - [Shared glossary](./GLOSSARY.md)
 
+## Core process contract
+
+The core is a gated workflow rather than a prose shortcut:
+
+`S0 scope → S1 intake → S2 route-lock → S3 evidence-ledger → S4 integrity-gate → S5 architecture → S6 authorized-work → S7 independent-audit → S8 delivery-stop`
+
+Every response reports the authorized checkpoint, evidence coverage, executed and unexecuted work, gate status, and one observable next checkpoint. A plan is not an experiment, a reported number is not a reproduction, and file validation is not model evaluation.
+
+For manuscript work, the core also exposes an alignment checkpoint, terminology
+ledger, result-allocation record, retrospective consistency sweep, review-freeze
+rule, and conservative revision-readiness tracker. These are generic controls,
+not journal policy.
+
 ## Skill list
 
 ### Core story and manuscript workflow
@@ -63,6 +76,7 @@ graph LR
 
 - A relationship in this map is a routing aid, not a claim that one skill can complete the next skill's work.
 - Every result should show evidence state, unresolved assumptions, rights or access constraints, and the next verification action.
+- Every route must expose its process status and stop at a held gate instead of silently handing off downstream work.
 - Missing formal rules remain pending; no experience-based threshold can substitute for a current formal requirement.
 - The skills are not institutional policy, publication guarantees, or independent experimental proof.
 

@@ -3,9 +3,9 @@
 <div align="center">
 
 <p>
-  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.2.0-2563eb?style=for-the-badge" alt="Version 3.2.0"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.3.0-2563eb?style=for-the-badge" alt="Version 3.3.0"></a>
   <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/skills-1%20core%20%2B%205%20specialists-7c3aed?style=for-the-badge" alt="One core and five specialists"></a>
-  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-9%2F9%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-11%2F11%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
 </p>
 <p>
   <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/platform-Codex%20Skills-0f172a?style=flat-square" alt="Codex Skills"></a>
@@ -51,6 +51,7 @@
 - [Research Story Spine](#research-story-spine)
 - [Repository Layout](#repository-layout)
 - [Skill Flow](#skill-flow)
+- [Complete Process & Hard Boundaries](#complete-process--hard-boundaries)
 - [Routes](#routes)
 - [Scope & Boundaries](#scope--boundaries)
 - [Installation](#installation)
@@ -162,6 +163,36 @@ At runtime, the workflow is:
 5. **Run the smallest action**: prefer reversible, reproducible, reviewable actions.
 6. **Return a checkpoint**: provide pass conditions, stop conditions, pending checks, and the next action.
 
+## Complete Process & Hard Boundaries
+
+The core is not a generator that sees papers and immediately writes results. It is a stateful, stoppable workflow:
+
+`S0 scope → S1 intake → S2 route-lock → S3 evidence-ledger → S4 integrity-gate → S5 architecture → S6 authorized-work → S7 independent-audit → S8 delivery-stop`
+
+| Stage | Required artifact | If the gate does not pass |
+|---|---|---|
+| `S0–S2` | Scope, authorized checkpoint, input inventory, and one primary route | Do not enter manuscript prose or result claims; resolve scope, inputs, or route collision |
+| `S3–S4` | Claim–evidence–provenance ledger plus fairness, rights, and attribution checks | Mark `missing`/`hold`/`blocked`; wording cannot repair the gap |
+| `S5–S6` | Bounded claim, mechanism, prediction, and the authorized plan/draft/audit artifact | Deliver only the current checkpoint; do not report downstream work as complete |
+| `S7–S8` | Independent audit, executed/not-executed record, and one observable next checkpoint | Preserve failure and uncertainty; reflux or stop |
+
+Hard boundaries: a plan is not an experiment, a reported number is not a reproduction, a score difference is not mechanism proof, a story is not post-hoc motivation, and file validation is not model evaluation. When evidence is missing, return a bounded placeholder and the smallest evidence-producing task.
+
+### Manuscript control layer
+
+The core treats scientific writing as auditable control work, not sentence-only editing:
+
+| Control | Delivery rule |
+|---|---|
+| **Alignment Checkpoint** | Freeze the central claim, reader question, terminology, paragraph map, and lead evidence before a long draft; stop at `confirm` when a high-leverage assumption is unresolved |
+| **Terminology Ledger** | Lock canonical forms for methods, models, datasets, metrics, variables, and abbreviations; translation and polishing cannot drift silently |
+| **Result Allocation** | Classify results as core, necessary support, qualification, robustness, heterogeneity, provenance detail, or boundary, then place them in main text, captions, Methods/source data, or SI |
+| **Consistency Sweep** | Reconcile numbers and tables first, then claims versus data, units/terms/cross-references, and redundancy; mechanical findings require human inspection |
+| **Review Freeze** | Use an immutable source packet, freeze lens reports before synthesis, and never call same-context work blind review |
+| **Revision Readiness** | Keep `action`, `work_status`, `verification_evidence`, and `package_readiness` separate; no inspectable artifact means no `VERIFIED_DONE` |
+
+These are generic evidence-bound controls, not official Nature or journal policy. Current journal, field, and institutional requirements take precedence.
+
 ## Routes
 
 | Entry | Use it for | Typical trigger |
@@ -246,7 +277,7 @@ academic-stitcher-skill/
     │   ├── static/                # core, route, paper type, section, language
     │   ├── references/            # planning, writing, evaluation playbooks
     │   ├── scripts/               # local validation and maintenance scripts
-    │   └── tests/                 # 48 core route/boundary fixtures
+    │   └── tests/                 # 52 core route/boundary fixtures
     └── five specialist entries/   # direction, papers, A/B/C, modules, innovation/workload
 ```
 
@@ -343,14 +374,14 @@ Every entry should print:
 Skill is valid!
 ```
 
-The published package contains 30 routing cases for the five sibling skills plus 48 route/boundary fixtures for the core base:
+The current candidate package contains 30 routing cases for the five sibling skills plus 56 route/boundary fixtures for the core base:
 
 | Test layer | Result |
 |---|---:|
 | should_trigger | 15 / 15 |
 | should_not_trigger | 10 / 10 |
 | edge_case | 5 / 5 |
-| Core deterministic maintenance tests | **9 / 9** |
+| Core deterministic maintenance tests | **12 / 12** |
 
 The new <code>story-architecture</code> and <code>claim-driven-experiment</code> prompts are fixture coverage; they are not mixed with independent model blind-test results.
 
@@ -407,7 +438,8 @@ No LICENSE file is currently included at the repository root. Add an explicit li
 
 | Version | Date | Description |
 |---|---|---|
-| Unreleased | 2026-08-21 | Added the claim-driven experiment bridge and continued refining the bilingual README hierarchy |
+| Unreleased | 2026-08-21 | Distilled the manuscript control layer: Alignment Checkpoint, terminology ledger, result placement, consistency audit, review freeze, and revision readiness; core raised to 2.6.0 with 56 fixtures |
+| v3.3.0 | 2026-08-21 | Added the S0–S8 process contract, Process Status, explicit boundaries, and 52 core fixtures |
 | v3.2.0 | 2026-08-21 | Added the claim-driven-experiment route, experiment matrix, decision gates, failure reflux, and 48 core fixtures |
 | v3.1.0 | 2026-08-21 | Restored the public core base, added the story-architecture route, hybrid-paper story fixtures, and core maintenance validation |
 | v3.0.0 | 2026-08-20 | Replaced the root with five independent academic research-planning skills and refreshed README, badges, installation, and validation docs |

@@ -1,10 +1,11 @@
 name: academic-stitcher-skill
-version: 2.4.0
+version: 2.6.0
 description: >
-  Declarative router for evidence-bound research planning, manuscript work,
-  reviewer audit, thesis/proposal workflows, and skill regression testing.
+  Declarative gated router for evidence-bound research planning, manuscript
+  work, reviewer audit, thesis/proposal workflows, and skill regression testing.
 
 always_load:
+  - static/core/process-contract.md
   - static/core/stance.md
   - static/core/workflow.md
   - static/core/quality-gates.md
@@ -80,5 +81,7 @@ references:
       path: references/playbook.md
     - condition: needs detailed section moves, structural polishing passes, reviewer-response matrices, or multi-section writing workflows
       path: references/writing-suite.md
+    - condition: creates or rebuilds sections, restructures a multi-round manuscript, allocates Results across main text/SI, audits reviewer lenses, prepares revision statuses, or places observed experiment blocks into a paper
+      path: references/manuscript-control.md
     - condition: asks to evaluate, maintain, distill, regression-test, or optimize a skill package with Ctx2Skill-style loops
       path: references/ctx2skill-evaluation.md
