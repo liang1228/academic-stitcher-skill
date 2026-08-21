@@ -1,6 +1,6 @@
 # Shared Glossary
 
-> Working definitions for the core story/writing skill and five specialist skills. These are operational terms, not institutional rules or universal claims.
+> Working definitions for the core story/writing/experiment skill and five specialist skills. These are operational terms, not institutional rules or universal claims.
 
 ## Research story and manuscript architecture
 
@@ -10,6 +10,8 @@
 - **Design principle**: the reason a change should address the failure mode; it must be more specific than “add a stronger module”.
 - **Claim–evidence–boundary map**: a ledger connecting each claim to its evidence state and the conditions where it stops applying.
 - **Research story**: an evidence-preserving organization of a research argument, not post-hoc motivation, hidden reuse, or invented results.
+- **Claim ladder**: one dominant claim, optional supporting claims, and anti-claims that the experiment plan must distinguish and test.
+- **Claim–evidence–experiment matrix**: a ledger connecting each claim to its evidence state, primary test, comparator/control, decisive ablation, failure check, uncertainty, and paper placement.
 
 ## Research direction and foundations
 
@@ -38,6 +40,9 @@
 - **Train/deploy contract**: the information available during training versus deployment; a training-only label cannot silently become an inference dependency.
 - **Single-module control**: an isolated comparison that identifies the effect and cost of one change before composition.
 - **Ablation**: a comparison that removes or changes a component to test causality, not just a best-result table.
+- **Decision gate**: a predeclared stop/go condition that determines whether the next experiment stage is justified.
+- **Failure reflux**: the explicit update from a failed or inconclusive run back to a narrower claim, removed module, revised mechanism, or missing-input checkpoint.
+- **Run state**: the operational status of a run, such as planned, running, observed, failed, or reproduced; it is separate from the evidence state of a claim.
 
 ## Evidence, delivery, and stop conditions
 
@@ -48,6 +53,7 @@
 - **Workload axis**: implementable, recorded, and reviewable deliverables such as reproduction, engineering migration, experiments, negative results, and chapters.
 - **Stop condition**: a predeclared condition that triggers continuation, a time-boxed pilot, narrowing, redesign, or stopping.
 - **Pending**: the correct state when required evidence or a current formal rule has not been checked. It is not permission to infer a result.
+- **Ground-truth protocol**: the recorded source of target labels or reference values and the same evaluation procedure applied to every comparator.
 
 ## Operating reminders
 

@@ -27,6 +27,14 @@ Apply only gates relevant to the selected route.
 - Use repeated runs or uncertainty estimates when the claim depends on unstable differences.
 - An open repository is evidence of availability, not proof of correctness.
 
+## Claim-Driven Experiment Gate
+
+- Every retained experiment block names the claim it can support or weaken.
+- The primary test, comparator/control, decisive ablation, and failure/robustness check are explicit.
+- Success criteria, failure interpretation, run order, cost, seeds/uncertainty, and paper placement are recorded before results are used.
+- Evaluation uses the task's actual ground truth and the same protocol for every comparator; failed, missing, and unstable runs remain visible.
+- Results are labeled planned, running, observed, failed, or reproduced; observed results do not silently become causal explanations.
+
 ## Source-Fidelity Gate
 
 - Each paragraph has one job and no unsupported specificity.

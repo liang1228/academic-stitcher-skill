@@ -1,7 +1,7 @@
 ---
 name: academic-stitcher-skill
 description: |
-  Evidence-bound academic research planning, manuscript drafting, structural polishing, reviewer audit, and thesis/proposal workflow skill. Use to combine or extend papers, build an A+B or module-based research plan, choose a defensible baseline, connect failure modes to mechanisms and experiments, draft or rebuild manuscript sections, polish Chinese or English academic prose, prepare an opening report or thesis plan, audit reviewer risks, answer revision comments, run an end-to-end research-to-paper workflow, or regression-test this skill. Trigger on paper stitching, academic tailoring, research story, baseline plus module, thesis proposal, manuscript draft, Nature-style polish, reviewer audit, rebuttal, 论文故事, 缝论文, 学术裁缝, 开题, 小论文, 大论文, SCI写作, 返修, and 答辩. Never fabricate evidence or conceal copying, unfair comparison, material negative evidence, or academic misconduct.
+  Evidence-bound skill for academic research planning, claim-driven experiment design, manuscript drafting, structural polishing, reviewer audit, thesis/proposal workflow, and skill regression testing. Use to combine or extend papers, choose a defensible baseline, map failure modes to mechanisms and fair experiments, build claim/ablation plans, analyze result states, draft or rebuild sections, polish Chinese/English prose, prepare proposals, audit reviewer risks, answer revision comments, or run an end-to-end research-to-paper workflow. Trigger on paper stitching, academic tailoring, research story, claim-driven experiment, ablation plan, evaluation protocol, run order, baseline plus module, thesis proposal, manuscript draft, Nature-style polish, reviewer audit, rebuttal, 论文故事, 缝论文, 学术裁缝, 主张驱动实验, 消融矩阵, 实验闭环, 开题, 小论文, 大论文, SCI写作, 返修, 答辩. Never fabricate evidence or conceal copying, unfair comparison, negative evidence, or misconduct.
 ---
 
 # Academic Stitcher Skill
@@ -31,14 +31,16 @@ Use the first matching rule:
 2. **full-pipeline** — the user explicitly requests an end-to-end workflow across research, writing, and review.
 3. **reviewer-audit** — the primary request is critique, rejection-risk analysis, rebuttal, revision-response, or defense-question preparation.
 4. **story-architecture** — the primary request is to build or repair a research story, argument spine, multi-paper/module narrative, or claim-to-evidence progression.
-5. **nature-polish** — the user supplies existing prose and asks to improve structure, flow, tone, or language while preserving meaning.
-6. **section-draft** — the user asks to create or rebuild one or more named manuscript sections from supplied artifacts.
-7. **stitch-plan** — research idea, baseline/module selection, proposal, thesis topic, advisor plan, or experiment roadmap; this is the default only inside the skill's domain.
+5. **claim-driven-experiment** — the primary request is to convert frozen claims into an experiment matrix, ablation/evaluation plan, run order, decision gate, or result-to-story update loop.
+6. **nature-polish** — the user supplies existing prose and asks to improve structure, flow, tone, or language while preserving meaning.
+7. **section-draft** — the user asks to create or rebuild one or more named manuscript sections from supplied artifacts.
+8. **stitch-plan** — research idea, baseline/module selection, proposal, thesis topic, advisor plan, or broad experiment roadmap; this is the default only inside the skill's domain.
 
 Collision rules:
 
 - Existing prose + “rewrite/polish” beats `section-draft`.
 - An explicit request to repair the scientific argument or story spine beats ordinary polishing; use `story-architecture` first, then draft sections only at the requested checkpoint.
+- An explicit claim-driven experiment/evaluation/ablation request beats broad `stitch-plan`; if the story or claim boundary is not yet accepted, use `story-architecture` first and hand off here.
 - Named section + no usable prose beats `nature-polish`.
 - Reviewer comments + request for a response matrix uses `reviewer-audit`, even if text edits are also needed.
 - A broad topic without artifacts stays in `stitch-plan`; do not jump directly to manuscript prose.

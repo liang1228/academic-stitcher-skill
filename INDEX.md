@@ -1,6 +1,6 @@
 # Academic Research Planning Skills — Index
 
-> One evidence-bound core plus five independent specialist skills for research stories, research planning, evidence decomposition, architecture boundaries, module adaptation, and paper delivery.
+> One evidence-bound core plus five independent specialist skills for research stories, claim-driven experiments, research planning, evidence decomposition, architecture boundaries, module adaptation, and paper delivery.
 
 ## Shared material
 
@@ -11,7 +11,7 @@
 
 ### Core story and manuscript workflow
 
-- [academic-stitcher-skill](./skills/academic-stitcher-skill/SKILL.md): route hybrid-paper stories, section construction, structural polishing, reviewer audit, proposals, and full research-to-paper workflows.
+- [academic-stitcher-skill](./skills/academic-stitcher-skill/SKILL.md): route hybrid-paper stories, claim-driven experiments, section construction, structural polishing, reviewer audit, proposals, and full research-to-paper workflows.
 
 ### Direction and feasibility
 
@@ -33,17 +33,19 @@
 ## Recommended sequence
 
 1. If the user asks for a research story, manuscript structure, review, or full workflow, start with academic-stitcher-skill.
-2. If the direction or resources are uncertain, use direction-feasibility-foundation-map.
-3. If the paper set is known, use purpose-driven-paper-decomposition to freeze the reading goal and evidence.
-4. If inherited and new work are mixed, use variable-granularity-abc-research-architecture.
-5. If the baseline is stable and a module must be transferred, use three-domain-module-search-dataflow-adaptation.
-6. If the architecture is bounded and delivery must be planned, use innovation-workload-dual-axis.
+2. If the story and central claim are frozen but evidence must be designed, use academic-stitcher-skill's claim-driven-experiment route.
+3. If the direction or resources are uncertain, use direction-feasibility-foundation-map.
+4. If the paper set is known, use purpose-driven-paper-decomposition to freeze the reading goal and evidence.
+5. If inherited and new work are mixed, use variable-granularity-abc-research-architecture.
+6. If the baseline is stable and a module must be transferred, use three-domain-module-search-dataflow-adaptation.
+7. If the architecture is bounded and delivery must be planned, use innovation-workload-dual-axis.
 
 ## Relationship map
 
-`mermaid
+```mermaid
 graph LR
     S["Research story/writing core"] -->|orchestrates| F["Direction feasibility"]
+    S -->|bridges claims to experiments| E["Claim-driven experiments"]
     S -->|orchestrates| P["Purpose-driven decomposition"]
     S -->|orchestrates| A["Variable-granularity A/B/C"]
     S -->|orchestrates| M["Three-domain module adaptation"]
@@ -55,7 +57,7 @@ graph LR
     A -->|composes-with| M
     A -->|composes-with| W["Innovation/workload dual axis"]
     W -->|depends-on| A
-`
+```
 
 ## Shared operating rules
 

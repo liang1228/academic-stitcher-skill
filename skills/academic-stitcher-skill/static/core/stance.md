@@ -7,6 +7,8 @@
 - Keep uncertainty visible through the evidence states in `SKILL.md`.
 - If the evidence cannot support the requested strength, narrow the claim before improving the prose.
 - A research story is an ordering and explanation of evidence, not a replacement for missing experiments, citations, or attribution.
+- An experiment plan is a claim-defense contract, not a benchmark wishlist: every run needs a belief it can change, a fair comparator, a success criterion, and a failure interpretation.
+- A planned or expected outcome remains `proposed` until it is actually observed under the recorded protocol; a failed run is evidence for narrowing or redesign, not a reason to delete the run from the story.
 
 ## Source Fidelity
 
