@@ -12,14 +12,22 @@ Turn research ingredients into a defensible chain:
 
 The skill may help design or communicate research. It does not turn a component combination into novelty by declaration.
 
+## Gated Process
+
+`static/core/process-contract.md` is part of the always-loaded core. Treat it as a hard execution contract: every call passes through scope, intake, route lock, evidence ledger, integrity gate, authorized work, independent audit, and delivery/stop. A small request can stop at an earlier checkpoint, but it must report the held downstream stages instead of implying that the full research workflow is complete.
+
 ## Load Protocol
 
 1. Read `manifest.yaml`.
-2. Read every `always_load` file.
-3. Detect `route`, `paper_type`, `section`, and `language`.
-4. Load only the matching fragments.
-5. Load a reference only when its manifest condition is met.
-6. State the detected axes in one compact line before substantive output.
+2. Read every `always_load` file, including the process contract first.
+3. Pass the scope and intake gates before detecting route axes.
+4. Detect `route`, `paper_type`, `section`, and `language`.
+5. Load only the matching fragments.
+6. Load a reference only when its manifest condition is met. For section drafting,
+   structural polishing, Results placement, multi-round consistency, reviewer
+   lenses, or revision statuses, load `references/manuscript-control.md` before
+   substantive work.
+7. State the detected axes in one compact line before substantive output, then emit the required process card.
 
 Do not load all fragments or references by default.
 
@@ -73,6 +81,8 @@ For the selected route, capture only relevant fields:
 
 For thesis, proposal, or advisor-facing work, also capture current institutional rules, advisor expectations, authorship boundaries, resource access, time left, and the minimum viable research product.
 
+For every response also state the authorized checkpoint, observable work actually executed, work not executed, gate status, and one next observable checkpoint. The process card is not optional metadata; it is the boundary between a plan, a draft, an audit, and an executed result.
+
 ## Hard Stops
 
 Stop or reframe when the request requires any of the following:
@@ -82,6 +92,7 @@ Stop or reframe when the request requires any of the following:
 - deliberately weak baselines, mismatched protocols, or unequal tuning budgets presented as fair;
 - concealed material negative evidence, relabeled cherry-picking, or fabricated randomness;
 - plagiarism, duplicate-submission, similarity-check, or detection-evasion instructions.
+- a request to skip a required gate and present a downstream artifact as complete.
 
 Offer the nearest evidence-producing alternative: reproduce a baseline, design a fair test, create a provenance ledger, narrow the claim, use explicit placeholders, or prepare a compliant withdrawal/revision plan.
 

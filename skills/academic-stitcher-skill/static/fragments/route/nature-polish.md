@@ -6,12 +6,15 @@ Use when the user supplies prose and asks for structural editing, academic tone,
 
 ## Diagnosis Order
 
-1. paper-type logic;
-2. section job;
-3. paragraph order and one-job discipline;
-4. claim/evidence/boundary alignment;
-5. terminology and source fidelity;
-6. sentence clarity and style.
+1. load `references/manuscript-control.md` when the edit changes structure,
+   terminology, evidence placement, or spans multiple rounds;
+2. paper-type logic;
+3. section job and alignment checkpoint;
+4. paragraph order and one-job discipline;
+5. claim/evidence/boundary alignment;
+6. terminology and source fidelity;
+7. consistency sweep for numbers, claims, units, cross-references, and redundancy;
+8. sentence clarity and style.
 
 ## Claim Calibration
 
@@ -31,4 +34,13 @@ Remove or bound unsupported absolutes such as “first”, “unique”, “unpr
 
 ## Contract
 
-Use the `nature-polish` headings from `static/core/output-format.md`. The `Change Log` must distinguish structural, claim-strength, terminology, and sentence-level changes.
+Use the `nature-polish` headings from `static/core/output-format.md`, including the process card. The `Change Log` must distinguish structural, claim-strength, terminology, and sentence-level changes.
+
+## Boundary
+
+- Improve organization, clarity, and calibrated wording without changing scientific meaning.
+- Do not manufacture significance, novelty, mechanisms, applications, citations, or completed evidence.
+- If a sentence cannot be made precise without new evidence, flag it and stop at the source-and-claim risk.
+- Do not silently normalize a terminology or numeric mismatch. Record the
+  observed variants and request the authoritative source when the distinction
+  cannot be resolved from the supplied manuscript.

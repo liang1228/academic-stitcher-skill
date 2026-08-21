@@ -3,9 +3,9 @@
 <div align="center">
 
 <p>
-  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.2.0-2563eb?style=for-the-badge" alt="Version 3.2.0"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/version-3.3.0-2563eb?style=for-the-badge" alt="Version 3.3.0"></a>
   <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/skills-1%20core%20%2B%205%20specialists-7c3aed?style=for-the-badge" alt="One core and five specialists"></a>
-  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-9%2F9%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
+  <a href="https://github.com/liang1228/academic-stitcher-skill/tree/main/skills"><img src="https://img.shields.io/badge/validation-11%2F11%20core%20%7C%2030%2F30%20routes-16a34a?style=for-the-badge" alt="Validation status"></a>
 </p>
 <p>
   <a href="https://github.com/liang1228/academic-stitcher-skill"><img src="https://img.shields.io/badge/platform-Codex%20Skills-0f172a?style=flat-square" alt="Codex Skills"></a>
@@ -51,6 +51,7 @@
 - [研究故事主线](#研究故事主线)
 - [仓库结构](#仓库结构)
 - [Skill Flow](#skill-flow)
+- [完整流程与硬边界](#完整流程与硬边界)
 - [Routes](#routes)
 - [适用与边界](#适用与边界)
 - [安装方式](#安装方式)
@@ -161,6 +162,36 @@ flowchart LR
 5. **执行最小动作**：优先选择可回滚、可复现、可验收的动作。
 6. **返回检查点**：给出通过条件、停止条件、pending 项和下一动作。
 
+## 完整流程与硬边界
+
+核心基座不是“看到论文就直接写结果”的生成器，而是一条有状态、可停机的流程：
+
+`S0 scope → S1 intake → S2 route-lock → S3 evidence-ledger → S4 integrity-gate → S5 architecture → S6 authorized-work → S7 independent-audit → S8 delivery-stop`
+
+| 阶段 | 必须留下的东西 | 未通过时 |
+|---|---|---|
+| `S0–S2` | 范围、授权检查点、输入清单、唯一主路由 | 不进入正文/实验结论，先补输入或解决路由冲突 |
+| `S3–S4` | 主张—证据—来源账本、公平性/权利/归属检查 | 标记 `missing`/`hold`/`blocked`，不能靠润色补齐 |
+| `S5–S6` | 有边界的主张、机制、预测、计划/草稿/审计产物 | 只交付当前授权检查点，不把下游工作说成完成 |
+| `S7–S8` | 独立审查、已执行/未执行清单、下一可观察检查点 | 保留失败与不确定性，回炉或停止 |
+
+硬边界：计划不等于实验，报道不等于复现，分数差不等于机制证明，故事不等于事后编动机，文件校验不等于模型评测。缺少证据时只输出有界占位符和最小补证任务。
+
+### 论文写作控制层
+
+核心基座还把写作当作一组可审计的控制动作，而不是单纯改句子：
+
+| 控制点 | 交付要求 |
+|---|---|
+| **Alignment Checkpoint** | 长段落或结构改写前先冻结中心主张、读者问题、术语、段落图和 lead evidence；有高杠杆歧义就停在 `confirm` |
+| **Terminology Ledger** | 方法、模型、数据集、指标、变量和缩写锁定 canonical form，翻译/润色不静默漂移 |
+| **Result Allocation** | 把结果按核心发现、必要支持、限定、鲁棒性、异质性、溯源细节和边界分配到主文、图注、Methods/source data 或 SI |
+| **Consistency Sweep** | 先核对数字与表格，再核对主张与数据、单位/术语/交叉引用和冗余；机械发现必须人工核验 |
+| **Review Freeze** | 审稿视角使用不可变材料包，意见先独立冻结再综合；无法隔离上下文时不冒充盲审 |
+| **Revision Readiness** | `action`、`work_status`、`verification_evidence`、`package_readiness` 分离；没有可检查产物不能标 `VERIFIED_DONE` |
+
+这些是通用的证据边界，不是 Nature 或任何期刊的官方政策；期刊、领域和机构的现行要求优先。
+
 ## Routes
 
 | 入口 | 适合什么 | 典型触发 |
@@ -245,7 +276,7 @@ academic-stitcher-skill/
     │   ├── static/                # core、route、paper type、section、language
     │   ├── references/            # planning、writing、evaluation playbooks
     │   ├── scripts/               # 本地验证和维护脚本
-    │   └── tests/                 # 48 条基座路由/边界 fixture
+    │   └── tests/                 # 52 条基座路由/边界 fixture
     └── five specialist entries/   # 方向、论文、A/B/C、模块、创新/工作量
 ```
 
@@ -342,14 +373,14 @@ Get-ChildItem .\skills -Directory | ForEach-Object {
 Skill is valid!
 ```
 
-当前发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 48 条路由/边界 fixture：
+当前候选发布包包含 5 个兄弟 skill 的 30 条路由案例，以及核心基座的 56 条路由/边界 fixture：
 
 | 测试层 | 结果 |
 |---|---:|
 | should_trigger | 15 / 15 |
 | should_not_trigger | 10 / 10 |
 | edge_case | 5 / 5 |
-| 核心确定性维护测试 | **9 / 9** |
+| 核心确定性维护测试 | **12 / 12** |
 
 新增的 <code>story-architecture</code> 与 <code>claim-driven-experiment</code> 题目属于 fixture 覆盖，不与独立模型盲测结果混计。
 
@@ -406,7 +437,8 @@ Skill is valid!
 
 | 版本 | 日期 | 说明 |
 |---|---|---|
-| Unreleased | 2026-08-21 | 新增 claim-driven-experiment 主张—实验闭环，并继续完善双语 README 层级 |
+| Unreleased | 2026-08-21 | 蒸馏论文写作控制层：Alignment Checkpoint、术语账本、结果落点、一致性审计、审稿冻结和返修就绪状态；核心升至 2.6.0、56 条 fixture |
+| v3.3.0 | 2026-08-21 | 新增 S0–S8 流程契约、Process Status、严格边界与 52 条核心 fixture |
 | v3.2.0 | 2026-08-21 | 新增 claim-driven-experiment 路由、实验矩阵、运行决策门、失败回炉和 48 条核心 fixture |
 | v3.1.0 | 2026-08-21 | 恢复公开核心基座，新增 story-architecture 路由、杂交论文故事 fixture 和核心维护验证 |
 | v3.0.0 | 2026-08-20 | 根目录替换为五个独立学术研究规划 skill，补齐公开 README、徽标、安装和验证说明 |

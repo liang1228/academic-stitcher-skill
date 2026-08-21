@@ -56,8 +56,13 @@ This route designs and audits the evidence bridge. It does not pretend to have r
 ## Paper Placement
 
 6. **Place the evidence in the paper**
-   - Main paper: the anchor result and the minimum controls needed for the central claim.
-   - Appendix: useful robustness or implementation detail that does not carry the main inference.
+   - Classify each retained block as `core_discovery`, `necessary_support`,
+     `qualification`, `robustness`, `heterogeneity`, `provenance_detail`,
+     `alternative_inference`, or `edge_case` before placement.
+   - Main paper: the anchor result, minimum controls, and any qualification or
+     edge case that changes the central inference.
+   - Appendix/SI: useful robustness or implementation detail that does not carry
+     the main inference, with a stable pointer.
    - Cut or defer: attractive but non-decisive runs that consume budget without changing a reviewer decision.
    - Map each retained block to a figure/table and to the exact sentence it supports; do not write a result paragraph before its evidence state is known.
 
@@ -71,7 +76,7 @@ This route designs and audits the evidence bridge. It does not pretend to have r
 
 ## Contract
 
-Use the `claim-driven-experiment` headings from `static/core/output-format.md` exactly. The matrix must contain at least one primary test and one falsifying or narrowing check for every central claim. `Analysis And Failure Reflux` must distinguish planned evidence from observed evidence and state what happens if the central gate fails.
+Use the `claim-driven-experiment` headings from `static/core/output-format.md` exactly, including the process card. The matrix must contain at least one primary test and one falsifying or narrowing check for every central claim. `Analysis And Failure Reflux` must distinguish planned evidence from observed evidence and state what happens if the central gate fails.
 
 ## Boundary
 

@@ -1,8 +1,12 @@
 # Core Workflow
 
+All routes are slices of `static/core/process-contract.md`. The common gates are mandatory; route-specific procedures decide what artifact is produced after the gates pass.
+
 ## 1. Route And Checkpoint
 
 Detect the axes, announce them in the compact route line, and state the requested stopping point. Do not draft a paper when the request only authorizes scoping.
+
+Before substantive work, record the process card: current stage, authorized checkpoint, input/evidence coverage, executed versus not executed actions, gate status, and next checkpoint.
 
 ## 2. Intake And Evidence Inventory
 
@@ -32,12 +36,27 @@ For planning or full-pipeline work:
 
 For drafting or polishing:
 
-1. determine the section job;
-2. write a one-sentence argument;
-3. assign one job to each paragraph;
-4. build a source trace for concrete details;
-5. draft from evidence outward;
-6. run terminology, claim-strength, and source-fidelity passes.
+1. load `references/manuscript-control.md` when its condition is met;
+2. determine the section job;
+3. write a one-sentence argument and run the alignment checkpoint;
+4. lock terminology and assign one job to each paragraph;
+5. build a source trace for concrete details;
+6. draft from evidence outward;
+7. run terminology, claim-strength, source-fidelity, and consistency passes.
+
+For a full section or structural rewrite, do not emit full prose while the
+alignment checkpoint is `confirm` or `hold`. A short or unambiguous edit may
+record `proceed` inline and continue.
+
+When Results or a full manuscript is involved, classify result blocks before
+drafting, build the shortest sufficient evidence chain, and record main-text,
+caption, Methods/source-data, and SI placement. Conclusion-changing evidence
+must remain visible even when it is inconvenient or labelled robustness.
+
+When several revision rounds have touched the manuscript, run the retrospective
+consistency sweep after content fixes and before final wording. Inspect numeric
+and claim-to-data mismatches before terminology and redundancy. A mechanical
+finding is a warning for human inspection, not an automatic correction.
 
 For `story-architecture`:
 
@@ -56,8 +75,16 @@ For `claim-driven-experiment`:
 
 ## 6. Independent Review
 
-Keep methodology, domain/positioning, skeptical-reader, editorial, and integrity concerns separate until synthesis. Convert each high-risk concern into an experiment, citation check, text edit, provenance action, or narrower claim.
+Keep methodology, domain/positioning, skeptical-reader, editorial, and integrity
+concerns separate until synthesis. Use an immutable supplied-artifact packet,
+stable issue IDs, claim/evidence pointers, and a resolution test. Freeze each
+lens before synthesis. If separate contexts are unavailable, disclose that the
+review is a same-context multi-lens audit rather than mutually blind peer review.
+Convert each high-risk concern into an experiment, citation check, text edit,
+provenance action, or narrower claim.
 
 ## 7. Deliver And Stop
 
 Use the selected route contract. End with the next checkpoint or the smallest missing-input list. Do not imply that a plan, draft, or deterministic audit is an executed experiment, accepted paper, or completed model evaluation.
+
+If any gate is `hold` or `blocked`, deliver the bounded artifact that is still authorized and stop. Never use later writing, polishing, or a favorable result to silently repair an earlier failed gate.

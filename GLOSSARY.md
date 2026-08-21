@@ -4,6 +4,18 @@
 
 ## Research story and manuscript architecture
 
+- **Process contract**: the mandatory gated lifecycle from scope and intake through route lock, evidence/integrity checks, authorized work, independent audit, and delivery/stop.
+- **Process status**: the compact record of current stage, authorized checkpoint, evidence coverage, executed/not-executed work, gate result, and next checkpoint.
+- **Checkpoint**: one observable artifact or decision at which work may stop, continue, reflux, or become blocked.
+- **Hold/blocked**: an explicit non-complete state; `hold` waits for an input or decision, while `blocked` indicates an integrity, provenance, fairness, or access barrier.
+- **Hard boundary**: a condition that prevents a plan, report, draft, deterministic check, or story from being represented as a stronger scientific or delivery state.
+- **Alignment checkpoint**: the pre-prose record of the bounded argument, reader question, section/paragraph map, terminology lock, lead evidence, and assumptions; `confirm` pauses before a full draft.
+- **Terminology ledger**: the canonical vocabulary table for methods, models, datasets, metrics, variables, abbreviations, and real distinctions between variants.
+- **Result allocation**: the evidence-placement decision that separates central findings and conclusion-changing qualifications from robustness, provenance, and non-central detail.
+- **Consistency sweep**: a retrospective audit of numeric reconciliation, claims versus the paper's own evidence, terminology, cross-references, and redundancy after multi-round editing.
+- **Review freeze**: the rule that each review lens uses the same immutable supplied packet and is finalized before any cross-lens synthesis.
+- **Revision readiness**: the conservative package state derived from per-item action, work status, verification evidence, placeholders, and blockers.
+
 - **Story spine**: a bounded argument linking pressure, inherited baseline, failure mode, gap, design principle, mechanism, prediction, evidence, and boundary.
 - **Central claim**: the smallest sentence the paper must support; it is not a list of modules or a headline metric.
 - **Failure mode**: the concrete limitation of the inherited approach that motivates a change and predicts an observable difference.

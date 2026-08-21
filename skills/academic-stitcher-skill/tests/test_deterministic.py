@@ -170,7 +170,59 @@ class DeterministicReleaseTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         payload = json.loads(result.stdout)
         self.assertTrue(payload["ok"])
-        self.assertEqual(payload["version"], "2.4.0")
+        self.assertEqual(payload["version"], "2.6.0")
+
+    def test_process_contract_is_always_loaded_and_has_strict_lifecycle(self) -> None:
+        manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["always_load"][0], "static/core/process-contract.md")
+        process_file = ROOT / manifest["always_load"][0]
+        self.assertTrue(process_file.is_file())
+        process_text = process_file.read_text(encoding="utf-8")
+        for required in (
+            "S0 scope",
+            "S1 intake",
+            "S2 route-lock",
+            "S3 evidence-ledger",
+            "S4 integrity-gate",
+            "S5 architecture",
+            "S6 authorized-work",
+            "S7 independent-audit",
+            "S8 delivery-stop",
+            "Scope And Action Boundary",
+            "Required Process Card",
+            "Alignment Checkpoint",
+            "Stop And Reflux Rules",
+        ):
+            self.assertIn(required, process_text)
+
+    def test_manuscript_control_reference_is_declared_and_bounded(self) -> None:
+        manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))
+        entries = manifest["references"]["on_demand"]
+        paths = {entry["path"] for entry in entries}
+        self.assertIn("references/manuscript-control.md", paths)
+        control = ROOT / "references/manuscript-control.md"
+        self.assertTrue(control.is_file())
+        text = control.read_text(encoding="utf-8")
+        for required in (
+            "Alignment checkpoint",
+            "Terminology ledger",
+            "Result allocation",
+            "Consistency sweep",
+            "Independent review and synthesis boundary",
+            "Revision action and readiness tracker",
+        ):
+            self.assertIn(required, text)
+        self.assertIn("not journal policy", text)
+
+    def test_every_declared_route_has_contract_and_boundary(self) -> None:
+        manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))
+        for route, rel in manifest["axes"]["route"]["values"].items():
+            route_text = (ROOT / rel).read_text(encoding="utf-8")
+            with self.subTest(route=route):
+                self.assertIn("## Contract", route_text)
+                self.assertIn("## Boundary", route_text)
+        output_text = (ROOT / "static/core/output-format.md").read_text(encoding="utf-8")
+        self.assertIn("## Process Status", output_text)
 
     def test_story_architecture_route_is_declared(self) -> None:
         manifest = yaml.safe_load((ROOT / "manifest.yaml").read_text(encoding="utf-8"))

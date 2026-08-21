@@ -27,10 +27,10 @@ When asked how this skill should answer a sample request:
 3. put any compliance stop inside the target contract rather than a preceding meta heading;
 4. add `## Behavior Notes` only after the simulated response and only when requested.
 
-## Evidence Boundary
+## Boundary
 
-Do not claim full self-play, judge success, or replay selection unless model calls and outputs exist. Process exit code alone is not a behavioral pass.
+Do not claim full self-play, judge success, or replay selection unless model calls and outputs exist. Process exit code alone is not a behavioral pass. Deterministic package validation remains a separate evidence state.
 
 ## Contract
 
-For audit mode, use the `ctx2skill-audit` headings from `static/core/output-format.md`. For behavior simulation, use the simulated route contract instead.
+For audit mode, use the `ctx2skill-audit` headings from `static/core/output-format.md`, including the process card. For behavior simulation, use the simulated route contract instead.
